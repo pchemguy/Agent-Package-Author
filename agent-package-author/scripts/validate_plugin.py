@@ -1,10 +1,12 @@
 """Validate Agent Plugins 1.0.0 package structure offline."""
 
 import argparse
+import ipaddress
 import json
 from pathlib import Path
 import re
 import sys
+from urllib.parse import urlsplit
 
 from validate_skill import Issue, print_issues, validate_skill
 
@@ -13,6 +15,7 @@ MCP_SCHEMA = 'https://agent-plugins.org/schemas/1.0.0/mcp.schema.json'
 MANIFEST_KEYS = {'$schema', 'name', 'version', 'description', 'author', 'homepage', 'repository', 'license', 'keywords', 'extensions'}
 PLUGIN_NAME = re.compile(r'[a-z0-9](?:[a-z0-9.-]{0,62}[a-z0-9])?\Z')
 NAMESPACE = re.compile(r'[a-z0-9]+(?:\.[a-z0-9-]+){2,}\Z')
+HEADER = re.compile(r"[!#$%&'*+.^_`|~0-9A-Za-z-]+\Z")
 
 
 def _json(path: Path) -> object:
@@ -70,6 +73,87 @@ def _manifest(root: Path) -> tuple[list[Issue], dict | None]:
     return issues, data
 
 
+def _mcp(root: Path) -> list[Issue]:
+    """Check the fixed root MCP configuration and each server independently."""
+    path = root / 'mcp.json'
+    if not path.exists() and not path.is_symlink():
+        return []
+    if not path.resolve().is_relative_to(root.resolve()) or not path.is_file():
+        return [Issue('ERROR', str(path), 'mcp-path', 'mcp.json must be a contained regular file')]
+    try:
+        data = _json(path)
+    except (ValueError, OSError, UnicodeError) as error:
+        return [Issue('ERROR', str(path), 'mcp-json', str(error))]
+    if not isinstance(data, dict) or set(data) != {'$schema','mcpServers'} or not isinstance(data.get('mcpServers'), dict):
+        return [Issue('ERROR', str(path), 'mcp-root', 'root must contain only $schema and mcpServers object')]
+    if data['$schema'] != MCP_SCHEMA:
+        return [Issue('ERROR', str(path), 'mcp-schema', f'$schema must match plugin version: {MCP_SCHEMA}')]
+    issues = []
+    for name, config in sorted(data['mcpServers'].items()):
+        label = f'{path}#mcpServers/{name}'
+        def error(rule, message):
+            issues.append(Issue('ERROR', label, rule, message))
+        if not isinstance(config, dict):
+            error('mcp-server', 'server configuration must be an object')
+            continue
+        kind = config.get('type')
+        if kind == 'stdio':
+            allowed = {'type','command','args','env','cwd'}
+            command = config.get('command')
+            if not isinstance(command, str) or not command or command.startswith(('/', '../')) or (not command.startswith('./') and (any(c.isspace() for c in command) or '/' in command or '\\' in command)):
+                error('mcp-command', 'command must be a bare executable token or contained ./ path')
+            elif command.startswith('./') and not (root / command).resolve().is_relative_to(root.resolve()):
+                error('mcp-path', 'command escapes plugin root')
+            if 'args' in config and (not isinstance(config['args'], list) or any(not isinstance(s, str) for s in config['args'])):
+                error('mcp-args', 'args must be a string array')
+            env = config.get('env', {})
+            if not isinstance(env, dict) or any(not isinstance(v, str) for v in env.values()) or {'PLUGIN_ROOT','PLUGIN_DATA'} & set(env):
+                error('mcp-env', 'env must be a string mapping without reserved PLUGIN_ROOT/PLUGIN_DATA keys')
+            elif any(re.search(r'(?:TOKEN|SECRET|PASSWORD|API_KEY)', k, re.I) and v and '${' not in v for k,v in env.items()):
+                issues.append(Issue('WARN', label, 'mcp-secret-review', 'possible literal credential in env; review manually'))
+            cwd = config.get('cwd')
+            if cwd is not None:
+                if not isinstance(cwd, str) or not (cwd.startswith('./') or cwd == '${PLUGIN_ROOT}' or cwd.startswith('${PLUGIN_ROOT}/') or cwd == '${PLUGIN_DATA}' or cwd.startswith('${PLUGIN_DATA}/')):
+                    error('mcp-cwd', 'cwd must be ./, PLUGIN_ROOT, or PLUGIN_DATA rooted')
+                else:
+                    prefix = '${PLUGIN_DATA}'
+                    if cwd.startswith(prefix):
+                        base, suffix = root / '.plugin-data-placeholder', cwd[len(prefix):]
+                    elif cwd.startswith('${PLUGIN_ROOT}'):
+                        base, suffix = root, cwd[len('${PLUGIN_ROOT}'):]
+                    else:
+                        base, suffix = root, cwd[1:]
+                    if not (base / suffix.lstrip('/')).resolve().is_relative_to(base.resolve()):
+                        error('mcp-path', 'cwd escapes its declared root')
+        elif kind in {'streamable-http','sse'}:
+            allowed = {'type','url','headers'}
+            url = config.get('url')
+            try:
+                parsed = urlsplit(url) if isinstance(url, str) else None
+                host = parsed.hostname if parsed else None
+                loopback = host == 'localhost'
+                if host and not loopback:
+                    try:
+                        loopback = ipaddress.ip_address(host).is_loopback
+                    except ValueError:
+                        pass
+                if not parsed or parsed.scheme not in {'http','https'} or not host or parsed.username or parsed.password or parsed.fragment or (parsed.scheme == 'http' and not loopback):
+                    error('mcp-url', 'absolute HTTPS URL required except HTTP loopback; no userinfo or fragment')
+            except ValueError:
+                error('mcp-url', 'invalid URL')
+            headers = config.get('headers', {})
+            if not isinstance(headers, dict) or any(not isinstance(v, str) or not HEADER.fullmatch(k) or '\r' in v or '\n' in v for k,v in headers.items()) or len({k.lower() for k in headers}) != len(headers):
+                error('mcp-headers', 'headers must be valid strings with case-insensitively unique names')
+            elif any(k.lower() in {'authorization','proxy-authorization','x-api-key'} and v for k,v in headers.items()):
+                issues.append(Issue('WARN', label, 'mcp-secret-review', 'possible literal credential in headers; review manually'))
+        else:
+            allowed = {'type'}
+            error('mcp-type', 'type must be stdio, streamable-http, or sse')
+        for key in sorted(config.keys() - allowed):
+            error('mcp-server-fields', f'unknown or cross-variant field {key!r}')
+    return issues
+
+
 def validate_plugin(path: Path) -> list[Issue]:
     """Return ordered strict findings for a plugin package.
 
@@ -106,6 +190,7 @@ def validate_plugin(path: Path) -> list[Issue]:
     for child in sorted(root.iterdir(), key=lambda p: p.name):
         if child.is_dir() and child.name.startswith(('com.', 'org.', 'net.')) and not NAMESPACE.fullmatch(child.name):
             issues.append(Issue('ERROR', str(child), 'extension-directory', 'extension root must use a reverse-domain namespace'))
+    issues.extend(_mcp(root))
     return issues
 
 

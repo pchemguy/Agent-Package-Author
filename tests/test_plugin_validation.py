@@ -72,6 +72,11 @@ class PluginValidationTests(unittest.TestCase):
         (self.root / 'skills/outer').symlink_to(Path(self.temp.name))
         self.assertTrue(any(i.rule == 'skill-containment' for i in load().validate_plugin(self.root)))
 
+    def test_extension_directory_must_be_contained(self):
+        self.manifest()
+        (self.root / 'com.example.client').symlink_to(Path(self.temp.name))
+        self.assertTrue(any(i.rule == 'extension-containment' for i in load().validate_plugin(self.root)))
+
 
 if __name__ == '__main__':
     unittest.main()

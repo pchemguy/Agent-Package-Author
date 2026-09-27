@@ -141,12 +141,12 @@ def _mcp(root: Path) -> list[Issue]:
                         loopback = ipaddress.ip_address(host).is_loopback
                     except ValueError:
                         pass
-                if not parsed or any(c.isspace() for c in url) or parsed.scheme not in {'http','https'} or not host or parsed.username or parsed.password or parsed.fragment or (parsed.scheme == 'http' and not loopback):
+                if not parsed or any(ord(c) < 0x20 or ord(c) == 0x7f or c.isspace() for c in url) or parsed.scheme not in {'http','https'} or not host or parsed.username or parsed.password or parsed.fragment or (parsed.scheme == 'http' and not loopback):
                     error('mcp-url', 'absolute HTTPS URL required except HTTP loopback; no userinfo or fragment')
             except ValueError:
                 error('mcp-url', 'invalid URL')
             headers = config.get('headers', {})
-            if not isinstance(headers, dict) or any(not isinstance(v, str) or not HEADER.fullmatch(k) or '\r' in v or '\n' in v for k,v in headers.items()) or len({k.lower() for k in headers}) != len(headers):
+            if not isinstance(headers, dict) or any(not isinstance(v, str) or not HEADER.fullmatch(k) or any(ord(c) < 0x20 and c != '\t' or ord(c) == 0x7f for c in v) for k,v in headers.items()) or len({k.lower() for k in headers}) != len(headers):
                 error('mcp-headers', 'headers must be valid strings with case-insensitively unique names')
             elif any(k.lower() in {'authorization','proxy-authorization','x-api-key'} and v for k,v in headers.items()):
                 issues.append(Issue('WARN', label, 'mcp-secret-review', 'possible literal credential in headers; review manually'))
@@ -192,8 +192,11 @@ def validate_plugin(path: Path) -> list[Issue]:
                 else:
                     issues.extend(validate_skill(child))
     for child in sorted(root.iterdir(), key=lambda p: p.name):
-        if child.is_dir() and child.name.startswith(('com.', 'org.', 'net.')) and not NAMESPACE.fullmatch(child.name):
-            issues.append(Issue('ERROR', str(child), 'extension-directory', 'extension root must use a reverse-domain namespace'))
+        if child.is_dir() and child.name.count('.') >= 2:
+            if not child.resolve().is_relative_to(root.resolve()):
+                issues.append(Issue('ERROR', str(child), 'extension-containment', 'extension directory escapes plugin root'))
+            elif not NAMESPACE.fullmatch(child.name):
+                issues.append(Issue('ERROR', str(child), 'extension-directory', 'extension root must use a reverse-domain namespace'))
     issues.extend(_mcp(root))
     return issues
 

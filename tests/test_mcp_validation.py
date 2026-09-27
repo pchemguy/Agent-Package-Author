@@ -59,6 +59,12 @@ class McpValidationTests(unittest.TestCase):
         self.mcp({'local': {'type': 'stdio', 'command': './bin/server'}})
         self.assertTrue(any(i.rule == 'mcp-path' for i in load().validate_plugin(self.root)))
 
+    def test_control_characters_in_remote_fields_are_rejected(self):
+        self.mcp({'remote': {'type': 'streamable-http', 'url': 'https://example.com\x00/mcp'}})
+        self.assertTrue(any(i.rule == 'mcp-url' for i in load().validate_plugin(self.root)))
+        self.mcp({'remote': {'type': 'streamable-http', 'url': 'https://example.com/mcp', 'headers': {'X-Test':'bad\x00value'}}})
+        self.assertTrue(any(i.rule == 'mcp-headers' for i in load().validate_plugin(self.root)))
+
 
 if __name__ == '__main__':
     unittest.main()

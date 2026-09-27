@@ -66,6 +66,14 @@ class SkillValidationTests(unittest.TestCase):
         (self.root / 'SKILL.md').write_text((self.root / 'SKILL.md').read_text() + '\n[bad](../other/SKILL.md)\n')
         self.assertTrue(any(i.rule == 'resource-escape' for i in load().validate_skill(self.root)))
 
+    def test_invalid_yaml_scalars_do_not_pass_and_quoted_comment_works(self):
+        self.write('name: example-skill\ndescription: Use when key: value')
+        self.assertTrue(any(i.rule == 'frontmatter-unverified' for i in load().validate_skill(self.root)))
+        self.write('name: example-skill\ndescription: "bad\\q"')
+        self.assertTrue(any(i.rule == 'frontmatter-unverified' for i in load().validate_skill(self.root)))
+        self.write('name: example-skill\ndescription: "Valid: quoted" # comment')
+        self.assertEqual(load().validate_skill(self.root), [])
+
 
 if __name__ == '__main__':
     unittest.main()

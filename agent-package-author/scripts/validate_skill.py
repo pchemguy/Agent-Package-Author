@@ -5,8 +5,8 @@ It reports unhandled YAML syntax as unverified rather than declaring conformance
 """
 
 import argparse
-import ast
 from dataclasses import dataclass
+import json
 from pathlib import Path
 import re
 import sys
@@ -28,13 +28,22 @@ class Issue:
 def _scalar(value: str) -> str:
     """Parse a deliberately bounded string scalar without guessing YAML semantics."""
     value = value.strip()
-    if value.startswith(('"', "'")):
-        if value[-1:] != value[0]:
-            raise ValueError('unterminated quoted scalar')
-        parsed = ast.literal_eval(value)
-        if not isinstance(parsed, str):
-            raise ValueError('expected string')
-        return parsed
+    if value.startswith('"'):
+        match = re.fullmatch(r'("(?:[^"\\]|\\.)*")(?:\s+#.*)?', value)
+        if not match:
+            raise ValueError('unsupported YAML quoted scalar syntax')
+        try:
+            return json.loads(match[1])
+        except json.JSONDecodeError as error:
+            raise ValueError('unsupported YAML double-quoted escape') from error
+    if value.startswith("'"):
+        match = re.fullmatch(r"('(?:[^']|'')*')(?:\s+#.*)?", value)
+        if not match:
+            raise ValueError('unsupported YAML single-quoted scalar syntax')
+        return match[1][1:-1].replace("''", "'")
+    value = re.split(r'\s+#', value, maxsplit=1)[0].rstrip()
+    if ': ' in value or re.search(r'[\x00-\x1f]', value):
+        raise ValueError('unsupported YAML plain scalar syntax')
     if not value or value[0] in '[{>|&*!' or value in {'null', '~', 'true', 'false'}:
         raise ValueError('unsupported YAML scalar syntax')
     return value

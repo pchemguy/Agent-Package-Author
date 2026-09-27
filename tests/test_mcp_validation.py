@@ -45,6 +45,16 @@ class McpValidationTests(unittest.TestCase):
         (self.root / 'mcp.json').write_text('{')
         self.assertTrue(any(i.rule == 'mcp-json' for i in load().validate_plugin(self.root)))
 
+    def test_nonstring_header_key_and_cwd_traversal_diagnosed(self):
+        self.mcp({'remote': {'type': 'streamable-http', 'url': 'https://example.com/mcp', 'headers': {'X-Test': 'ok', 'bad': 3}}})
+        self.assertTrue(any(i.rule == 'mcp-headers' for i in load().validate_plugin(self.root)))
+        self.mcp({'local': {'type': 'stdio', 'command': 'python', 'cwd': '${PLUGIN_DATA}/../escape'}})
+        self.assertTrue(any(i.rule == 'mcp-path' for i in load().validate_plugin(self.root)))
+
+    def test_invalid_port_is_not_accepted_as_remote_url(self):
+        self.mcp({'remote': {'type': 'streamable-http', 'url': 'https://example.com:bad/mcp'}})
+        self.assertTrue(any(i.rule == 'mcp-url' for i in load().validate_plugin(self.root)))
+
 
 if __name__ == '__main__':
     unittest.main()

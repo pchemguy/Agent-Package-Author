@@ -131,13 +131,15 @@ def _mcp(root: Path) -> list[Issue]:
             try:
                 parsed = urlsplit(url) if isinstance(url, str) else None
                 host = parsed.hostname if parsed else None
+                if parsed:
+                    _ = parsed.port  # Force validation of malformed port text.
                 loopback = host == 'localhost'
                 if host and not loopback:
                     try:
                         loopback = ipaddress.ip_address(host).is_loopback
                     except ValueError:
                         pass
-                if not parsed or parsed.scheme not in {'http','https'} or not host or parsed.username or parsed.password or parsed.fragment or (parsed.scheme == 'http' and not loopback):
+                if not parsed or any(c.isspace() for c in url) or parsed.scheme not in {'http','https'} or not host or parsed.username or parsed.password or parsed.fragment or (parsed.scheme == 'http' and not loopback):
                     error('mcp-url', 'absolute HTTPS URL required except HTTP loopback; no userinfo or fragment')
             except ValueError:
                 error('mcp-url', 'invalid URL')

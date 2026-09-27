@@ -62,6 +62,23 @@ class AuthoringTests(unittest.TestCase):
                 self.assertEqual(result.returncode, 0, result.stderr)
                 self.assertIn(expected, result.stdout)
 
+    def test_invalid_package_and_bad_invocation_have_distinct_exit_codes(self):
+        import tempfile
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp) / 'bad-skill'
+            root.mkdir()
+            (root / 'SKILL.md').write_text('bad')
+            script = CREATOR / 'scripts/validate_skill.py'
+            invalid = subprocess.run([sys.executable, str(script), str(root)], capture_output=True, text=True)
+            missing = subprocess.run([sys.executable, str(script), str(root/'absent')], capture_output=True, text=True)
+            self.assertEqual((invalid.returncode, missing.returncode), (1, 2))
+            self.assertIn('frontmatter', invalid.stdout)
+
+    def test_authoring_requires_collision_check_before_overwrite(self):
+        body = (CREATOR / 'references/authoring-workflow.md').read_text()
+        self.assertIn('Before writing into an existing target or installing', body)
+        self.assertIn('never overwrite an unrelated item', body)
+
 
 if __name__ == '__main__':
     unittest.main()

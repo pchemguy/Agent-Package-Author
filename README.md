@@ -13,10 +13,11 @@ python agent-package-author/scripts/validate_skill.py examples/standalone/word-c
 python agent-package-author/scripts/validate_plugin.py examples/multi-skill/notes-tools
 python agent-package-author/scripts/validate_plugin.py examples/with-mcp/notes-tools
 python agent-package-author/scripts/inspect_package.py examples/with-mcp/notes-tools
+python agent-package-author/scripts/create_openai_presentation.py --help
 python -m unittest discover -s tests -v
 ```
 
-CLIs exit `0` on strict structural success, `1` on detected package errors, and `2` for invalid invocation or absent paths. Diagnostics identify paths and rules. `--help` is available for each helper. A strict plugin check fails if any included skill or MCP server is invalid even when a conforming client could load other valid components.
+The first three CLIs exit `0` on strict structural success, `1` on detected package errors, and `2` for invalid invocation or absent paths. The presentation generator exits nonzero for invalid input or existing outputs, and accepts `--force` for an intentional replacement. Diagnostics identify paths and rules; `--help` is available for each helper. A strict plugin check fails if any included skill or MCP server is invalid even when a conforming client could load other valid components.
 
 ## Complete authoring walkthrough
 
@@ -38,6 +39,7 @@ Assume the user supplied these excerpts:
 | `WELCOME-draft.md` attachment | **Draft:** a single contributor-focused Markdown welcome page, with useful introduction text but no user branch or manifest. | Supplies candidate wording and a layout to adapt. It is not copied as the final skill instructions or treated as proof of correct behavior. |
 | `hello-world-SPEC.md` attachment, if supplied | **Design exemplar:** the Hello World reference specification described in this project's [SPEC.md](SPEC.md). | Justifies reading the conditional [Hello World design reference](agent-package-author/references/hello-world-example.md); its deliberately large file tree is not mandatory. |
 | [Agent Skills specification](https://agentskills.io/specification) | **External normative format reference.** | Governs `SKILL.md` frontmatter, naming, optional resources, and relative links; check the published text when authoring. |
+| `welcome-brand.json` attachment, if supplied | **Presentation reference:** approved name, color, and icon idea. | Becomes reviewed context for OpenAI metadata and icon; task and format requirements still govern the skill. |
 
 1. **Activate, explore, and brainstorm.** The creator's [`SKILL.md`](agent-package-author/SKILL.md) selects standalone mode. Read [authoring-workflow.md](agent-package-author/references/authoring-workflow.md) to extract the capability, inputs, audiences, activation phrases, outputs, constraints, and success/failure cases. Inspect the attachments and record “keep the introduction; replace the single-audience assumption; add a manifest and a validator.” Compare one skill with two audience branches against two separately discoverable skills: both audiences share the same input and output contract, so one skill with conditional profiles is the smaller coherent design. Resolve missing details, such as where the pack is written, with the user if they cannot be inferred. Check the proposed `project-welcome-pack` name in the intended discovery scope before writing or installing.
 2. **Classify and design.** Read [portability-policy.md](agent-package-author/references/portability-policy.md) to classify `SKILL.md` as core, references/scripts/assets as justified optional resources, and fixtures/tests as development material. Read [skill-standard.md](agent-package-author/references/skill-standard.md) for frontmatter and path rules and [skill-design.md](agent-package-author/references/skill-design.md) to keep orchestration in `SKILL.md`, audience rules in separate references, a reusable template in `assets/`, and repeatable render/validate operations in `scripts/`. Because the user supplied a rich exemplar, read [hello-world-example.md](agent-package-author/references/hello-world-example.md) **in this branch** for the conditional-resource design. It would not be loaded for a simple skill such as the repository's [`word-count`](examples/standalone/word-count/SKILL.md).
@@ -47,17 +49,21 @@ Assume the user supplied these excerpts:
    ```text
    project-welcome-pack/
    ├── SKILL.md
+   ├── agents/openai.yaml
    ├── references/
    │   ├── output-contract.md
    │   ├── contributor-profile.md
    │   └── user-profile.md
-   ├── assets/welcome-template.md
+   ├── assets/
+   │   ├── welcome-template.md
+   │   └── icon.svg
    └── scripts/
        ├── render.py
        └── validate.py
    ```
 
-5. **Exercise and report.** Read [validation-policy.md](agent-package-author/references/validation-policy.md). Render a contributor pack and a user pack, check their different final sections and manifest audiences, corrupt one output and confirm the independent validator rejects it, then repeat a render to compare bytes. Run `python agent-package-author/scripts/validate_skill.py project-welcome-pack` and `python agent-package-author/scripts/inspect_package.py project-welcome-pack`. Report the actual checks, script runtime needs, and any client-dependent installation behavior. These commands describe the output of this illustrative request; the `project-welcome-pack/` directory is not shipped here. For a shipped standalone smoke example, run `python agent-package-author/scripts/validate_skill.py examples/standalone/word-count` and `python examples/standalone/word-count/scripts/count_words.py 'one two three'` (expected output: `3`).
+5. **Derive OpenAI presentation from the accepted context.** Read [openai-presentation.md](agent-package-author/references/openai-presentation.md). After authoring `SKILL.md`, run `python agent-package-author/scripts/create_openai_presentation.py project-welcome-pack --context welcome-brand.json` if the reviewed brand file exists, or omit `--context` to derive defaults from the skill. The helper creates `project-welcome-pack/agents/openai.yaml` and `assets/icon.svg`; check that the short description matches the two audiences, the default prompt contains `$project-welcome-pack`, and the icon reflects the approved branding. These are OpenAI client presentation files rather than portable activation rules. The shipped [`word-count` metadata](examples/standalone/word-count/agents/openai.yaml) and [icon](examples/standalone/word-count/assets/icon.svg) show the generated shape.
+6. **Exercise and report.** Read [validation-policy.md](agent-package-author/references/validation-policy.md). Render a contributor pack and a user pack, check their different final sections and manifest audiences, corrupt one output and confirm the independent validator rejects it, then repeat a render to compare bytes. Run `python agent-package-author/scripts/validate_skill.py project-welcome-pack` and `python agent-package-author/scripts/inspect_package.py project-welcome-pack`. Check the OpenAI paths and SVG separately. Report the actual checks, script runtime needs, and any client-dependent installation behavior. These commands describe the output of this illustrative request; the `project-welcome-pack/` directory is not shipped here. For a shipped standalone smoke example, run `python agent-package-author/scripts/validate_skill.py examples/standalone/word-count` and `python examples/standalone/word-count/scripts/count_words.py 'one two three'` (expected output: `3`).
 
 ### Request B: from existing drafts to a multi-skill plugin
 
@@ -69,6 +75,7 @@ Assume the user supplied these excerpts:
 |---|---|---|
 | `notes-requirements.md` attachment | **Seed:** “Outline headings when asked for structure; identify missing local links when asked to audit a note; use local files without network access.” | Supplies two candidate activation conditions and test inputs. |
 | `outline-draft.md` and `links-draft.md` attachments | **Drafts:** informal procedures and example outputs such as `- First` and `missing: absent.md`. | Reuse accurate steps as skill instructions and outputs; check each against the actual scripts. |
+| `notes-brand.json` attachment, if supplied | **Presentation reference:** two approved names, colors, and icon ideas. | Supplies separate reviewed contexts keyed by `outline-notes` and `check-note-links`. |
 | [Agent Plugins 1.0.0](https://agent-plugins.org/specification) and [Agent Skills](https://agentskills.io/specification) | **External normative references.** | Govern the manifest, fixed discovery locations, optional MCP shape, and each bundled skill's `SKILL.md`. |
 | [`examples/standalone/sample.md`](examples/standalone/sample.md) | **Local test seed:** a heading and a broken relative link. | Supplies observable positive and negative workflow outcomes for the two skills. |
 
@@ -86,12 +93,13 @@ Assume the user supplied these excerpts:
    ```
 
    The outline script emits `- First`; the link checker emits `missing: absent.md`. The plugin validates without `mcp.json` because that component is optional.
-4. **Take the conditional MCP branch only when justified.** If a client needs tool-call access to the note heading index, read [mcp-packaging.md](agent-package-author/references/mcp-packaging.md). Add a root `mcp.json` with the matching 1.0.0 schema and one `stdio` server; keep the executable token separate from arguments and refer to the bundled script through `${PLUGIN_ROOT}`. The shipped [`examples/with-mcp/notes-tools/`](examples/with-mcp/notes-tools/mcp.json) demonstrates this branch. Run `python agent-package-author/scripts/validate_plugin.py examples/with-mcp/notes-tools` and inspect it. The tests exercise the sample server's `initialize` and `tools/list` responses; a particular client's MCP handshake, permissions, and presentation remain client-dependent. No secret is put into `mcp.json`.
-5. **Finish the evidence loop.** Apply [validation-policy.md](agent-package-author/references/validation-policy.md) to the plugin and each skill: verify both positive workflows, corrupt one skill's frontmatter in a disposable copy and confirm strict validation fails, check malformed `mcp.json` and an escaping package path, then restore the valid example. Report the two skills, optional server, actual CLI outcomes, required Python runtime, and any client extension separately. A request for a host-specific hook would require verified host documentation and an explicit extension; it would not be described as a portable v1 capability.
+4. **Generate distinct OpenAI presentation for each child.** Read [openai-presentation.md](agent-package-author/references/openai-presentation.md) and run `python agent-package-author/scripts/create_openai_presentation.py examples/multi-skill/notes-tools --context notes-brand.json` with a reviewed JSON context containing a `skills` object, or omit `--context` for defaults. The helper writes an `agents/openai.yaml` and `assets/icon.svg` inside **each** skill, never at plugin root. Check the `$outline-notes` and `$check-note-links` prompts, names, and icons separately. The shipped [outliner metadata](examples/multi-skill/notes-tools/skills/outline-notes/agents/openai.yaml) and [link checker metadata](examples/multi-skill/notes-tools/skills/check-note-links/agents/openai.yaml) show both outputs. Because shipped example outputs exist, rerunning generation there requires `--force` after reviewing the replacements.
+5. **Take the conditional MCP branch only when justified.** If a client needs tool-call access to the note heading index, read [mcp-packaging.md](agent-package-author/references/mcp-packaging.md). Add a root `mcp.json` with the matching 1.0.0 schema and one `stdio` server; keep the executable token separate from arguments and refer to the bundled script through `${PLUGIN_ROOT}`. The shipped [`examples/with-mcp/notes-tools/`](examples/with-mcp/notes-tools/mcp.json) demonstrates this branch, with child metadata and icons generated the same way. Run `python agent-package-author/scripts/validate_plugin.py examples/with-mcp/notes-tools` and inspect it. The tests exercise the sample server's `initialize` and `tools/list` responses; a particular client's MCP handshake, permissions, and presentation remain client-dependent. No secret is put into `mcp.json`.
+6. **Finish the evidence loop.** Apply [validation-policy.md](agent-package-author/references/validation-policy.md) to the plugin and each skill: verify both positive workflows, corrupt one skill's frontmatter in a disposable copy and confirm strict validation fails, check malformed `mcp.json` and an escaping package path, then restore the valid example. Check OpenAI presentation per child. Report the two skills, optional server, actual CLI outcomes, required Python runtime, and any client extension separately. A request for a host-specific hook would require verified host documentation and an explicit extension; it would not be described as a portable v1 capability.
 
 ### Exact reference loading map
 
-All nine modules are named directly by the creator's `SKILL.md`. “Read” means the authoring agent loads that reference to make a decision; it does **not** mean a Python validator executes the reference. A referenced module is loaded only for the branch shown. The second column identifies the direct trigger and the third shows a concrete effect in the walkthrough.
+All ten modules are named directly by the creator's `SKILL.md`. “Read” means the authoring agent loads that reference to make a decision; it does **not** mean a Python validator executes the reference. A referenced module is loaded only for the branch shown. The second column identifies the direct trigger and the third shows a concrete effect in the walkthrough.
 
 | Creator reference | Direct trigger / subworkflow | Observable use above |
 |---|---|---|
@@ -104,6 +112,7 @@ All nine modules are named directly by the creator's `SKILL.md`. “Read” mean
 | [`plugin-design.md`](agent-package-author/references/plugin-design.md) | Plugin exploration and capability decomposition | Separates outlining from link checking and avoids overlapping activation. |
 | [`mcp-packaging.md`](agent-package-author/references/mcp-packaging.md) | Only the optional heading-index MCP branch | Chooses the `stdio` variant, schema, placeholder placement, path containment, and credential boundary. |
 | [`validation-policy.md`](agent-package-author/references/validation-policy.md) | Both requests, after design and again at acceptance | Combines structural CLIs with output checks, negative cases, and qualified reporting. |
+| [`openai-presentation.md`](agent-package-author/references/openai-presentation.md) | Both requests, after portable `SKILL.md` files exist | Derives reviewed OpenAI metadata and SVG for the standalone skill and each plugin child; invokes `create_openai_presentation.py` and checks outputs. |
 
 ## Boundaries
 
@@ -111,6 +120,6 @@ All nine modules are named directly by the creator's `SKILL.md`. “Read” mean
 - The skill validator parses a documented subset of YAML frontmatter: plain and quoted string scalars and an indented string mapping for `metadata`. Other valid YAML syntax, including block scalars, is reported as **unverified** with a failing status. A green result therefore confirms its supported structural checks, not complete YAML-language conformance for every possible skill.
 - The structural checks do not establish prose quality, reliable activation, security of included code, remote service behavior, host installation, or cross-client runtime compatibility. The example MCP server's initialize and tool-list responses are tested locally; full interoperability with particular clients and network services is outside the checks.
 - Credentials are not part of the portable MCP package. A literal-looking secret in an environment or header value triggers a review warning, which is not a comprehensive secret scanner.
-- Client-specific extensions require separate verified client documentation and are never presented as portable Agent Plugins components. The repository examples intentionally contain no such extension.
+- Client-specific extensions require separate verified client documentation and are never presented as portable Agent Plugins components. The examples contain OpenAI-specific presentation files within skills, but no Agent Plugins manifest extension.
 
 The source-only `examples/`, `tests/`, `SPEC.md`, `PLAN.md`, `ROADMAP.md`, and append-only `IMPLEMENTATION_LOG.jsonl` are not needed to run the delivered skill. The project history has one local task commit per implementation task, each with a `Task:` trailer; recovery manifests are transient and excluded from Git.

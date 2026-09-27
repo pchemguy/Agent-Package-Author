@@ -5,3 +5,5 @@ Choose a plugin when packaging multiple independently useful skills or a skill w
 Keep shared material under explicit ownership. A bundled skill must not assume a client discovers another skill's private references. If common data is needed, give each skill a self-contained copy or a documented contained path while preserving its standalone behavior.
 
 Only `skills/*/SKILL.md` immediate children are portable skills. Do not imply that arbitrary `commands/`, hooks, custom agents, or rules are portable v1 components. Explicit client-specific behavior belongs under the client's verified reverse-domain `extensions` namespace and/or matching root directory; this is not portable core. Installation and presentation remain client concerns.
+
+Read `openai-presentation.md` to generate distinct OpenAI presentation in each immediate-child skill after the portable plugin is designed. Do not put a skill's OpenAI metadata at plugin root or in `plugin.json`.

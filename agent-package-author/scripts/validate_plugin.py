@@ -102,8 +102,10 @@ def _mcp(root: Path) -> list[Issue]:
             command = config.get('command')
             if not isinstance(command, str) or not command or command.startswith(('/', '../')) or (not command.startswith('./') and (any(c.isspace() for c in command) or '/' in command or '\\' in command)):
                 error('mcp-command', 'command must be a bare executable token or contained ./ path')
-            elif command.startswith('./') and not (root / command).resolve().is_relative_to(root.resolve()):
-                error('mcp-path', 'command escapes plugin root')
+            elif command.startswith('./'):
+                executable = (root / command).resolve()
+                if not executable.is_relative_to(root.resolve()) or not executable.is_file():
+                    error('mcp-path', 'bundled command must be a contained regular file')
             if 'args' in config and (not isinstance(config['args'], list) or any(not isinstance(s, str) for s in config['args'])):
                 error('mcp-args', 'args must be a string array')
             env = config.get('env', {})

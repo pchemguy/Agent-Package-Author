@@ -55,6 +55,10 @@ class McpValidationTests(unittest.TestCase):
         self.mcp({'remote': {'type': 'streamable-http', 'url': 'https://example.com:bad/mcp'}})
         self.assertTrue(any(i.rule == 'mcp-url' for i in load().validate_plugin(self.root)))
 
+    def test_bundled_command_must_resolve_to_file(self):
+        self.mcp({'local': {'type': 'stdio', 'command': './bin/server'}})
+        self.assertTrue(any(i.rule == 'mcp-path' for i in load().validate_plugin(self.root)))
+
 
 if __name__ == '__main__':
     unittest.main()

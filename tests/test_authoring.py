@@ -79,6 +79,33 @@ class AuthoringTests(unittest.TestCase):
         self.assertIn('Before writing into an existing target or installing', body)
         self.assertIn('never overwrite an unrelated item', body)
 
+    def test_creator_skill_validates_itself(self):
+        result = subprocess.run([sys.executable, str(CREATOR/'scripts/validate_skill.py'), str(CREATOR)], capture_output=True, text=True)
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+
+    def test_external_entry_symlink_is_rejected_without_reading_it(self):
+        import tempfile
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp) / 'sample'
+            root.mkdir()
+            outside = Path(temp) / 'outside.md'
+            outside.write_text('---\nname: sample\ndescription: Outside\n---\n# Outside')
+            (root / 'SKILL.md').symlink_to(outside)
+            result = subprocess.run([sys.executable, str(CREATOR/'scripts/validate_skill.py'), str(root)], capture_output=True, text=True)
+            self.assertEqual(result.returncode, 1)
+            self.assertIn('entry-containment', result.stdout)
+
+    def test_example_mcp_server_handles_initialize_and_tool_list(self):
+        import json
+        server = ROOT/'examples/with-mcp/notes-tools/bin/notes_server.py'
+        requests = [{'jsonrpc':'2.0','id':1,'method':'initialize','params':{'protocolVersion':'2025-06-18','capabilities':{},'clientInfo':{'name':'test','version':'1'}}},
+                    {'jsonrpc':'2.0','id':2,'method':'tools/list','params':{}}]
+        result = subprocess.run([sys.executable,str(server)],input='\n'.join(map(json.dumps,requests))+'\n',capture_output=True,text=True)
+        self.assertEqual(result.returncode,0,result.stderr)
+        responses=[json.loads(line) for line in result.stdout.splitlines()]
+        self.assertEqual(responses[0]['result']['serverInfo']['name'],'note-heading-index')
+        self.assertEqual(responses[1]['result']['tools'][0]['name'],'headings')
+
 
 if __name__ == '__main__':
     unittest.main()

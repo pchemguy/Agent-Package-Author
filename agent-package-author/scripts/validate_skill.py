@@ -91,6 +91,8 @@ def validate_skill(path: Path) -> list[Issue]:
     entry = path / 'SKILL.md'
     if not path.is_dir() or not entry.is_file():
         return [Issue('ERROR', str(entry), 'entry', 'skill directory and regular SKILL.md required')]
+    if not entry.resolve().is_relative_to(path.resolve()):
+        return [Issue('ERROR', str(entry), 'entry-containment', 'SKILL.md resolves outside skill root')]
     try:
         content = entry.read_text(encoding='utf-8')
         metadata = _frontmatter(content)

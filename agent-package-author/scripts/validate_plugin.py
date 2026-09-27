@@ -83,6 +83,29 @@ def validate_plugin(path: Path) -> list[Issue]:
     if not root.is_dir():
         return [Issue('ERROR', str(root), 'plugin-root', 'plugin directory required')]
     issues, manifest = _manifest(root)
+    if manifest is None:
+        return issues
+    skills = root / 'skills'
+    if skills.exists() or skills.is_symlink():
+        if not skills.resolve().is_relative_to(root.resolve()) or not skills.is_dir():
+            issues.append(Issue('ERROR', str(skills), 'skills-kind', 'skills must resolve to a contained directory'))
+        else:
+            for child in sorted(skills.iterdir(), key=lambda p: p.name):
+                if not child.is_dir():
+                    continue
+                if not child.resolve().is_relative_to(root.resolve()):
+                    issues.append(Issue('ERROR', str(child), 'skill-containment', 'discovered child escapes plugin root'))
+                    continue
+                entry = child / 'SKILL.md'
+                if not entry.exists() and not entry.is_symlink():
+                    continue
+                if not entry.resolve().is_relative_to(root.resolve()):
+                    issues.append(Issue('ERROR', str(entry), 'skill-containment', 'SKILL.md escapes plugin root'))
+                else:
+                    issues.extend(validate_skill(child))
+    for child in sorted(root.iterdir(), key=lambda p: p.name):
+        if child.is_dir() and child.name.startswith(('com.', 'org.', 'net.')) and not NAMESPACE.fullmatch(child.name):
+            issues.append(Issue('ERROR', str(child), 'extension-directory', 'extension root must use a reverse-domain namespace'))
     return issues
 
 

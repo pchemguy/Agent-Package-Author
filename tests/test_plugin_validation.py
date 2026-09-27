@@ -53,6 +53,25 @@ class PluginValidationTests(unittest.TestCase):
         issues = load().validate_plugin(self.root)
         self.assertTrue(any(i.rule == 'extensions' and 'client' in i.message for i in issues))
 
+    def test_immediate_skills_are_validated_independently(self):
+        self.manifest()
+        for name in ('alpha', 'beta'):
+            skill = self.root / 'skills' / name
+            skill.mkdir(parents=True)
+            (skill / 'SKILL.md').write_text(f'---\nname: {name}\ndescription: Run {name}\n---\n\n# {name}\n')
+        self.assertEqual(load().validate_plugin(self.root), [])
+        (self.root / 'skills/beta/SKILL.md').write_text('broken')
+        self.assertTrue(any('beta' in i.path for i in load().validate_plugin(self.root)))
+
+    def test_wrong_kind_skills_and_escaping_child(self):
+        self.manifest()
+        (self.root / 'skills').write_text('not a directory')
+        self.assertTrue(any(i.rule == 'skills-kind' for i in load().validate_plugin(self.root)))
+        (self.root / 'skills').unlink()
+        (self.root / 'skills').mkdir()
+        (self.root / 'skills/outer').symlink_to(Path(self.temp.name))
+        self.assertTrue(any(i.rule == 'skill-containment' for i in load().validate_plugin(self.root)))
+
 
 if __name__ == '__main__':
     unittest.main()

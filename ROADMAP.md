@@ -8,7 +8,7 @@ Derived from [PLAN.md](PLAN.md). A checkbox is durable only with a matching comp
 - [x] Task 04 — Plugin and MCP authoring resources
 - [x] Task 05 — Skill validator, metadata and naming
 - [x] Task 06 — Skill resource and path validation
-- [ ] Task 07 — Plugin manifest validator
+- [x] Task 07 — Plugin manifest validator
 - [ ] Task 08 — Skill discovery and extensions inside plugins
 - [ ] Task 09 — MCP configuration validator
 - [ ] Task 10 — Read-only package inspector

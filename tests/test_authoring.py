@@ -32,6 +32,15 @@ class AuthoringTests(unittest.TestCase):
         self.assertIn('not a mandatory', exemplar.lower())
         self.assertIn('description:', (CREATOR / 'assets/skill-entry-template.md').read_text())
 
+    def test_plugin_templates_have_canonical_schemas(self):
+        import json
+        manifest = json.loads((CREATOR / 'assets/plugin-manifest-template.json').read_text())
+        mcp = json.loads((CREATOR / 'assets/mcp-template.json').read_text())
+        self.assertEqual(manifest['$schema'], 'https://agent-plugins.org/schemas/1.0.0/plugin.schema.json')
+        self.assertEqual(mcp['$schema'], 'https://agent-plugins.org/schemas/1.0.0/mcp.schema.json')
+        self.assertNotIn('mcpServers', manifest)
+        self.assertIn('immediate', (CREATOR / 'references/plugin-standard.md').read_text())
+
 
 if __name__ == '__main__':
     unittest.main()

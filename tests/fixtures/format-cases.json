@@ -1,0 +1,13 @@
+{
+  "reviewed_at": "2026-09-27",
+  "sources": ["https://agentskills.io/specification", "https://agent-plugins.org/specification"],
+  "plugin_schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "mcp_schema": "https://agent-plugins.org/schemas/1.0.0/mcp.schema.json",
+  "skill_name_alphabet": "abcdefghijklmnopqrstuvwxyz0123456789-",
+  "plugin_name_alphabet": "abcdefghijklmnopqrstuvwxyz0123456789-.",
+  "manifest_keys": ["$schema", "name", "version", "description", "author", "homepage", "repository", "license", "keywords", "extensions"],
+  "skill_fields": ["name", "description", "license", "compatibility", "metadata", "allowed-tools"],
+  "mcp_transports": ["stdio", "streamable-http", "sse"],
+  "discovery": {"included": ["skills/example/SKILL.md"], "excluded": ["skills/example/subskills/nested/SKILL.md"]},
+  "failure_boundaries": {"fatal_manifest": "plugin", "invalid_skill": "skill", "invalid_mcp_root": "mcp type", "invalid_mcp_server": "server"}
+}

@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "components": {
+    "example.core": {
+      "paths": [
+        "src/example/core.py"
+      ],
+      "verification_targets": [
+        "example.core.unit",
+        "example.workflow.integration"
+      ]
+    },
+    "example.adapter": {
+      "paths": [
+        "src/example/adapter.py"
+      ],
+      "verification_targets": [
+        "example.adapter.unit",
+        "example.workflow.integration"
+      ]
+    }
+  },
+  "verification_targets": {
+    "example.core.unit": {
+      "kind": "unit",
+      "cwd": ".",
+      "command": [
+        "python",
+        "-m",
+        "pytest",
+        "tests/test_core.py"
+      ]
+    },
+    "example.adapter.unit": {
+      "kind": "unit",
+      "cwd": ".",
+      "command": [
+        "python",
+        "-m",
+        "pytest",
+        "tests/test_adapter.py"
+      ]
+    },
+    "example.workflow.integration": {
+      "kind": "integration",
+      "cwd": ".",
+      "command": [
+        "python",
+        "-m",
+        "pytest",
+        "tests/integration/test_workflow.py"
+      ]
+    }
+  }
+}

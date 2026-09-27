@@ -23,6 +23,15 @@ class AuthoringTests(unittest.TestCase):
         self.assertIn('before', body.lower())
         self.assertIn('acceptance', body.lower())
 
+    def test_skill_resources_are_optional_and_example_is_not_mandatory(self):
+        standard = (CREATOR / 'references/skill-standard.md').read_text()
+        design = (CREATOR / 'references/skill-design.md').read_text()
+        exemplar = (CREATOR / 'references/hello-world-example.md').read_text()
+        self.assertIn('optional', standard.lower())
+        self.assertIn('activation', design.lower())
+        self.assertIn('not a mandatory', exemplar.lower())
+        self.assertIn('description:', (CREATOR / 'assets/skill-entry-template.md').read_text())
+
 
 if __name__ == '__main__':
     unittest.main()

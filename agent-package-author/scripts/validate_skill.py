@@ -116,6 +116,18 @@ def validate_skill(path: Path) -> list[Issue]:
         issues.append(Issue('ERROR', str(entry), 'field', f'unknown frontmatter field {key!r}'))
     if 'allowed-tools' in metadata:
         issues.append(Issue('WARN', str(entry), 'experimental', 'allowed-tools is experimental; client support varies'))
+    # Only explicit local links and resource path literals have file semantics.
+    links = re.findall(r'\]\(([^)]+)\)', content)
+    literals = re.findall(r'`((?:references|scripts|assets)/[^`\s]+)`', content)
+    for raw in sorted(set(links + literals)):
+        target = raw.split('#', 1)[0]
+        if not target or '://' in target or target.startswith('#'):
+            continue
+        resolved = (path / target).resolve()
+        if Path(target).is_absolute() or not resolved.is_relative_to(path.resolve()):
+            issues.append(Issue('ERROR', str(entry), 'resource-escape', f'local resource escapes skill root: {raw}'))
+        elif not resolved.is_file():
+            issues.append(Issue('ERROR', str(entry), 'resource-missing', f'local resource does not exist: {raw}'))
     return issues
 
 

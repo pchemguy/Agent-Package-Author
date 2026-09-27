@@ -49,6 +49,23 @@ class SkillValidationTests(unittest.TestCase):
         self.write('name: example-skill\ndescription: Valid\ncompatibility: ' + 'x'*501)
         self.assertTrue(any(i.rule == 'compatibility' for i in load().validate_skill(self.root)))
 
+    def test_reference_links_are_contained_and_exist(self):
+        self.write()
+        (self.root / 'SKILL.md').write_text((self.root / 'SKILL.md').read_text() + '\nSee [guide](references/guide.md).\n')
+        issues = load().validate_skill(self.root)
+        self.assertTrue(any(i.rule == 'resource-missing' for i in issues))
+        (self.root / 'references').mkdir()
+        (self.root / 'references/guide.md').write_text('Guidance')
+        self.assertEqual(load().validate_skill(self.root), [])
+        (self.root / 'references/guide.md').unlink()
+        (self.root / 'references/guide.md').symlink_to(Path(self.temp.name) / 'external.md')
+        self.assertTrue(any(i.rule == 'resource-escape' for i in load().validate_skill(self.root)))
+
+    def test_parent_traversal_is_rejected(self):
+        self.write()
+        (self.root / 'SKILL.md').write_text((self.root / 'SKILL.md').read_text() + '\n[bad](../other/SKILL.md)\n')
+        self.assertTrue(any(i.rule == 'resource-escape' for i in load().validate_skill(self.root)))
+
 
 if __name__ == '__main__':
     unittest.main()

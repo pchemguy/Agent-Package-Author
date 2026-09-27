@@ -23,19 +23,19 @@
 
 ## File map
 
-| Path | Responsibility |
-|---|---|
-| `agent-package-author/SKILL.md` | Activation, mode routing, exact resource paths, workflow gates, completion reporting |
-| `references/authoring-workflow.md`, `portability-policy.md`, `validation-policy.md` | Shared process, component classification, evidence and limits |
-| `references/skill-standard.md`, `skill-design.md`, `hello-world-example.md` | Skill format, design choices, bounded exemplar |
-| `references/plugin-standard.md`, `plugin-design.md`, `mcp-packaging.md` | Plugin format, capability split, optional MCP details |
-| `assets/skill-entry-template.md`, `plugin-manifest-template.json`, `mcp-template.json` | Minimal, editable starting material |
-| `scripts/validate_skill.py` | Frontmatter, naming, relative resource and containment checks; shared issues and CLI output |
-| `scripts/validate_plugin.py` | Manifest, discovery, bundled skills, MCP, extensions, path checks |
-| `scripts/inspect_package.py` | Read-only inventory and bounded validation summary |
-| `tests/test_skill_validation.py`, `test_plugin_validation.py`, `test_mcp_validation.py`, `test_inspection.py`, `test_authoring.py` | Structural, negative, CLI, and end-to-end behavior |
-| `examples/standalone/`, `examples/multi-skill/`, `examples/with-mcp/` | Realistic acceptance packages; only `with-mcp` contains `mcp.json` |
-| `README.md` | Source usage, format scope, independent installation, verification instructions |
+| Path                                                                                                                               | Responsibility                                                                              |
+| ---------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| `agent-package-author/SKILL.md`                                                                                                    | Activation, mode routing, exact resource paths, workflow gates, completion reporting        |
+| `references/authoring-workflow.md`, `portability-policy.md`, `validation-policy.md`                                                | Shared process, component classification, evidence and limits                               |
+| `references/skill-standard.md`, `skill-design.md`, `hello-world-example.md`                                                        | Skill format, design choices, bounded exemplar                                              |
+| `references/plugin-standard.md`, `plugin-design.md`, `mcp-packaging.md`                                                            | Plugin format, capability split, optional MCP details                                       |
+| `assets/skill-entry-template.md`, `plugin-manifest-template.json`, `mcp-template.json`                                             | Minimal, editable starting material                                                         |
+| `scripts/validate_skill.py`                                                                                                        | Frontmatter, naming, relative resource and containment checks; shared issues and CLI output |
+| `scripts/validate_plugin.py`                                                                                                       | Manifest, discovery, bundled skills, MCP, extensions, path checks                           |
+| `scripts/inspect_package.py`                                                                                                       | Read-only inventory and bounded validation summary                                          |
+| `tests/test_skill_validation.py`, `test_plugin_validation.py`, `test_mcp_validation.py`, `test_inspection.py`, `test_authoring.py` | Structural, negative, CLI, and end-to-end behavior                                          |
+| `examples/standalone/`, `examples/multi-skill/`, `examples/with-mcp/`                                                              | Realistic acceptance packages; only `with-mcp` contains `mcp.json`                          |
+| `README.md`                                                                                                                        | Source usage, format scope, independent installation, verification instructions             |
 
 ## Review focus
 

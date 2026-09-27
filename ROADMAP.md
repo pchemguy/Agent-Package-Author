@@ -3,7 +3,7 @@
 Derived from [PLAN.md](PLAN.md). A checkbox is durable only with a matching completed journal record and `Task:` commit.
 
 - [x] Task 01 — Pin rules and establish a test harness
-- [ ] Task 02 — Shared authoring contract and mode routing
+- [x] Task 02 — Shared authoring contract and mode routing
 - [ ] Task 03 — Standalone skill authoring resources
 - [ ] Task 04 — Plugin and MCP authoring resources
 - [ ] Task 05 — Skill validator, metadata and naming

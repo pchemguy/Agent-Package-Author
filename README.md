@@ -1,10 +1,12 @@
 # Agent Package Author
 
-This repository implements [SPEC.md](SPEC.md) under the ordered [PLAN.md](PLAN.md). The runtime skill is the `agent-package-author/` directory. It guides the creation or revision of a standalone Agent Skill or an Agent Plugins 1.0.0 package with immediately discoverable skills and optional MCP servers. It can inspect and structurally validate both formats without downloading schemas, executing target scripts, or connecting to MCP endpoints.
+`agent-package-author/` is a skill for creating and revising Agent Skills and Agent Plugins 1.0.0 packages. Give it a capability brief, existing draft, or reference files. It explores the requirements, decides whether one skill or several independently useful skills fit the work, writes the package, and checks its structure and example behavior. A plugin can include MCP configuration when the capability needs it. Each generated skill also gets OpenAI presentation metadata and an SVG icon derived from its context.
+
+The [walkthrough](#complete-authoring-walkthrough) shows both modes with attached material. [SPEC.md](SPEC.md) defines this creator's requirements; [PLAN.md](PLAN.md) records its implementation plan.
 
 ## Use
 
-Place the complete `agent-package-author/` directory in a skill discovery location supported by your agent. Installation paths, invocation syntax, Python support, and MCP transport support depend on the host. Installing or publishing the skill is outside this repository's implementation campaign. The skill's own routing starts in `SKILL.md`, with conditional references and optional templates under `references/` and `assets/`.
+Place the complete `agent-package-author/` directory in a skill discovery location supported by your agent. Ask it to create a standalone skill or a plugin from your brief and any attached files. The entry point is [`SKILL.md`](agent-package-author/SKILL.md); it loads the relevant authoring references for the request. Installation paths, invocation syntax, Python support, and MCP transport support depend on the host.
 
 Run the offline helpers with Python 3.11 or newer:
 

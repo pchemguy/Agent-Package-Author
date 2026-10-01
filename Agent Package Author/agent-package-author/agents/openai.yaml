@@ -1,9 +1,0 @@
-interface:
-  display_name: "Agent Package Author"
-  short_description: "Design and validate Agent Skills and Plugins"
-  icon_small: "./assets/icon.svg"
-  icon_large: "./assets/icon.svg"
-  brand_color: "#375C9B"
-  default_prompt: "Use $agent-package-author to design and validate a portable Agent Skill or multi-skill Agent Plugin."
-policy:
-  allow_implicit_invocation: true

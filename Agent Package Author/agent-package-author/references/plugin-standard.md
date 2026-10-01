@@ -1,7 +1,0 @@
-# Agent Plugins 1.0.0 format
-
-The [published specification](https://agent-plugins.org/specification) governs. A plugin has root `plugin.json` containing canonical `$schema` and valid `name`. Names allow lowercase ASCII letters, digits, periods and hyphens, length 1–64, alphanumeric at both ends, without `--` or `..`. The closed root keys are `$schema`, `name`, `version`, `description`, `author`, `homepage`, `repository`, `license`, `keywords`, `extensions`; `author` has only string `name`, `email`, `url`. Other metadata is type-checked but URLs/versions are not semantically forced.
-
-Portable component locations are fixed: immediate child directories of `skills/` with a regular `SKILL.md`, and optional root `mcp.json`. Neither location is configurable in the manifest. An absent component location is valid; a present malformed location is not a clean creator deliverable. Bundled skills conform independently to Agent Skills. Nested `SKILL.md` files are not independently discovered.
-
-Client loading distinguishes a fatal manifest field/type/version violation from unknown manifest fields and non-object `extensions`, which clients report and ignore. Invalid individual skills are skipped; invalid MCP configuration disables that component type; invalid servers are skipped independently. Strict authoring validation still requires every advertised included component to pass. Clients decide what component types and transports they support and how skills appear to users.

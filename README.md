@@ -2,8 +2,6 @@
 
 `agent-package-author/` is a skill for creating and revising Agent Skills and Agent Plugins 1.0.0 packages. Give it a capability brief, existing draft, or reference files. It explores the requirements, decides whether one skill or several independently useful skills fit the work, writes the package, and checks its structure and example behavior. A plugin can include MCP configuration when the capability needs it. Each generated skill also gets OpenAI presentation metadata and an SVG icon derived from its context.
 
-**Author:** PChemGuy · **Source:** [pchemguy/Agent-Package-Author](https://github.com/pchemguy/Agent-Package-Author)
-
 The [walkthrough](#complete-authoring-walkthrough) shows both modes with attached material. [AGENTS.md](AGENTS.md) is the project development entry point; [SPEC.md](docs/dev/SPEC.md) defines this creator's requirements, and [PLAN.md](docs/dev/PLAN.md) records its implementation plan.
 
 ## Use

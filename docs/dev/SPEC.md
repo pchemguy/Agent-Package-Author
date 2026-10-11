@@ -4,7 +4,7 @@
 
 Implement `agent-package-author`, a portable Agent Skill that creates, revises, inspects, and validates (a) standalone Agent Skills and (b) Agent Plugins 1.0 packages containing Agent Skills and, when justified, MCP server configuration. These are two authoring modes within one skill. Inspection and validation serve both modes.
 
-The skill's frontmatter `name` SHALL be `agent-package-author`, and its directory SHALL have the same name. Its description SHALL mention both standalone skills and Agent Plugins so either request can activate it. Before installing a generated package, the workflow SHALL check for a same-name package or skill in the target discovery scope and resolve collisions without overwriting an unrelated item. The name does not assert global uniqueness.
+The skill's frontmatter `name` SHALL be `agent-package-author`, and its directory SHALL have the same name. Its description SHALL mention both standalone skills and Agent Plugins so either request can activate it. Its standard optional `metadata` mapping SHALL identify `PChemGuy` as `author` and `https://github.com/pchemguy/Agent-Package-Author` as `source`. Before installing a generated package, the workflow SHALL check for a same-name package or skill in the target discovery scope and resolve collisions without overwriting an unrelated item. The name does not assert global uniqueness.
 
 The creator SHALL produce the smallest package that satisfies the user's requested capabilities. The Hello World reference skill is a design exemplar for a deliberately broad feature demonstration; its file count and workflow SHALL NOT be imposed on other skills.
 
@@ -48,7 +48,7 @@ agent-package-author/
     └── mcp-template.json
 ```
 
-`SKILL.md` SHALL contain only valid `name` and `description` frontmatter and concise routing, relative resource paths, creation steps, and completion conditions. Each reference SHALL be directly discoverable from it; reading a reference SHALL NOT be required to discover another reference. `references/` contains conditional authoring knowledge; `scripts/` contains deterministic offline helpers; `assets/` contains starting material for generated files. The Hello World example SHALL explain design choices without turning them into universal requirements. Development `SPEC.md`, `PLAN.md`, `README.md`, examples, and tests MAY accompany the source repository but SHALL NOT be necessary to execute the runtime skill.
+`SKILL.md` SHALL contain valid `name` and `description` frontmatter, the author/source `metadata` mapping, and concise routing, relative resource paths, creation steps, and completion conditions. Each reference SHALL be directly discoverable from it; reading a reference SHALL NOT be required to discover another reference. `references/` contains conditional authoring knowledge; `scripts/` contains deterministic offline helpers; `assets/` contains starting material for generated files. The Hello World example SHALL explain design choices without turning them into universal requirements. Development `SPEC.md`, `PLAN.md`, `README.md`, examples, and tests MAY accompany the source repository but SHALL NOT be necessary to execute the runtime skill.
 
 ## 4. Shared authoring workflow
 

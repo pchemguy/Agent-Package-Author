@@ -12,7 +12,7 @@
 
 ## Global constraints and interfaces
 
-- Creator directory and frontmatter name: `agent-package-author`. Its own frontmatter contains only `name` and `description`.
+- Creator directory and frontmatter name: `agent-package-author`. Its frontmatter also uses the standard optional `metadata` mapping for `author: PChemGuy` and the repository `source` URL; generated skills use optional metadata only when justified.
 - Plugin schema identifiers are exactly `https://agent-plugins.org/schemas/1.0.0/plugin.schema.json` and `https://agent-plugins.org/schemas/1.0.0/mcp.schema.json`. Do not silently accept another version.
 - Runtime helpers are offline and standard-library-only; no target package code is executed by inspection or structural validation.
 - A validator's exit `0` means strict creator validation passed; exit `1` means package errors; exit `2` means invalid invocation or unreadable input. Warnings do not fail. Diagnostics use `ERROR|WARN: path: rule: explanation` and are stably ordered.
@@ -59,7 +59,7 @@
 
 **Files:** `agent-package-author/SKILL.md`, `references/authoring-workflow.md`, `portability-policy.md`, `validation-policy.md`, `tests/test_authoring.py`.
 
-- [ ] Write a failing test that checks the creator's exact frontmatter fields, both mode keywords in `description`, directly named references, and explicit conditional routing for MCP and the Hello World exemplar.
+- [ ] Write a failing test that checks the creator's required frontmatter fields and author/source metadata, both mode keywords in `description`, directly named references, and explicit conditional routing for MCP and the Hello World exemplar.
 - [ ] Author the entry point and shared references: requirements intake, collision check before any install/write, classification of every proposed component, observable acceptance model, revision without overwriting unrelated files, verification evidence, and qualified completion claims.
 - [ ] Run `python -m unittest discover -s tests -p 'test_authoring.py' -v`. **Complete when:** skill and plugin requests route to the intended references and the creator itself has no host instruction files.
 

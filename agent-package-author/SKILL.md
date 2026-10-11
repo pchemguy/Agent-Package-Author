@@ -1,6 +1,9 @@
 ---
 name: agent-package-author
 description: Design, create, revise, inspect, and validate standalone Agent Skills and Agent Plugins 1.0 packages. Use for portable skill authoring or multi-skill plugin packaging with optional MCP configuration.
+metadata:
+  author: PChemGuy
+  source: https://github.com/pchemguy/Agent-Package-Author
 ---
 
 # Agent Package Author

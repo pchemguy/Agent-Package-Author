@@ -18,6 +18,7 @@ class AuthoringTests(unittest.TestCase):
         self.assertIn('references/mcp-packaging.md', body)
         self.assertIn('only if', body.lower())
         self.assertIn('references/hello-world-example.md', body)
+        self.assertIn('references/openai-presentation.md', body)
 
     def test_shared_workflow_guards_collisions(self):
         body = (CREATOR / 'references/authoring-workflow.md').read_text()

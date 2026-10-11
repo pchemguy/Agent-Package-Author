@@ -19,7 +19,7 @@ python agent-package-author/scripts/create_openai_presentation.py --help
 python -m unittest discover -s tests -v
 ```
 
-The first three CLIs exit `0` on strict structural success, `1` on detected package errors, and `2` for invalid invocation or absent paths. The presentation generator exits nonzero for invalid input or existing outputs, and accepts `--force` for an intentional replacement. Diagnostics identify paths and rules; `--help` is available for each helper. A strict plugin check fails if any included skill or MCP server is invalid even when a conforming client could load other valid components.
+The skill and plugin validators exit `0` on strict structural success, `1` on detected package errors, and `2` for invalid invocation or absent paths. The inspector exits `0` for a valid package, `1` for a recognized invalid package, and `2` for an unknown or unreadable path. The presentation generator exits nonzero for invalid input or existing outputs, and accepts `--force` for an intentional replacement. Diagnostics identify paths and rules; `--help` is available for each helper. A strict plugin check fails if any included skill or MCP server is invalid even when a conforming client could load other valid components.
 
 ## Complete authoring walkthrough
 
@@ -134,6 +134,6 @@ All ten modules are named directly by the creator's `SKILL.md`. “Read” means
 - The skill validator parses a documented subset of YAML frontmatter: plain and quoted string scalars and an indented string mapping for `metadata`. Other valid YAML syntax, including block scalars, is reported as **unverified** with a failing status. A green result therefore confirms its supported structural checks, not complete YAML-language conformance for every possible skill.
 - The structural checks do not establish prose quality, reliable activation, security of included code, remote service behavior, host installation, or cross-client runtime compatibility. The example MCP server's initialize and tool-list responses are tested locally; full interoperability with particular clients and network services is outside the checks.
 - Credentials are not part of the portable MCP package. A literal-looking secret in an environment or header value triggers a review warning, which is not a comprehensive secret scanner.
-- Client-specific extensions require separate verified client documentation and are never presented as portable Agent Plugins components. The examples contain OpenAI-specific presentation files within skills, but no Agent Plugins manifest extension.
+- Client-specific extensions require separate verified client documentation and are never presented as portable Agent Plugins components. The creator skill includes its own OpenAI presentation files; the examples can generate corresponding files on demand and have no Agent Plugins manifest extension.
 
 The source-only `examples/`, `tests/`, and `docs/dev/` are not needed to run the delivered skill.

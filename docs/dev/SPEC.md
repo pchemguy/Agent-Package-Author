@@ -32,14 +32,19 @@ agent-package-author/
 │   ├── mcp-packaging.md
 │   ├── portability-policy.md
 │   ├── validation-policy.md
+│   ├── openai-presentation.md
 │   └── hello-world-example.md
 ├── scripts/
 │   ├── inspect_package.py
 │   ├── validate_skill.py
+│   ├── create_openai_presentation.py
 │   └── validate_plugin.py
+├── agents/
+│   └── openai.yaml
 └── assets/
     ├── skill-entry-template.md
     ├── plugin-manifest-template.json
+    ├── icon.svg
     └── mcp-template.json
 ```
 
@@ -66,6 +71,8 @@ The generated skill SHALL be a directory whose `SKILL.md` contains valid YAML fr
 The workflow SHALL put concise orchestration and conditional routing in `SKILL.md`; focused detail MAY reside in `references/`, executable repeatable operations in `scripts/`, and reusable input material in `assets/`. None of those optional directories SHALL be created just to match a template. Every linked resource SHALL exist and use a relative path. The creator requires standalone links to remain in the skill directory; section 6 permits plugin child links to remain within the containing plugin instead. References SHOULD be linked directly from `SKILL.md`, with task-specific loading where useful. Conditional branches SHALL have observable effects when they are part of the requested behavior.
 
 Scripts SHALL state their runtime requirements, provide actionable errors and nonzero failure status, and be tested on their supported paths. Prefer deterministic and offline helpers when the task permits; external tools, network access, and dependencies are permitted only if genuinely required and declared. Where generated artifacts admit mechanical checks, validation SHOULD be independent of their producer. Acceptance SHALL cover representative success, branching when applicable, and meaningful failure behavior.
+
+After authoring each portable skill, the creator SHALL derive `agents/openai.yaml` and `assets/icon.svg` from its accepted name, description, workflow, and any reviewed presentation context. The presentation reference SHALL be directly discoverable from the creator's `SKILL.md`. For a plugin, generate these files separately for each immediate-child skill, not at plugin root. The helper SHALL reject invalid context, unknown child names, and unintended replacement of existing files. Verify the generated prompt's `$<skill-name>` invocation, local icon paths, parseable SVG, and context-specific presentation. Classify `agents/openai.yaml` as OpenAI-specific presentation rather than portable Agent Skills or Agent Plugins metadata; do not claim that structural validation proves client rendering.
 
 ## 6. Agent Plugin mode
 

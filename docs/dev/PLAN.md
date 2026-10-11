@@ -4,7 +4,7 @@
 
 **Goal:** Deliver `agent-package-author`, a portable skill that authors, inspects, and validates standalone Agent Skills and Agent Plugins 1.0.0 packages.
 
-**Architecture:** `SKILL.md` routes between skill and plugin authoring. Focused references explain standards and design decisions; templates are optional starting material. Three offline Python CLIs share validation functions, with `validate_plugin.py` importing skill checks and `inspect_package.py` importing both validators without executing inspected code.
+**Architecture:** `SKILL.md` routes between skill and plugin authoring. Focused references explain standards and design decisions; templates are optional starting material. Three offline structural CLIs share validation functions, with `validate_plugin.py` importing skill checks and `inspect_package.py` importing both validators without executing inspected code. A fourth offline helper generates optional OpenAI presentation from reviewed skill context.
 
 **Technology:** Markdown, JSON, Python standard library, `unittest` for development tests. Python 3.11 or newer for the creator's helpers; generated packages declare their own actual runtime requirements.
 
@@ -29,11 +29,13 @@
 | `references/authoring-workflow.md`, `portability-policy.md`, `validation-policy.md`                                                | Shared process, component classification, evidence and limits                               |
 | `references/skill-standard.md`, `skill-design.md`, `hello-world-example.md`                                                        | Skill format, design choices, bounded exemplar                                              |
 | `references/plugin-standard.md`, `plugin-design.md`, `mcp-packaging.md`                                                            | Plugin format, capability split, optional MCP details                                       |
+| `references/openai-presentation.md`, `agents/openai.yaml`, `assets/icon.svg`                                                        | Presentation guidance and the creator skill's own client-specific presentation             |
 | `assets/skill-entry-template.md`, `plugin-manifest-template.json`, `mcp-template.json`                                             | Minimal, editable starting material                                                         |
 | `scripts/validate_skill.py`                                                                                                        | Frontmatter, naming, relative resource checks with skill or plugin containment; shared issues and CLI output |
 | `scripts/validate_plugin.py`                                                                                                       | Manifest, discovery, bundled skills, MCP, extensions, path checks                           |
 | `scripts/inspect_package.py`                                                                                                       | Read-only inventory and bounded validation summary                                          |
-| `tests/test_skill_validation.py`, `test_plugin_validation.py`, `test_mcp_validation.py`, `test_inspection.py`, `test_authoring.py` | Structural, negative, CLI, and end-to-end behavior                                          |
+| `scripts/create_openai_presentation.py`                                                                                            | Contextual metadata and SVG generation for skills and plugin children                      |
+| `tests/test_skill_validation.py`, `test_plugin_validation.py`, `test_mcp_validation.py`, `test_inspection.py`, `test_authoring.py`, `test_openai_presentation.py` | Structural, negative, CLI, presentation, and end-to-end behavior |
 | `examples/standalone/`, `examples/multi-skill/`, `examples/with-mcp/`                                                              | Realistic acceptance packages; only `with-mcp` contains `mcp.json`                          |
 | `README.md`                                                                                                                        | Source usage, format scope, independent installation, verification instructions             |
 
@@ -148,6 +150,10 @@
 - [ ] Explain the two modes, runtime versus development material, exact CLI commands, Python requirement, YAML subset limitation, host-controlled installation, no publishing in this plan, and the distinction between structural and runtime verification.
 - [ ] Run `python -m unittest discover -s tests -v`; run all three CLIs on the relevant examples; run `python -m compileall -q agent-package-author/scripts`; check relative links, unexpected files, and version strings with `rg -n '1\.0\.0|SKILL\.md|mcp\.json|\.codex-plugin|\.claude-plugin' agent-package-author README.md`.
 - [ ] Walk sections 1–10 of `SPEC.md` against test names and observed output; record any known limitations without claiming universal client compatibility. **Complete when:** tests and acceptance runs pass, the creator validates itself, and documentation accurately states what was and was not verified.
+
+## Contextual OpenAI presentation
+
+The contextual OpenAI presentation workflow runs after each skill's portable instructions are established. `references/openai-presentation.md` defines the reviewed context and output checks; `scripts/create_openai_presentation.py` produces separate metadata and SVG files for a standalone skill or each immediate plugin child. Its tests cover default and supplied contexts, invalid input before writes, existing-output refusal, deterministic replacement, and a symlinked skill-container escape. Verify the resulting files separately from portable structural validation. The delivered creator's own metadata and icon are included, while example presentation files may be generated in disposable copies.
 
 ## Execution and review gates
 

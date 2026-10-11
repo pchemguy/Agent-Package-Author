@@ -4,6 +4,7 @@ import importlib.util
 import json
 from pathlib import Path
 import sys
+import subprocess
 import tempfile
 import unittest
 
@@ -30,6 +31,57 @@ class PluginValidationTests(unittest.TestCase):
         value = {'$schema':'https://agent-plugins.org/schemas/1.0.0/plugin.schema.json', 'name':'example-plugin'}
         value.update(changes)
         (self.root / 'plugin.json').write_text(json.dumps(value))
+
+    def sibling_skills(self):
+        self.manifest()
+        for name in ('alpha', 'beta'):
+            skill = self.root / 'skills' / name
+            (skill / 'references').mkdir(parents=True)
+            (skill / 'SKILL.md').write_text(f'---\nname: {name}\ndescription: Run {name}\n---\n\n# {name}\n')
+        (self.root / 'skills/beta/references/shared.md').write_text('# Shared guidance\n')
+        (self.root / 'skills/alpha/references/local.md').write_text('# Local guidance\n')
+        return self.root / 'skills/alpha/SKILL.md'
+
+    def test_sibling_entry_and_reference_are_warning_only(self):
+        entry = self.sibling_skills()
+        entry.write_text(entry.read_text() + '\n[Local](references/local.md)\n'
+                         '[Handoff](../beta/SKILL.md)\n'
+                         '[Shared](../beta/references/shared.md)\n')
+        issues = load().validate_plugin(self.root)
+        self.assertEqual([i for i in issues if i.severity == 'ERROR'], [])
+        self.assertEqual([(i.severity, i.rule) for i in issues],
+                         [('WARN', 'resource-cross-skill')] * 2)
+        validator = subprocess.run([sys.executable, str(SCRIPTS / 'validate_plugin.py'), str(self.root)],
+                                   capture_output=True, text=True)
+        inspector = subprocess.run([sys.executable, str(SCRIPTS / 'inspect_package.py'), str(self.root)],
+                                   capture_output=True, text=True)
+        self.assertEqual(validator.returncode, 0, validator.stdout)
+        self.assertEqual(inspector.returncode, 0, inspector.stdout)
+        self.assertIn('warnings: 2', inspector.stdout)
+
+    def test_missing_sibling_file_is_error(self):
+        entry = self.sibling_skills()
+        entry.write_text(entry.read_text() + '\n[Missing](../beta/references/absent.md)\n')
+        issues = load().validate_plugin(self.root)
+        self.assertTrue(any(i.severity == 'ERROR' and i.rule == 'resource-missing' for i in issues))
+
+    def test_plugin_escape_and_symlink_escape_are_errors(self):
+        entry = self.sibling_skills()
+        outside = Path(self.temp.name) / 'outside.md'
+        outside.write_text('# Outside\n')
+        (self.root / 'skills/beta/references/external.md').symlink_to(outside)
+        entry.write_text(entry.read_text() + '\n[Traversal](../../../outside.md)\n'
+                         '[Symlink](../beta/references/external.md)\n')
+        issues = load().validate_plugin(self.root)
+        self.assertEqual(sum(i.severity == 'ERROR' and i.rule == 'resource-escape' for i in issues), 2)
+
+    def test_presentation_generator_accepts_bundled_reference(self):
+        entry = self.sibling_skills()
+        entry.write_text(entry.read_text() + '\n[Shared](../beta/references/shared.md)\n')
+        result = subprocess.run([sys.executable, str(SCRIPTS / 'create_openai_presentation.py'), str(self.root)],
+                                capture_output=True, text=True)
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertTrue((self.root / 'skills/alpha/agents/openai.yaml').is_file())
 
     def test_minimal_manifest_and_dotted_name(self):
         self.manifest(name='example.plugin')

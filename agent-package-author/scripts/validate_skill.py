@@ -86,11 +86,13 @@ def _frontmatter(content: str) -> dict[str, object]:
     return data
 
 
-def validate_skill(path: Path) -> list[Issue]:
+def validate_skill(path: Path, plugin_root: Path | None = None) -> list[Issue]:
     """Return structural findings for a skill directory.
 
     Args:
         path: Skill root. No included scripts are executed.
+        plugin_root: Optional containing plugin root. References may resolve
+            outside the child skill while remaining inside this boundary.
 
     Returns:
         Ordered issues; an empty list means the supported checks passed.
@@ -98,6 +100,9 @@ def validate_skill(path: Path) -> list[Issue]:
     path = Path(path)
     issues: list[Issue] = []
     entry = path / 'SKILL.md'
+    boundary = Path(plugin_root).resolve() if plugin_root is not None else path.resolve()
+    if plugin_root is not None and not path.resolve().is_relative_to(boundary):
+        return [Issue('ERROR', str(entry), 'plugin-context', 'skill resolves outside supplied plugin root')]
     if not path.is_dir() or not entry.is_file():
         return [Issue('ERROR', str(entry), 'entry', 'skill directory and regular SKILL.md required')]
     if not entry.resolve().is_relative_to(path.resolve()):
@@ -135,10 +140,13 @@ def validate_skill(path: Path) -> list[Issue]:
         if not target or '://' in target or target.startswith('#'):
             continue
         resolved = (path / target).resolve()
-        if Path(target).is_absolute() or not resolved.is_relative_to(path.resolve()):
-            issues.append(Issue('ERROR', str(entry), 'resource-escape', f'local resource escapes skill root: {raw}'))
+        if Path(target).is_absolute() or not resolved.is_relative_to(boundary):
+            issues.append(Issue('ERROR', str(entry), 'resource-escape', f'local resource escapes validation root: {raw}'))
         elif not resolved.is_file():
             issues.append(Issue('ERROR', str(entry), 'resource-missing', f'local resource does not exist: {raw}'))
+        elif plugin_root is not None and not resolved.is_relative_to(path.resolve()):
+            issues.append(Issue('WARN', str(entry), 'resource-cross-skill',
+                                f'plugin-contained reference depends on bundled files; client handoff is not guaranteed: {raw}'))
     return issues
 
 

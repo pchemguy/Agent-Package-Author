@@ -1,7 +1,9 @@
 # Comprehensive project review plan
 
-Campaign: `002_283617b-comprehensive-review`  
-Starting baseline: `283617b53fe51f32284ba54df1a6a901e678aa3e` (`main`)  
+Campaign: `002_283617b-comprehensive-review`
+
+Starting baseline: `283617b53fe51f32284ba54df1a6a901e678aa3e` (`main`)
+
 Target: `main`
 
 ## Scope

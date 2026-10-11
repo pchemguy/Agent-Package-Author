@@ -136,4 +136,4 @@ All ten modules are named directly by the creator's `SKILL.md`. “Read” means
 - Credentials are not part of the portable MCP package. A literal-looking secret in an environment or header value triggers a review warning, which is not a comprehensive secret scanner.
 - Client-specific extensions require separate verified client documentation and are never presented as portable Agent Plugins components. The examples contain OpenAI-specific presentation files within skills, but no Agent Plugins manifest extension.
 
-The source-only `examples/`, `tests/`, `SPEC.md`, `PLAN.md`, `ROADMAP.md`, and append-only `IMPLEMENTATION_LOG.jsonl` are not needed to run the delivered skill. The project history has one local task commit per implementation task, each with a `Task:` trailer; recovery manifests are transient and excluded from Git.
+The source-only `examples/`, `tests/`, `SPEC.md`, `PLAN.md`, and `ROADMAP.md` are not needed to run the delivered skill.

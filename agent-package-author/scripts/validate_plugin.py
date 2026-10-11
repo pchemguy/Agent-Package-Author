@@ -190,7 +190,7 @@ def validate_plugin(path: Path) -> list[Issue]:
                 if not entry.resolve().is_relative_to(root.resolve()):
                     issues.append(Issue('ERROR', str(entry), 'skill-containment', 'SKILL.md escapes plugin root'))
                 else:
-                    issues.extend(validate_skill(child))
+                    issues.extend(validate_skill(child, plugin_root=root))
     for child in sorted(root.iterdir(), key=lambda p: p.name):
         if child.is_dir() and child.name.count('.') >= 2:
             if not child.resolve().is_relative_to(root.resolve()):

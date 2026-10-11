@@ -24,11 +24,11 @@ def title(name):
     return ' '.join(part.capitalize() for part in name.split('-'))
 
 
-def render(skill, context):
+def render(skill, context, plugin_root=None):
     if not isinstance(context, dict) or set(context) - FIELDS:
         raise ValueError(f'{skill}: context must be an object with only {sorted(FIELDS)}')
     # A skill can mention its future presentation icon before generation.
-    issues = [issue for issue in validate_skill(skill) if issue.severity == 'ERROR'
+    issues = [issue for issue in validate_skill(skill, plugin_root=plugin_root) if issue.severity == 'ERROR'
               and not (issue.rule == 'resource-missing' and issue.message.endswith('assets/icon.svg'))]
     if issues:
         raise ValueError(f'{skill}: invalid SKILL.md: {issues[0].message}')
@@ -119,7 +119,7 @@ def main():
             raise ValueError(f'{base}: expected SKILL.md or plugin.json')
         writes = []
         for skill, options in skills:
-            yaml, svg = render(skill, options)
+            yaml, svg = render(skill, options, plugin_root=base if (base / 'plugin.json').is_file() else None)
             for relative, content in [('agents/openai.yaml', yaml), ('assets/icon.svg', svg)]:
                 destination = skill / relative
                 if skill.is_symlink() or destination.parent.is_symlink() or destination.is_symlink():

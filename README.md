@@ -2,7 +2,7 @@
 
 `agent-package-author/` is a skill for creating and revising Agent Skills and Agent Plugins 1.0.0 packages. Give it a capability brief, existing draft, or reference files. It explores the requirements, decides whether one skill or several independently useful skills fit the work, writes the package, and checks its structure and example behavior. A plugin can include MCP configuration when the capability needs it. Each generated skill also gets OpenAI presentation metadata and an SVG icon derived from its context.
 
-The [walkthrough](#complete-authoring-walkthrough) shows both modes with attached material. [SPEC.md](SPEC.md) defines this creator's requirements; [PLAN.md](PLAN.md) records its implementation plan.
+The [walkthrough](#complete-authoring-walkthrough) shows both modes with attached material. [SPEC.md](docs/dev/SPEC.md) defines this creator's requirements; [PLAN.md](docs/dev/PLAN.md) records its implementation plan.
 
 ## Use
 
@@ -39,7 +39,7 @@ Assume the user supplied these excerpts:
 |---|---|---|
 | `welcome-brief.md` attachment | **Seed:** “Input has project name, description, and `audience=user|contributor`; output has `WELCOME.md` and `welcome.json`; identical inputs produce identical bytes.” | Becomes the input, output, determinism, and branch acceptance contract after review. |
 | `WELCOME-draft.md` attachment | **Draft:** a single contributor-focused Markdown welcome page, with useful introduction text but no user branch or manifest. | Supplies candidate wording and a layout to adapt. It is not copied as the final skill instructions or treated as proof of correct behavior. |
-| `hello-world-SPEC.md` attachment, if supplied | **Design exemplar:** the Hello World reference specification described in this project's [SPEC.md](SPEC.md). | Justifies reading the conditional [Hello World design reference](agent-package-author/references/hello-world-example.md); its deliberately large file tree is not mandatory. |
+| `hello-world-SPEC.md` attachment, if supplied | **Design exemplar:** the Hello World reference specification described in this project's [SPEC.md](docs/dev/SPEC.md). | Justifies reading the conditional [Hello World design reference](agent-package-author/references/hello-world-example.md); its deliberately large file tree is not mandatory. |
 | [Agent Skills specification](https://agentskills.io/specification) | **External normative format reference.** | Governs `SKILL.md` frontmatter, naming, optional resources, and relative links; check the published text when authoring. |
 | `welcome-brand.json` attachment, if supplied | **Presentation reference:** approved name, color, and icon idea. | Becomes reviewed context for OpenAI metadata and icon; task and format requirements still govern the skill. |
 
@@ -136,4 +136,4 @@ All ten modules are named directly by the creator's `SKILL.md`. “Read” means
 - Credentials are not part of the portable MCP package. A literal-looking secret in an environment or header value triggers a review warning, which is not a comprehensive secret scanner.
 - Client-specific extensions require separate verified client documentation and are never presented as portable Agent Plugins components. The examples contain OpenAI-specific presentation files within skills, but no Agent Plugins manifest extension.
 
-The source-only `examples/`, `tests/`, `SPEC.md`, `PLAN.md`, and `ROADMAP.md` are not needed to run the delivered skill.
+The source-only `examples/`, `tests/`, and `docs/dev/` are not needed to run the delivered skill.

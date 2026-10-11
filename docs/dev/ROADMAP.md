@@ -1,6 +1,6 @@
 # Agent Package Author Roadmap
 
-Derived from [PLAN.md](PLAN.md). A checkbox is durable only with a matching completed journal record and `Task:` commit.
+Derived from [PLAN.md](PLAN.md). Completed tasks are recorded in the Git history.
 
 - [x] Task 01 — Pin rules and establish a test harness
 - [x] Task 02 — Shared authoring contract and mode routing

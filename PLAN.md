@@ -17,7 +17,7 @@
 - Runtime helpers are offline and standard-library-only; no target package code is executed by inspection or structural validation.
 - A validator's exit `0` means strict creator validation passed; exit `1` means package errors; exit `2` means invalid invocation or unreadable input. Warnings do not fail. Diagnostics use `ERROR|WARN: path: rule: explanation` and are stably ordered.
 - Public CLIs: `python agent-package-author/scripts/validate_skill.py PATH`, `validate_plugin.py PATH`, `inspect_package.py PATH`, each with `--help`. `inspect_package.py` exits `1` on invalid recognized packages and `2` on unknown/unreadable paths; it still inventories valid components of a partially invalid package.
-- Shared Python interfaces in `scripts/validate_skill.py`: `Issue(severity: str, path: str, rule: str, message: str)`, `validate_skill(path: Path) -> list[Issue]`, `print_issues(issues: list[Issue]) -> None`. `validate_plugin.py` exports `validate_plugin(path: Path) -> list[Issue]` and imports `Issue` and `validate_skill`. `inspect_package.py` imports both validation functions. No separate runtime package or third-party parser.
+- Shared Python interfaces in `scripts/validate_skill.py`: `Issue(severity: str, path: str, rule: str, message: str)`, `validate_skill(path: Path, plugin_root: Path | None = None) -> list[Issue]`, `print_issues(issues: list[Issue]) -> None`. `validate_plugin.py` exports `validate_plugin(path: Path)` and passes its root to every child validator. The standalone CLI omits that context and keeps the skill-directory creator policy. `inspect_package.py` imports both validation functions. No separate runtime package or third-party parser.
 - The skill validator checks the portable default and documented optional standard metadata. Because Python's standard library has no general YAML parser, its frontmatter reader SHALL support the documented scalar and mapping subset used in the examples and templates, and report unsupported YAML syntax as **unverified** with exit `1`, never as a claim of full YAML conformance. Include a follow-up note in the README about this deliberate coverage limit. If full YAML syntax is required to meet the SPEC's validator scope, revise this design before implementation rather than silently rejecting otherwise valid skills.
 - Keep tests, examples, `README.md`, `SPEC.md`, and `PLAN.md` at repository root, outside the delivered `agent-package-author/` runtime directory. Do not install or publish the creator as part of this plan.
 
@@ -30,7 +30,7 @@
 | `references/skill-standard.md`, `skill-design.md`, `hello-world-example.md`                                                        | Skill format, design choices, bounded exemplar                                              |
 | `references/plugin-standard.md`, `plugin-design.md`, `mcp-packaging.md`                                                            | Plugin format, capability split, optional MCP details                                       |
 | `assets/skill-entry-template.md`, `plugin-manifest-template.json`, `mcp-template.json`                                             | Minimal, editable starting material                                                         |
-| `scripts/validate_skill.py`                                                                                                        | Frontmatter, naming, relative resource and containment checks; shared issues and CLI output |
+| `scripts/validate_skill.py`                                                                                                        | Frontmatter, naming, relative resource checks with skill or plugin containment; shared issues and CLI output |
 | `scripts/validate_plugin.py`                                                                                                       | Manifest, discovery, bundled skills, MCP, extensions, path checks                           |
 | `scripts/inspect_package.py`                                                                                                       | Read-only inventory and bounded validation summary                                          |
 | `tests/test_skill_validation.py`, `test_plugin_validation.py`, `test_mcp_validation.py`, `test_inspection.py`, `test_authoring.py` | Structural, negative, CLI, and end-to-end behavior                                          |
@@ -90,7 +90,7 @@
 **Files:** `scripts/validate_skill.py`, `tests/test_skill_validation.py`.
 
 - [ ] Add tests for a valid directly linked reference, missing link, absolute path, `../` escape, symlink escape, optional directories absent, and a link into another bundled skill's private directory. Scope checks to explicit local resource links/paths; do not guess arbitrary prose is a file path.
-- [ ] Resolve resource targets against the skill root; reject missing or escaped explicit resources and retain stable path-specific diagnostics. Apply plugin-root containment additionally when Task 08 validates bundled skills.
+- [ ] Resolve resource targets against the skill root. For standalone validation, reject missing targets or paths outside that root as creator policy. With plugin context, permit existing relative sibling files inside the resolved plugin root with a nonfatal bundle-dependency warning; reject missing files, absolute paths and resolved plugin-root escapes. Retain stable path-specific diagnostics.
 - [ ] Run `python -m unittest discover -s tests -p 'test_skill_validation.py' -v`. **Complete when:** all stated resource cases are handled without executing a script or opening unrelated files.
 
 ## Task 07: Plugin manifest validator
@@ -106,7 +106,7 @@
 **Files:** `scripts/validate_plugin.py`, `tests/test_plugin_validation.py`.
 
 - [ ] Test two valid immediate-child skills; a nested `SKILL.md` not separately discovered; missing component locations; present wrong-kind `skills`; one invalid child; symlinks that escape plugin root; manifest and/or top-level extension namespace with valid and invalid forms.
-- [ ] Enumerate only immediate skill child directories with regular `SKILL.md`, call `validate_skill` on each, and enforce both its skill-root and the plugin-root containment. Validate extension namespace placement and object values without pretending to validate client-owned extension semantics.
+- [ ] Enumerate only immediate skill child directories with regular `SKILL.md`, call `validate_skill(child, plugin_root=root)` on each, and enforce the plugin-root boundary for referenced files. Sibling-contained links may warn but do not fail the plugin or inspector. Validate extension namespace placement and object values without pretending to validate client-owned extension semantics.
 - [ ] Run `python -m unittest discover -s tests -p 'test_plugin_validation.py' -v`. **Complete when:** a plugin lacking MCP passes, each discovered child has an independent result, and strict failure of one component does not prevent reporting the others.
 
 ## Task 09: MCP configuration validator

@@ -4,4 +4,6 @@ The [published specification](https://agent-plugins.org/specification) governs. 
 
 Portable component locations are fixed: immediate child directories of `skills/` with a regular `SKILL.md`, and optional root `mcp.json`. Neither location is configurable in the manifest. An absent component location is valid; a present malformed location is not a clean creator deliverable. Bundled skills conform independently to Agent Skills. Nested `SKILL.md` files are not independently discovered.
 
+The plugin root is the resolved containment boundary for package-supplied files. A relative link from one child skill to an existing sibling file can remain inside that boundary. Validate the resolved path, including symlinks; reject a missing file or a path outside the plugin. A warning about bundle dependency does not invalidate the plugin. This does not define client-side cross-skill invocation.
+
 Client loading distinguishes a fatal manifest field/type/version violation from unknown manifest fields and non-object `extensions`, which clients report and ignore. Invalid individual skills are skipped; invalid MCP configuration disables that component type; invalid servers are skipped independently. Strict authoring validation still requires every advertised included component to pass. Clients decide what component types and transports they support and how skills appear to users.

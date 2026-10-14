@@ -14,7 +14,8 @@ PLUGIN_SCHEMA = 'https://agent-plugins.org/schemas/1.0.0/plugin.schema.json'
 MCP_SCHEMA = 'https://agent-plugins.org/schemas/1.0.0/mcp.schema.json'
 MANIFEST_KEYS = {'$schema', 'name', 'version', 'description', 'author', 'homepage', 'repository', 'license', 'keywords', 'extensions'}
 PLUGIN_NAME = re.compile(r'[a-z0-9](?:[a-z0-9.-]{0,62}[a-z0-9])?\Z')
-NAMESPACE = re.compile(r'[a-z0-9]+(?:\.[a-z0-9-]+){2,}\Z')
+NAMESPACE_LABEL = r'[a-z0-9](?:[a-z0-9-]*[a-z0-9])?'
+NAMESPACE = re.compile(rf'{NAMESPACE_LABEL}(?:\.{NAMESPACE_LABEL})+\Z')
 HEADER = re.compile(r"[!#$%&'*+.^_`|~0-9A-Za-z-]+\Z")
 
 
@@ -68,8 +69,10 @@ def _manifest(root: Path) -> tuple[list[Issue], dict | None]:
             error('extensions', 'extensions must be an object; clients report and ignore a non-object field')
         else:
             for namespace, value in sorted(ext.items()):
-                if not NAMESPACE.fullmatch(namespace) or not isinstance(value, dict):
-                    error('extensions', f'{namespace!r} must be a reverse-domain namespace with object value')
+                if not NAMESPACE.fullmatch(namespace):
+                    error('extensions', f'{namespace!r} must be a reverse-domain namespace')
+                if not isinstance(value, dict):
+                    error('extensions', f'{namespace!r} must have an object value')
     return issues, data
 
 
@@ -192,7 +195,8 @@ def validate_plugin(path: Path) -> list[Issue]:
                 else:
                     issues.extend(validate_skill(child, plugin_root=root))
     for child in sorted(root.iterdir(), key=lambda p: p.name):
-        if child.is_dir() and child.name.count('.') >= 2:
+        # Include valid two-label extensions without treating every dotted folder as one.
+        if child.is_dir() and (NAMESPACE.fullmatch(child.name) or child.name.count('.') >= 2):
             if not child.resolve().is_relative_to(root.resolve()):
                 issues.append(Issue('ERROR', str(child), 'extension-containment', 'extension directory escapes plugin root'))
             elif not NAMESPACE.fullmatch(child.name):

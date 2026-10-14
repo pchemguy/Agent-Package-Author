@@ -2,9 +2,9 @@
 
 > **For implementation:** Execute tasks in order and mark each checkbox when its verification passes. Keep `SPEC.md` beside this plan; both govern the work.
 
-**Goal:** Deliver `agent-package-author`, a portable skill that authors, inspects, and validates standalone Agent Skills and Agent Plugins 1.0.0 packages.
+**Goal:** Deliver `agent-package-author`, a portable skill that authors, reviews, inspects, and validates standalone Agent Skills and Agent Plugins 1.0.0 packages.
 
-**Architecture:** `SKILL.md` routes between skill and plugin authoring. Focused references explain standards and design decisions; templates are optional starting material. Three offline structural CLIs share validation functions, with `validate_plugin.py` importing skill checks and `inspect_package.py` importing both validators without executing inspected code. A fourth offline helper generates optional OpenAI presentation from reviewed skill context.
+**Architecture:** `SKILL.md` first routes the requested operation, then skill/plugin scope. Focused references explain standards, design decisions and qualitative content review; templates are optional starting material. Three offline structural CLIs share validation functions, with `validate_plugin.py` importing skill checks and `inspect_package.py` importing both validators without executing inspected code. A fourth offline helper generates OpenAI presentation from reviewed skill context.
 
 **Technology:** Markdown, JSON, Python standard library, `unittest` for development tests. Python 3.11 or newer for the creator's helpers; generated packages declare their own actual runtime requirements.
 
@@ -25,10 +25,10 @@
 
 | Path                                                                                                                               | Responsibility                                                                              |
 | ---------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
-| `agent-package-author/SKILL.md`                                                                                                    | Activation, mode routing, exact resource paths, workflow gates, completion reporting        |
+| `agent-package-author/SKILL.md`                                                                                                    | Activation, operation/package routing, direct reference links and use conditions, completion boundaries |
 | `references/authoring-workflow.md`, `portability-policy.md`, `validation-policy.md`                                                | Shared process, component classification, evidence and limits                               |
-| `references/skill-standard.md`, `skill-design.md`, `hello-world-example.md`                                                        | Skill format, design choices, bounded exemplar                                              |
-| `references/plugin-standard.md`, `plugin-design.md`, `mcp-packaging.md`                                                            | Plugin format, capability split, optional MCP details                                       |
+| `references/skill-standard.md`, `skill-design.md`, `skill-review.md`, `hello-world-example.md`                                     | Skill format, design choices, entry/reference content review, bounded exemplar             |
+| `references/plugin-standard.md`, `plugin-design.md`, `plugin-review.md`, `mcp-packaging.md`                                        | Plugin format, capability split, package composition review, optional MCP details          |
 | `references/openai-presentation.md`, `agents/openai.yaml`, `assets/icon.svg`                                                        | Presentation guidance and the creator skill's own client-specific presentation             |
 | `assets/skill-entry-template.md`, `plugin-manifest-template.json`, `mcp-template.json`                                             | Minimal, editable starting material                                                         |
 | `scripts/validate_skill.py`                                                                                                        | Frontmatter, naming, relative resource checks with skill or plugin containment; shared issues and CLI output |
@@ -46,6 +46,12 @@
 3. Absent `skills/` or `mcp.json`: accept the absence; an invalid *present* component fails strict creator validation.
 4. Unknown manifest field versus fatal field/type violation: both fail strict authoring checks, but diagnostics explain that client loading treats an unknown field differently.
 5. Empty `mcpServers`, invalid one-server variant, or mismatched schema: reflect format rules and explain client partial loading while failing strict creator validation.
+
+## Content review delivery path
+
+Retain the existing authoring and structural interfaces. Add a review-only entry path whose focused form limits itself to the requested artifact and interface, while its comprehensive form inventories and assesses the requested skill or plugin contents. Integrate skill-entry/reference assessment with `skill-design.md` ownership and plugin composition/coordination assessment with `plugin-design.md` ownership. `validation-policy.md` distinguishes source-quality findings, structural format results and observed behavior; `authoring-workflow.md` uses proportionate review within authorized creation/revision. A no-skill plugin follows its actual manifest, MCP and extension interfaces without loading skill criteria. A `PLUGIN.md` or coordinator is checked only when present and supported by an explicit loading path.
+
+Reviewable delivery boundaries are: governing contract and route ownership; usable review modules and entry selection; source documentation and verification. At exit, the entry selects references without exposing irrelevant modules, the review-only path returns findings without writes, the authoring path retains its accepted effects, all local links and existing example CLIs work, and unrun consumer behavior is reported separately from structural checks. The active revision campaign owns action-level ordering and evidence.
 
 ## Task 01: Pin rules and establish a test harness
 
@@ -149,7 +155,7 @@
 
 - [ ] Explain the two modes, runtime versus development material, exact CLI commands, Python requirement, YAML subset limitation, host-controlled installation, no publishing in this plan, and the distinction between structural and runtime verification.
 - [ ] Run `python -m unittest discover -s tests -v`; run all three CLIs on the relevant examples; run `python -m compileall -q agent-package-author/scripts`; check relative links, unexpected files, and version strings with `rg -n '1\.0\.0|SKILL\.md|mcp\.json|\.codex-plugin|\.claude-plugin' agent-package-author README.md`.
-- [ ] Walk sections 1–10 of `SPEC.md` against test names and observed output; record any known limitations without claiming universal client compatibility. **Complete when:** tests and acceptance runs pass, the creator validates itself, and documentation accurately states what was and was not verified.
+- [ ] Walk sections 1–11 of `SPEC.md` against test names and observed output; record any known limitations without claiming universal client compatibility. **Complete when:** tests and acceptance runs pass, the creator validates itself, and documentation accurately states what was and was not verified.
 
 ## Contextual OpenAI presentation
 

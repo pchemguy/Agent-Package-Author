@@ -2,7 +2,7 @@
 
 ## 1. Purpose and identity
 
-Implement `agent-package-author`, a portable Agent Skill that creates, revises, inspects, and validates (a) standalone Agent Skills and (b) Agent Plugins 1.0 packages containing Agent Skills and, when justified, MCP server configuration. These are two authoring modes within one skill. Inspection and validation serve both modes.
+Implement `agent-package-author`, a portable Agent Skill that creates, revises, reviews, inspects, and validates (a) standalone Agent Skills and (b) Agent Plugins 1.0 packages. Skill and plugin are package scopes within one creator skill. Content review, structural inspection and validation, and authoring/revision are distinct operations; reviewing an existing plugin without skills does not expand the skill-oriented plugin creation default.
 
 The skill's frontmatter `name` SHALL be `agent-package-author`, and its directory SHALL have the same name. Its description SHALL mention both standalone skills and Agent Plugins so either request can activate it. Before installing a generated package, the workflow SHALL check for a same-name package or skill in the target discovery scope and resolve collisions without overwriting an unrelated item. The name does not assert global uniqueness.
 
@@ -27,8 +27,10 @@ agent-package-author/
 │   ├── authoring-workflow.md
 │   ├── skill-standard.md
 │   ├── skill-design.md
+│   ├── skill-review.md
 │   ├── plugin-standard.md
 │   ├── plugin-design.md
+│   ├── plugin-review.md
 │   ├── mcp-packaging.md
 │   ├── portability-policy.md
 │   ├── validation-policy.md
@@ -48,7 +50,7 @@ agent-package-author/
     └── mcp-template.json
 ```
 
-`SKILL.md` SHALL contain only valid `name` and `description` frontmatter and concise routing, relative resource paths, creation steps, and completion conditions. Each reference SHALL be directly discoverable from it; reading a reference SHALL NOT be required to discover another reference. `references/` contains conditional authoring knowledge; `scripts/` contains deterministic offline helpers; `assets/` contains starting material for generated files. The Hello World example SHALL explain design choices without turning them into universal requirements. Development `SPEC.md`, `PLAN.md`, `README.md`, examples, and tests MAY accompany the source repository but SHALL NOT be necessary to execute the runtime skill.
+`SKILL.md` SHALL contain only valid `name` and `description` frontmatter and concise operation/package routing, relative resource links, applicable creation steps, and completion conditions. It SHALL name and link every bundled reference with sufficient purpose, boundary, and use conditions for selection before reading it. Review-only requests SHALL NOT be routed through writing, collision, installation, or generation steps. `references/` contains conditional authoring and review knowledge; `scripts/` contains deterministic offline helpers; `assets/` contains starting material for generated files. The Hello World example SHALL explain design choices without turning them into universal requirements. Development `SPEC.md`, `PLAN.md`, `README.md`, examples, and tests MAY accompany the source repository but SHALL NOT be necessary to execute the runtime skill.
 
 ## 4. Shared authoring workflow
 
@@ -62,13 +64,15 @@ For either mode, the creator SHALL:
 6. Run structural checks, inspect cross-file references and capability boundaries, exercise realistic positive and negative scenarios, repair findings, and revalidate.
 7. Report output paths, included capabilities, test evidence, required runtime facilities, client-dependent behavior, and any limitations. The workflow SHALL not claim a package is installed or universally supported merely because local validation passed.
 
-The creator SHALL preserve unrelated files when revising an existing package and SHALL distinguish review findings from edits it actually made.
+The creator SHALL preserve unrelated files when revising an existing package and SHALL distinguish review findings from edits it actually made. Within authorized creation or revision, proportionate content review can inform repairs; a review-only request stops at findings.
 
 ## 5. Standalone skill mode
 
 The generated skill SHALL be a directory whose `SKILL.md` contains valid YAML frontmatter with a matching `name` and a nonempty `description` explaining function and activation. For the portable default, it SHALL use only `name` and `description`; optional standard fields MAY be used when justified and documented, while experimental or client-specific fields SHALL NOT be silently introduced. The skill SHALL satisfy the current Agent Skills name and description constraints.
 
 The workflow SHALL put concise orchestration and conditional routing in `SKILL.md`; focused detail MAY reside in `references/`, executable repeatable operations in `scripts/`, and reusable input material in `assets/`. None of those optional directories SHALL be created just to match a template. Every linked resource SHALL exist and use a relative path. The creator requires standalone links to remain in the skill directory; section 6 permits plugin child links to remain within the containing plugin instead. References SHOULD be linked directly from `SKILL.md`, with task-specific loading where useful. Conditional branches SHALL have observable effects when they are part of the requested behavior.
+
+For a skill it creates or substantively revises that contains `references/*.md`, APA SHALL provide an identified entry-routing section that individually names and links each reference and states its purpose, scope boundary, and loading condition. Compact grouping is permitted if every file and condition remains identifiable. A skill without references needs no routing section. When reviewing a third-party skill, missing or weak routing is a content finding, not a formal format violation or a Python-validator error.
 
 Scripts SHALL state their runtime requirements, provide actionable errors and nonzero failure status, and be tested on their supported paths. Prefer deterministic and offline helpers when the task permits; external tools, network access, and dependencies are permitted only if genuinely required and declared. Where generated artifacts admit mechanical checks, validation SHOULD be independent of their producer. Acceptance SHALL cover representative success, branching when applicable, and meaningful failure behavior.
 
@@ -80,6 +84,8 @@ The generated plugin SHALL have root `plugin.json` with the canonical Agent Plug
 
 The creator SHALL distinguish plugin identity from bundled skill identity, avoid duplicate/confusing activation descriptions, and use separate skills only for capabilities with meaningful independent triggers or workflows. Shared material SHALL have explicit ownership and usable paths. A bundled skill MAY link to a sibling skill's `SKILL.md` for a named handoff or to a sibling reference for shared guidance when both are distributed together. The resolved target SHALL be a file within the resolved plugin root. Such links do not define a standard dependency or guarantee client activation; an isolated child may need its own copy of shared guidance. A consumer's visible presentation of plugin skills is client-defined, so the creator SHALL claim only that conforming clients discover immediate-child skills according to their supported component types.
 
+An optional `PLUGIN.md` MAY summarize an integrated plugin only where its loading path and cross-skill navigation value are explicit. It is not a portable Agent Plugins entry point. Substantial operational rules SHALL remain reachable through supported skill/coordinator entries or other owning interfaces when that optional file is unavailable. A coordinator skill is optional and SHALL not be inferred solely from package size or number of skills.
+
 `plugin.json` SHALL contain only standard top-level fields: `$schema`, `name`, `version`, `description`, `author`, `homepage`, `repository`, `license`, `keywords`, `extensions`. The creator SHALL validate their types and constraints against Agent Plugins 1.0.0. It SHALL distinguish strict authoring checks from client loading behavior: an unknown top-level manifest field is nonconforming but is reported and ignored by a conforming client, whereas other fatal manifest violations reject the plugin. Optional absent component locations SHALL not be treated as format errors. A deliverable advertised as fully conforming SHALL have no unknown fields or invalid included components.
 
 ## 7. MCP and client extensions
@@ -88,7 +94,15 @@ The creator SHALL add `mcp.json` only when MCP capability is requested or needed
 
 The creator SHALL isolate explicitly requested client-specific behavior in the relevant reverse-domain `extensions` object and/or corresponding top-level namespace directory, after verifying the target client's documentation and namespace ownership. For strict authoring, a namespace SHALL have at least two lowercase ASCII labels separated by periods, each starting and ending with a letter or digit and permitting internal hyphens. The validator SHALL check resolved containment of two-label and longer extension directories; the published manifest schema constrains extension values to objects but does not encode this name policy. Client extensions SHALL not be advertised as portable Agent Plugins v1 components. It SHALL not add hooks, commands, custom agents, rules, or host instruction files as implicit portable components. An unsupported requested feature SHALL be documented with a feasible client-specific route or a clear limitation.
 
-## 8. Inspectors and validators
+## 8. Content review
+
+For a full/comprehensive skill review, APA SHALL load `skill-review.md` and account for the requested `SKILL.md`, `references/*.md`, and supporting material needed to assess instruction claims. For a full/comprehensive plugin review, it SHALL load `plugin-review.md` and assess included skills/references through `skill-review.md` at the requested depth. Record reviewed depth and evidence, exclusions, and unassessed material; representative cases supplement content coverage. An ordinary focused review SHALL retain its narrower requested scope and use only relevant criteria. Explicit use of a review module at narrower scope is permitted.
+
+`skill-review.md` SHALL own entry/reference composition and routing assessment. `plugin-review.md` SHALL own package-level responsibility, shared entry, composite workflow and optional coordinator assessment. Apply `PLUGIN.md` and coordinator criteria only when those artifacts exist. Review an existing no-skill plugin using its actual manifest, MCP and extension interfaces without inventing skill requirements or child presentation. Format rules remain with the standards references; scripts remain structural tools and SHALL NOT classify subjective prose quality as formal conformance.
+
+A content review SHALL distinguish inspected text, structural checks, observed workflow behavior and client-specific runtime evidence. Review-only output SHALL contain located, actionable findings, coverage, uncertainty and a stopping boundary without writing to the reviewed package. Any authorized subsequent revision SHALL preserve the request's scope and report actual changed and verified results; neither a passing structural validator nor a source-only review establishes client activation or behavioral acceptance.
+
+## 9. Inspectors and validators
 
 `inspect_package.py PATH` SHALL identify skill versus plugin and inventory the discovered portable components, optional resources, MCP configuration, and client extensions without running included code. It SHALL report uncertainty rather than pronounce behavioral portability from file presence alone.
 
@@ -98,17 +112,18 @@ The creator SHALL isolate explicitly requested client-specific behavior in the r
 
 All three helpers SHALL use the Python standard library, require no network or package installation, provide `--help`, return zero for success and nonzero for invalid input or package, and yield stable, actionable diagnostics. A local structural pass SHALL NOT be labeled proof of script execution, MCP connectivity, security, or behavior on every client. The implementation plan SHALL specify exact CLIs, shared validation logic, and tests.
 
-## 9. Verification scenarios and completion
+## 10. Verification scenarios and completion
 
 1. **Standalone skill:** Create a small coherent skill, validate it, invoke its representative workflow, and show that no unjustified files or host-specific requirements are present. If it has conditional references, demonstrate the relevant branch and exclusion of irrelevant material.
 2. **Multi-skill plugin:** Create a plugin with at least two independently named and discoverable skills, validate the manifest and every skill, and inspect the inventory. The package SHALL remain valid without `mcp.json`.
 3. **Plugin with MCP:** Add one justified server configuration; validate its transport-specific fields, schema version, safe paths, and absence of embedded secrets. Connection/handshake verification is a separate runtime test when an environment permits it.
 4. **Negative cases:** Reject or precisely diagnose malformed skill metadata, a mismatched skill directory, invalid manifest fields/types, missing or malformed MCP configuration when present, an escaping package path, version mismatch, and an invalid immediate-child skill. Confirm that diagnostics distinguish strict creator failure from client partial-load behavior.
 5. **Collision and extension cases:** Detect a same-name item in a target install scope before overwriting it; classify a client-specific request and keep its extension isolated from portable claims.
+6. **Review routing:** A focused entry/reference request returns findings without creation side effects; comprehensive skill and plugin requests account for requested content and boundaries. A mixed plugin checks both component composition and child instructions; a no-skill plugin receives no fictional skill assessment. Creation/revision uses proportionate content assessment within its authorized effects. A custom `PLUGIN.md` is assessed only when present, with an explicit loading/fallback boundary.
 
 The implementation is complete when the creator's own skill validates, both authoring modes and inspection operate on the acceptance cases, its offline validators agree with the targeted normative rules, all automated tests and end-to-end scenarios pass, and the README explains installation as a host concern. No installation, publishing, or compatibility claim SHALL be inferred solely from authoring completion.
 
-## 10. Normative source references
+## 11. Normative source references
 
 - Agent Skills format: https://agentskills.io/specification
 - Agent Plugins 1.0.0: https://agent-plugins.org/specification

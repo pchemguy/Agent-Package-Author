@@ -1,9 +1,9 @@
 # Revision report: extension namespace validation
 
-Campaign: `003_328c7d4-extension-namespace-validation`  
-Baseline: `328c7d4034ab4bd141d5b88ddabfc65ae924d76e`  
-Branch: `revision/003_328c7d4-extension-namespace-validation`  
-Target: `main`
+- Campaign: `003_328c7d4-extension-namespace-validation`
+- Baseline: `328c7d4034ab4bd141d5b88ddabfc65ae924d76e`
+- Branch: `revision/003_328c7d4-extension-namespace-validation`
+- Target: `main`
 
 ## Intake and result
 

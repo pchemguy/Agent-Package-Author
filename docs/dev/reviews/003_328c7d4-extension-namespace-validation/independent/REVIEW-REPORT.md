@@ -1,8 +1,8 @@
 # Independent verification: extension namespace validation
 
-Campaign: `003_328c7d4-extension-namespace-validation`  
-Reviewed repository baseline: `328c7d4034ab4bd141d5b88ddabfc65ae924d76e` (`main`)  
-Scope: `agent-package-author/scripts/validate_plugin.py`, its tests, and the Agent Plugins 1.0.0 extension rules. This is a separate review of the repository checkout, not the installed snapshot described in the [submitted issue](../ISSUE-REPORT.md).
+- Campaign: `003_328c7d4-extension-namespace-validation`
+- Reviewed repository baseline: `328c7d4034ab4bd141d5b88ddabfc65ae924d76e` (`main`)
+- Scope: `agent-package-author/scripts/validate_plugin.py`, its tests, and the Agent Plugins 1.0.0 extension rules. This is a separate review of the repository checkout, not the installed snapshot described in the [submitted issue](../ISSUE-REPORT.md).
 
 ## Method and source
 

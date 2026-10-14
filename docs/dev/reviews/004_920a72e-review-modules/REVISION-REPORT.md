@@ -20,6 +20,40 @@ The three supplied documents under `inputs/` are historical evidence, stored wit
 
 The runtime `skill-review.md` retains entry and reference routing, local composition, bounded/full coverage and meaningful contrasts. The runtime `plugin-review.md` retains composition, optional shared entry/coordinator and cross-component handoff criteria. Shared evidence belongs to `validation-policy.md`; format rules and design remain with their existing owners. The runtime modules do not treat `PLUGIN.md`, coordinators, or skills in an existing no-skill plugin as mandatory. No unseen SDD contract is treated as authority.
 
-## V-03 through V-05
+## V-03: operation routing and owner integration
 
-Pending implementation and final merged-state verification.
+`17f436d15bf810d256511f78607ca84cb93c6731` refactors the entry to select operation before package type and directly links all twelve references with purpose, boundary and loading condition. `skill-design.md` owns APA's direct reference routing policy, `plugin-design.md` owns optional shared-entry design, `authoring-workflow.md` owns permitted changes, and `validation-policy.md` owns source/structure/workflow/client evidence. `agents/openai.yaml` now advertises review. README and AGENTS orientation follow those owners. The runtime modules remain adapted criteria rather than new format rules or validators.
+
+## V-04: source and structural checks
+
+- `PYTHONDONTWRITEBYTECODE=1 python -m unittest discover -s tests -q`: 50 tests passed. The reference-inventory test compares actual `references/*.md` against all direct Markdown links in the entry and confirms each target exists.
+- `validate_skill.py agent-package-author` and `inspect_package.py agent-package-author`: zero errors/warnings; 12 references, four scripts, four assets. The inspector explicitly says runtime is unverified.
+- `validate_skill.py examples/standalone/word-count`, `validate_plugin.py examples/multi-skill/notes-tools`, and `validate_plugin.py examples/with-mcp/notes-tools`: all exit zero. Plugin inspector on both examples: two skills each, optional MCP only in the latter, zero errors/warnings, runtime unverified.
+- A disposable plugin with only a valid manifest passes both plugin validator and inspector (zero errors/warnings, no invented skills). This establishes structural acceptance, not an MCP-only authoring promise.
+- A local Markdown link scan over README, AGENTS and runtime Markdown, excluding fenced illustrative code, checked 92 links with zero missing targets. `git diff --check main...HEAD` passed. All three committed input blobs have SHA-256 digests identical to the table above.
+
+Source scenario trace (entry and linked owner text, not a consumer trial):
+
+| Request | Route and effect | Evidence limit |
+| --- | --- | --- |
+| Focused skill-entry routing review | Entry selects review then skill, loads the relevant `skill-review.md` criteria; no authoring workflow or writes. | Source route, not observed client selection. |
+| Comprehensive mixed plugin review | Entry selects plugin review, inventories package, applies `plugin-review.md` and `skill-review.md` to actual children; optional MCP owner only for present config. | Source and structural inventory; not full client execution. |
+| Existing no-skill plugin composition review | Plugin criteria and actual components only; no child entry/presentation obligations. | Disposable validator/inspector pass does not prove prose review quality. |
+| Create/revise from supplied drafts | Authoring workflow retains collision/authority checks, proportionate content review, permitted repair, OpenAI presentation and verification. | README is illustrative; no independent consumer trial. |
+| Existing optional `PLUGIN.md` or coordinator | Relevant conditional criteria apply only when present, with explicit loading/fallback; absent artifacts impose no requirement. | No host loading claim. |
+
+## Findings disposition
+
+| Finding | Integrated owner and resolution |
+| --- | --- |
+| R-001 | Operation-first `SKILL.md`, review-only stopping boundary; authoring workflow loaded only for writes. |
+| R-002 | Published SPEC/PLAN preparation and README/entry alignment. |
+| R-003 | `plugin-design.md` and `plugin-review.md` constrain `PLUGIN.md` to an explicit loader and optional role. |
+| R-004 | Entry and plugin review cover existing no-skill packages without creating an MCP-only authoring promise. |
+| R-005 | `skill-design.md` and `skill-review.md` make direct routing a content policy; no Python format error. |
+| R-006 | Shared evidence and effects have single validation/authoring owners; review modules retain detailed criteria. |
+| R-007 | The three exact supplied inputs are preserved; unseen SDD records provide no authority. |
+
+## V-05: merge and remote verification
+
+Pending explicit two-parent integration and merged-state readback. No independent target-client consumer trial was performed; structural checks and source routing do not establish activation or runtime behavior on a host.

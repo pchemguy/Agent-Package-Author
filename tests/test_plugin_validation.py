@@ -105,6 +105,23 @@ class PluginValidationTests(unittest.TestCase):
         issues = load().validate_plugin(self.root)
         self.assertTrue(any(i.rule == 'extensions' and 'client' in i.message for i in issues))
 
+    def test_extension_namespace_two_or_more_labels(self):
+        for namespace in ('com.openai', 'com.example.product', 'co.ex-ample'):
+            with self.subTest(namespace=namespace):
+                self.manifest(extensions={namespace: {}})
+                self.assertEqual(load().validate_plugin(self.root), [])
+
+    def test_malformed_extension_namespace_and_nonobject_value(self):
+        for namespace in ('com', 'com..openai', 'Com.openai', 'com.-openai', 'com.openai-'):
+            with self.subTest(namespace=namespace):
+                self.manifest(extensions={namespace: {}})
+                issues = load().validate_plugin(self.root)
+                self.assertTrue(any(i.rule == 'extensions' and 'namespace' in i.message for i in issues))
+        self.manifest(extensions={'com.openai': []})
+        issues = load().validate_plugin(self.root)
+        self.assertTrue(any(i.rule == 'extensions' and 'object value' in i.message for i in issues))
+        self.assertFalse(any('namespace' in i.message for i in issues))
+
     def test_immediate_skills_are_validated_independently(self):
         self.manifest()
         for name in ('alpha', 'beta'):
@@ -126,8 +143,18 @@ class PluginValidationTests(unittest.TestCase):
 
     def test_extension_directory_must_be_contained(self):
         self.manifest()
-        (self.root / 'com.example.client').symlink_to(Path(self.temp.name))
-        self.assertTrue(any(i.rule == 'extension-containment' for i in load().validate_plugin(self.root)))
+        for namespace in ('com.openai', 'com.example.client'):
+            with self.subTest(namespace=namespace):
+                link = self.root / namespace
+                link.symlink_to(Path(self.temp.name), target_is_directory=True)
+                self.assertTrue(any(i.rule == 'extension-containment' for i in load().validate_plugin(self.root)))
+                link.unlink()
+
+    def test_two_label_directory_and_unrelated_dotted_folder(self):
+        self.manifest()
+        (self.root / 'com.openai').mkdir()
+        (self.root / 'docs.v2-').mkdir()
+        self.assertEqual(load().validate_plugin(self.root), [])
 
 
 if __name__ == '__main__':

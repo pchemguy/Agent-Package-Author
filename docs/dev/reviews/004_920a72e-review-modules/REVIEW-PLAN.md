@@ -8,7 +8,7 @@
 
 ## Intake
 
-The three user-supplied files are preserved under [inputs](inputs/) with CRLF line endings normalized to LF for the repository. Their textual content is otherwise unchanged. They are proposal material, not APA instructions or accepted requirements. The proposal came from SDD Manager campaign 060 and mentions additional contract, draft and review records that were not supplied. Its relative links back to that campaign are provenance links and are not APA-local dependencies.
+The three user-supplied files are preserved byte for byte under [inputs](inputs/), including their CRLF line endings. The scoped `.gitattributes` disables text conversion for these historical inputs. They are proposal material, not APA instructions or accepted requirements. The proposal came from SDD Manager campaign 060 and mentions additional contract, draft and review records that were not supplied. Its relative links back to that campaign are provenance links and are not APA-local dependencies.
 
 ## One integrated review unit
 

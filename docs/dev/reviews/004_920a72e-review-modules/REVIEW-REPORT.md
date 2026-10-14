@@ -2,7 +2,7 @@
 
 - Campaign: `004_920a72e-review-modules`
 - Repository source reviewed: `920a72ecbfe70cf5733cbf45da1fa0f995585824` (`main` before campaign)
-- Inputs: [proposal](inputs/PROPOSED-REVISIONS.md), [skill review](inputs/skill-review.md), and [plugin review](inputs/plugin-review.md), supplied by the user and copied with line endings normalized to LF
+- Inputs: [proposal](inputs/PROPOSED-REVISIONS.md), [skill review](inputs/skill-review.md), and [plugin review](inputs/plugin-review.md), supplied by the user and preserved byte for byte, including line endings
 - Scope and authority: source assessment and an integration design; no revision of the delivered `agent-package-author/` skill is accepted or claimed in this checkpoint.
 
 ## Assessment

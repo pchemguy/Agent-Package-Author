@@ -1,12 +1,12 @@
 # Agent development entry point
 
-This repository develops `agent-package-author`, a portable skill for authoring standalone Agent Skills and Agent Plugins 1.0 packages. Work from the repository root. Use [README.md](README.md) for the user-facing workflow and runnable examples.
+This repository develops `agent-package-author`, a portable skill for authoring and reviewing standalone Agent Skills and Agent Plugins 1.0 packages. Work from the repository root. Use [README.md](README.md) for the user-facing workflow and runnable examples.
 
 ## Start here
 
 1. Inspect Git status and the requested scope before editing. Preserve unrelated changes.
 2. Read [docs/dev/SPEC.md](docs/dev/SPEC.md) for requirements, [docs/dev/PLAN.md](docs/dev/PLAN.md) for implementation decisions and checks, and [docs/dev/ROADMAP.md](docs/dev/ROADMAP.md) for the completed original task sequence. These documents describe this project; a generated package can have its own development documents.
-3. Read [agent-package-author/SKILL.md](agent-package-author/SKILL.md) for the delivered skill's routing. Load only the relevant files under `agent-package-author/references/` for the part of the workflow you are changing.
+3. Read [agent-package-author/SKILL.md](agent-package-author/SKILL.md) for operation-first routing. Load only the relevant files under `agent-package-author/references/` for the part of the workflow you are changing. [Skill review](agent-package-author/references/skill-review.md) owns entry/reference content criteria; [plugin review](agent-package-author/references/plugin-review.md) owns package composition. [Validation policy](agent-package-author/references/validation-policy.md) owns evidence boundaries.
 
 ## Repository map
 

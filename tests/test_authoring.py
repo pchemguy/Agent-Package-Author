@@ -1,6 +1,7 @@
 """Check the creator's usable routing and design contracts."""
 
 from pathlib import Path
+import re
 import subprocess
 import sys
 import unittest
@@ -16,9 +17,17 @@ class AuthoringTests(unittest.TestCase):
         self.assertIn('standalone', body)
         self.assertIn('plugin', body.lower())
         self.assertIn('references/mcp-packaging.md', body)
-        self.assertIn('only if', body.lower())
+        self.assertIn('only for', body.lower())
         self.assertIn('references/hello-world-example.md', body)
         self.assertIn('references/openai-presentation.md', body)
+
+    def test_entry_links_entire_reference_inventory(self):
+        body = (CREATOR / 'SKILL.md').read_text()
+        linked = set(re.findall(r'\]\((references/[^)#]+\.md)\)', body))
+        actual = {f'references/{path.name}' for path in (CREATOR / 'references').glob('*.md')}
+        self.assertEqual(linked, actual)
+        for relative in linked:
+            self.assertTrue((CREATOR / relative).is_file(), relative)
 
     def test_shared_workflow_guards_collisions(self):
         body = (CREATOR / 'references/authoring-workflow.md').read_text()

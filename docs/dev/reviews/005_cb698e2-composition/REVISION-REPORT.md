@@ -41,3 +41,9 @@ R-001 and R-002 are revised and source-rechecked for V-001; their baseline obser
 - `README.md` now distinguishes the intentionally sparse shipped example from an APA-authored plugin deliverable, for which each child retains the generated pair. The demonstration points users to a disposable copy if they want to avoid modifying the shipped example.
 - Source recheck: a generic standalone request selects one pair; a two-child plugin selects two; scoped review assesses existing files without writes. Existing-file refusal and intentional `--force` remain in the module. No target-client rendering or independent invocation trial is claimed.
 - Verification: `PYTHONDONTWRITEBYTECODE=1 python -m unittest discover -s tests -q` passed (50 tests); `git diff --check` passed. Source trace covered generic standalone, two-child plugin, review-only, and existing-file replacement. These textual rechecks do not establish actual agent routing or client rendering.
+
+## V-003 — Entry and authoring stage order
+
+- Accepted findings: R-003 and R-004. `SKILL.md` now separates pre-write design/template decisions, post-content presentation and validation, and evidence-qualified reporting into short paragraphs. `references/authoring-workflow.md` keeps step 6 as one cohesive procedure with three ordered substeps: proportional content review, per-skill presentation, then structural and behavioral checks/repair.
+- Source recheck: entry alone still shows collision checking before writes, conditional MCP template, relevant validator and behavioral evidence before the reporting stop. The workflow preserves unrelated files during revision, and the review-only route still excludes authoring and generation.
+- Verification: `PYTHONDONTWRITEBYTECODE=1 python -m unittest discover -s tests -q` passed (50 tests), `validate_skill.py agent-package-author` exited cleanly, and `git diff --check` passed. The stage trace is source-level, not a target-agent trial.

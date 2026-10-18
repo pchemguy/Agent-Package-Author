@@ -1,4 +1,4 @@
-# Reference boundary revision evidence
+# Composition revision evidence
 
 ## Campaign and result
 
@@ -33,3 +33,11 @@ The entry's existing direct links to design and review remain the route for this
 ## Remaining campaign scope
 
 R-001 and R-002 are revised and source-rechecked for V-001; their baseline observations remain in the review report. U-001–U-005 of the general composition review remain unassessed, and any future findings require their own decision. This checkpoint stops after V-001 publication. No closed campaign record is changed.
+
+## V-002 — Presentation policy and example
+
+- Accepted findings: R-008 and R-010 from the completed U-001–U-005 review. The governing SPEC §5 already requires APA to generate a presentation pair for each authored skill; no contract change was made.
+- `references/openai-presentation.md` now selects the module for APA creation/substantive revision of a standalone or plugin child skill and for scoped assessment of existing presentation in review-only mode. It explicitly distinguishes APA's deliverable rule from the portable format and forbids generation/replacement during review-only work.
+- `README.md` now distinguishes the intentionally sparse shipped example from an APA-authored plugin deliverable, for which each child retains the generated pair. The demonstration points users to a disposable copy if they want to avoid modifying the shipped example.
+- Source recheck: a generic standalone request selects one pair; a two-child plugin selects two; scoped review assesses existing files without writes. Existing-file refusal and intentional `--force` remain in the module. No target-client rendering or independent invocation trial is claimed.
+- Verification: `PYTHONDONTWRITEBYTECODE=1 python -m unittest discover -s tests -q` passed (50 tests); `git diff --check` passed. Source trace covered generic standalone, two-child plugin, review-only, and existing-file replacement. These textual rechecks do not establish actual agent routing or client rendering.

@@ -1,6 +1,6 @@
 # OpenAI skill presentation
 
-Use this module whenever creating or revising a skill for an OpenAI client, including each immediate-child skill in a plugin. This presentation layer is optional client metadata; the portable Agent Skills frontmatter and Agent Plugins manifest remain authoritative for their respective formats. Do not add a plugin-root `agents/openai.yaml`.
+Use this module after APA creates or substantively revises a skill, including each immediate-child skill in a plugin. APA's deliverable includes `agents/openai.yaml` and `assets/icon.svg` for every such skill. For a review-only request, assess existing presentation when it falls within the requested scope without generating or replacing files. This presentation layer is client-specific; the portable Agent Skills frontmatter and Agent Plugins manifest remain authoritative for their respective formats and do not require these files. Do not add a plugin-root `agents/openai.yaml`.
 
 ## Derive from the actual work
 

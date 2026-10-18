@@ -3,10 +3,10 @@
 ## Campaign and assessment
 
 - Campaign: `005_cb698e2-composition`; starting and reviewed source baseline: `cb698e2c0d541a730a3070933778a66f6404a7fc`.
-- Working branch: `revision/005_cb698e2-composition`; assessment: U-000 / C-000 in [REVIEW-PLAN.md](REVIEW-PLAN.md).
+- Working branch: `revision/005_cb698e2-composition`; assessment: U-000–U-005 / C-000–C-009 in [REVIEW-PLAN.md](REVIEW-PLAN.md).
 - Reviewer and date: Codex, 2026-10-18. The user's four bullet notes supply the requested concept, not a published format rule or a source-file attachment.
 - Scope: reference size/scope balance as expressed in [skill design](../../../../agent-package-author/references/skill-design.md), [plugin design](../../../../agent-package-author/references/plugin-design.md), [skill review](../../../../agent-package-author/references/skill-review.md) and [plugin review](../../../../agent-package-author/references/plugin-review.md). The [entry](../../../../agent-package-author/SKILL.md), [authoring workflow](../../../../agent-package-author/references/authoring-workflow.md) and [SPEC](../../SPEC.md) were inspected only for routing and contract context.
-- Evidence: located source reading and conceptual contrast cases. U-001–U-004 inspect the post-V-001 runtime candidate at `527e77a754ed0dc53ffea99519e26ff490f533ef`; later commits change only review records. No target-client trial or full normative recheck is claimed. State: U-000–U-004 assessed; V-001 completed on the campaign branch. U-005 remains pending; new recommendations are not accepted repairs.
+- Evidence: located source reading, conceptual contrast cases and local link checks. U-001–U-004 inspect the post-V-001 runtime candidate at `527e77a754ed0dc53ffea99519e26ff490f533ef`; later commits change only review records. No target-client trial or full normative recheck is claimed. State: U-000–U-005 assessed; V-001 completed on the campaign branch. R-003–R-010 remain unaccepted review findings.
 
 ## Concept and current articulation
 
@@ -213,4 +213,27 @@ No separate finding is assigned to plugin-wide composition, sibling links or rev
 | Correction and meaning | State plainly that the repository's shipped examples omit pre-generated presentation and that an APA-authored deliverable includes and checks a separate pair per child. Preserve the distinction from portable-standard requirements and the instruction against unintentional replacement. If the project wants optional APA generation, amend SPEC and all routes as an explicit policy decision instead. |
 | Objective recheck and status | Follow standalone and plugin authoring prompts through the README and governing contract; both produce/retain per-skill presentation, while a review-only request writes none and shipped examples remain accurate. Open medium-priority documentation/contract consistency finding; coordinate with R-008. |
 
-The README's long numbered steps serve a worked example with stage boundaries and concrete effects; length alone did not justify a split. This unit did not run the hypothetical authoring prompts or inspect external specifications. U-005 will consolidate findings, rechecks and readiness.
+The README's long numbered steps serve a worked example with stage boundaries and concrete effects; length alone did not justify a split. This unit did not run the hypothetical authoring prompts or inspect external specifications.
+
+## U-005 — Consolidation and revision queue
+
+The full planned source-composition review is complete. The findings below are recommendations based on the stated source evidence, not accepted runtime changes. V-001 already revised R-001/R-002 and source-rechecked the paired concept; no current runtime finding calls for a new reference file or a size-driven split.
+
+| ID | Owner and bounded action | Priority / state | Recheck and coupling |
+| --- | --- | --- | --- |
+| R-001 | `skill-design.md`: two-sided reference boundary decision. | Medium; completed V-001. | Source contrasts and direct routing checked in [REVISION-REPORT.md](REVISION-REPORT.md); pair with R-002. |
+| R-002 | `skill-review.md`: paired thin/overloaded assessment. | Medium; completed V-001. | Source contrasts and delegation checked in revision report; pair with R-001. |
+| R-003 | `SKILL.md`: make authoring stages scan in order. | Low; open. | Entry-only pre-write, generation, checks and stop; coordinate with R-004. |
+| R-004 | `authoring-workflow.md`: separate step 6 stages internally. | Low; open. | Accepted portable content → presentation → checks/repair without changed authority; coordinate with R-003. |
+| R-005 | `hello-world-example.md`: add a compact requirement-to-file decision example. | Medium; open. | Selected reference alone justifies conditional resources and simpler omissions; no mandatory scaffold. |
+| R-006 | `validation-policy.md`: separate review scope, findings/effects and trial setup. | Low; open. | Focused/comprehensive/trial reader finds governing rule under one evidence owner. |
+| R-007 | `mcp-packaging.md`: include existing MCP review in opening trigger. | Medium; open. | Existing mixed/no-skill MCP review loads relevant guidance without a write; creation without MCP does not. |
+| R-008 | `openai-presentation.md`: align activation with APA's per-authored-skill output. | High; open. | Generic standalone and multi-child plugin generate pairs; review-only does not. Coordinate with R-010. |
+| R-009 | `README.md`: promote shared twelve-reference map to peer section. | Low; open. | Heading outline and all twelve route/example mappings remain complete. |
+| R-010 | `README.md`: clarify generated presentation retention in plugin example. | Medium; open. | Contract and example agree while shipped examples are accurately described; coordinate with R-008. |
+
+**Recommended action grouping.** Resolve the R-008/R-010 presentation interpretation first under the existing SPEC §5 mandatory APA output rule, or explicitly decide to amend that contract before touching prose. Then apply the two route/wording pairs R-003/R-004 and R-007, and the local composition improvements R-005/R-006/R-009. Each can stay in its current owner; no new module, template or validator rule is justified by these findings alone. A bounded revision plan should list exact edits, preserve review-only effects and independently recheck each owning route. The current review did not authorize that revision plan or its execution.
+
+**No-finding coverage.** The twelve entry routes exist and map one-to-one to shipped references; eight individual modules had no local composition finding; plugin capability versus child-reference decisions, sibling-relative links, optional `PLUGIN.md`/coordinator, no-skill plugin and focused versus comprehensive review had no separate handoff finding. README attachments have clear seed/reference/draft roles and distinguish illustrative prompts from runnable shipped examples. AGENTS and current SPEC/PLAN had no independent composition finding. These statements are bounded to inspected source, not proof of target-client selection or behavior.
+
+**Verification and remaining uncertainty.** This campaign inspected the post-V-001 runtime source, reviewed the four documentation files and checked their local Markdown targets. No hypothetical prompt execution, client installation, MCP transport connection, external standards recheck or full package behavior trial was performed. The project test command is recorded at the final checkpoint; a green test run would validate repository behavior, not resolve these prose-level activation ambiguities. The review stops here pending a selected revision scope; no merge to `main` is implied.

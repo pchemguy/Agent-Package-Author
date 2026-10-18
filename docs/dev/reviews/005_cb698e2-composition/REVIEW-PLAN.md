@@ -9,7 +9,7 @@
 - Included source: `agent-package-author/SKILL.md`, the twelve current `references/*.md`, `README.md`, `AGENTS.md`, and current `docs/dev/SPEC.md`/`PLAN.md` as governing context. Inspect scripts, examples, metadata or assets only where a textual claim or handoff depends on them.
 - Exclusions: closed campaign records and historical proposal inputs; independent standards/fact checking; functional validator or packaging redesign; automatic prose or contract changes. The review can identify a substantive conflict but must not smooth it into a silent editorial repair.
 - Evidence mode: source inspection and bounded local checks, with structural and observed behavior reported separately. No target-client consumer trial is presumed.
-- Companion report: [REVIEW-REPORT.md](REVIEW-REPORT.md). U-000–U-005 are assessed; R-001 and R-002 were accepted and completed in bounded V-001 as recorded in [REVISION-PLAN.md](REVISION-PLAN.md) and [REVISION-REPORT.md](REVISION-REPORT.md). R-003–R-010 are open findings, not accepted revisions.
+- Companion report: [REVIEW-REPORT.md](REVIEW-REPORT.md). U-000–U-005 are assessed; R-001/R-002 were completed in V-001. At the U-005 checkpoint R-003–R-010 were open findings; the later accepted V-002–V-005 actions and results are in [REVISION-PLAN.md](REVISION-PLAN.md) and [REVISION-REPORT.md](REVISION-REPORT.md).
 
 ## Review order and criteria
 

@@ -5,7 +5,7 @@ This repository develops `agent-package-author`, a portable skill for authoring 
 ## Start here
 
 1. Inspect Git status and the requested scope before editing. Preserve unrelated changes.
-2. Read [docs/dev/SPEC.md](docs/dev/SPEC.md) for requirements, [docs/dev/PLAN.md](docs/dev/PLAN.md) for implementation decisions and checks, and [docs/dev/ROADMAP.md](docs/dev/ROADMAP.md) for the completed original task sequence. These documents describe this project; a generated package can have its own development documents.
+2. Read [docs/dev/HANDOFF.md](docs/dev/HANDOFF.md) for the current workflow checkpoint, then [docs/dev/SPEC.md](docs/dev/SPEC.md) for requirements, [docs/dev/PLAN.md](docs/dev/PLAN.md) for implementation decisions and checks, and [docs/dev/ROADMAP.md](docs/dev/ROADMAP.md) for the completed original task sequence. These documents describe this project; a generated package can have its own development documents.
 3. Read [agent-package-author/SKILL.md](agent-package-author/SKILL.md) for operation-first routing. Load only the relevant files under `agent-package-author/references/` for the part of the workflow you are changing. [Skill review](agent-package-author/references/skill-review.md) owns entry/reference content criteria; [plugin review](agent-package-author/references/plugin-review.md) owns package composition. [Validation policy](agent-package-author/references/validation-policy.md) owns evidence boundaries.
 
 ## Repository map

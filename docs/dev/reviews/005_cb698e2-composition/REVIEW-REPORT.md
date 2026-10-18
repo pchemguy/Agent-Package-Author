@@ -31,8 +31,8 @@ The proposed balance is **cohesive substance at a selectable boundary**. A broad
 
 | Finding | Type | Priority | Status | Related finding |
 | --- | --- | --- | --- | --- |
-| R-001 | Authoring-guidance gap | Medium | Open recommendation | R-002 |
-| R-002 | Review-criterion clarity gap | Medium | Open recommendation | R-001 |
+| R-001 | Authoring-guidance gap | Medium | Accepted 2026-10-18; implementation pending | R-002 |
+| R-002 | Review-criterion clarity gap | Medium | Accepted 2026-10-18; implementation pending | R-001 |
 
 ## Finding records
 
@@ -44,7 +44,7 @@ The proposed balance is **cohesive substance at a selectable boundary**. A broad
 | Observation and reader consequence | “Focused reusable knowledge,” “task-relevant,” and “smallest structure” support the idea but do not state the two-sided decision. An author can meet direct routing requirements while creating a thin, vaguely scoped reference, or retain a broad procedure with a natural independently invoked subworkflow. This is a guidance gap, not proof that current APA modules are incorrectly split. |
 | Proposed correction and meaning limit | Add a compact criterion in `skill-design.md`: keep the entry shallow; give a reference a coherent, sufficiently developed responsibility; combine a fragment without meaningful independent use; split only a distinct substantial concern with a caller-visible trigger, preserving prerequisites and return path. Broad/shallow guidance and narrow/deep procedure are both valid. Avoid a numeric threshold or a mandatory split. If the criterion is adopted as a project requirement, reconcile `docs/dev/SPEC.md` through its document owner. |
 | Objective recheck | From design guidance alone, explain decisions for a complete short policy, a thin extra file, and a broad procedure containing an independently selected substantial subworkflow; resulting routes remain discoverable from `SKILL.md`. |
-| Current disposition | Open recommendation; no design text changed. |
+| Current disposition | Accepted for bounded V-001 on 2026-10-18; source change and recheck pending. See [REVISION-PLAN.md](REVISION-PLAN.md). |
 
 ### R-002 — Review criteria do not explicitly test both failure modes together
 
@@ -54,7 +54,7 @@ The proposed balance is **cohesive substance at a selectable boundary**. A broad
 | Observation and reader consequence | The checklist already rejects splitting on length alone and asks about independent use/loading, cohesion and sufficient result. It does not explicitly prompt the reviewer to catch both an underdeveloped fragment and an overloaded module with a naturally separable, substantial workflow. Reviewers can apply the existing questions correctly, but a lopsided assessment is easier. This is a clarification recommendation, not a missing formal standard rule. |
 | Proposed correction and meaning limit | Pair the two alternatives in the local purpose/cohesion criterion: ask whether each reference has enough substance and a clear boundary for its trigger, and whether a current module buries a distinct substantial subworkflow that should load separately. Evaluate caller-visible selection, required context and handoff before suggesting a split/merge. Retain length as a measurement, not an acceptance target. `plugin-review.md` should continue delegating included skill references rather than duplicating this check. |
 | Objective recheck | Source review of the same three contrasting cases yields a justified keep/combine/split decision with caller routing, preserved instructions and no numerical ceiling; a plugin case reaches the skill-review owner without a second competing policy. |
-| Current disposition | Open recommendation; no review text changed. |
+| Current disposition | Accepted for bounded V-001 on 2026-10-18; source change and recheck pending. See [REVISION-PLAN.md](REVISION-PLAN.md). |
 
 ## Contrasts and evidence limits
 
@@ -69,4 +69,4 @@ These cases are analytic contrasts, not constructed packages or observed agent e
 
 ## Revision handoff and stop
 
-The paired findings have a common policy shape and two current owners: design guidance and the skill-review checklist. A later accepted revision can edit those owners together, assess any SPEC change, then recheck entry routing and plugin delegation. The broader composition review remains queued at U-001. This checkpoint stops at findings; no runtime change, revision plan, or merge into `main` is authorized by this focused review request.
+The paired findings have a common policy shape and two current owners: design guidance and the skill-review checklist. The user accepted a bounded revision on 2026-10-18; [REVISION-PLAN.md](REVISION-PLAN.md) owns V-001 and its stop. The baseline findings above remain unchanged. The broader composition review remains queued at U-001; no merge into `main` is selected while the wider campaign remains incomplete.

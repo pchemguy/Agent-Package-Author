@@ -9,7 +9,7 @@
 - Included source: `agent-package-author/SKILL.md`, the twelve current `references/*.md`, `README.md`, `AGENTS.md`, and current `docs/dev/SPEC.md`/`PLAN.md` as governing context. Inspect scripts, examples, metadata or assets only where a textual claim or handoff depends on them.
 - Exclusions: closed campaign records and historical proposal inputs; independent standards/fact checking; functional validator or packaging redesign; automatic prose or contract changes. The review can identify a substantive conflict but must not smooth it into a silent editorial repair.
 - Evidence mode: source inspection and bounded local checks, with structural and observed behavior reported separately. No target-client consumer trial is presumed.
-- Companion report: `REVIEW-REPORT.md` is planned, not yet created. State: focused scope amendment; no source finding or revision is accepted yet.
+- Companion report: [REVIEW-REPORT.md](REVIEW-REPORT.md). U-000 is assessed; R-001 and R-002 are accepted for bounded V-001 in [REVISION-PLAN.md](REVISION-PLAN.md). U-001–U-005 remain pending.
 
 ## Review order and criteria
 
@@ -30,4 +30,4 @@ After each planned unit, update and commit `REVIEW-REPORT.md`; push that commit 
 
 ## Current stopping boundary
 
-The user's 2026-10-18 follow-up selects U-000 now. Publish this plan amendment, then assess U-000 and publish its report checkpoint. Stop before U-001 and before any runtime revision. The remaining units retain their planned dependency order.
+The U-000 report was published at `8d18fbb`. The user's later 2026-10-18 request accepts V-001; publish its plan and action checkpoints, then stop before U-001. The remaining units retain their planned dependency order.

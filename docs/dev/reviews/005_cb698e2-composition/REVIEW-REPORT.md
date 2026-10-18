@@ -6,7 +6,7 @@
 - Working branch: `revision/005_cb698e2-composition`; assessment: U-000 / C-000 in [REVIEW-PLAN.md](REVIEW-PLAN.md).
 - Reviewer and date: Codex, 2026-10-18. The user's four bullet notes supply the requested concept, not a published format rule or a source-file attachment.
 - Scope: reference size/scope balance as expressed in [skill design](../../../../agent-package-author/references/skill-design.md), [plugin design](../../../../agent-package-author/references/plugin-design.md), [skill review](../../../../agent-package-author/references/skill-review.md) and [plugin review](../../../../agent-package-author/references/plugin-review.md). The [entry](../../../../agent-package-author/SKILL.md), [authoring workflow](../../../../agent-package-author/references/authoring-workflow.md) and [SPEC](../../SPEC.md) were inspected only for routing and contract context.
-- Evidence: located source reading and conceptual contrast cases. No revised runtime, target-client trial, structural validator or full twelve-reference audit is claimed. State: U-000–U-002 assessed; V-001 completed on the campaign branch. U-003–U-005 remain pending; new recommendations are not accepted repairs.
+- Evidence: located source reading and conceptual contrast cases. No revised runtime, target-client trial, structural validator or full twelve-reference audit is claimed. State: U-000–U-003 assessed; V-001 completed on the campaign branch. U-004–U-005 remain pending; new recommendations are not accepted repairs.
 
 ## Concept and current articulation
 
@@ -145,3 +145,37 @@ No finding was assigned to the twelve-row map merely for its length: each shippe
 | Objective recheck and status | A focused review, comprehensive review and selected consumer trial can each locate its scope/evidence/report rule without reading a competing procedure. Open editorial recommendation. |
 
 The eight other modules have no material local composition finding at this depth. This unit did not independently verify normative format rules or run client workflows. Cross-owner agreement and README claims remain for U-003/U-004; these local outcomes do not preaccept revisions.
+
+## U-003 — Cross-module ownership and handoffs
+
+- Exact runtime candidate: `527e77a754ed0dc53ffea99519e26ff490f533ef`; C-005/C-006 source trace across the entry, authoring workflow, design/standards/review modules, portability, validation, MCP and OpenAI presentation. This is not a client activation trial.
+
+| Path / paired owners | Source result |
+| --- | --- |
+| Authorized creation → content review → validation | Entry selects authoring first; `authoring-workflow.md` permits proportionate repairs and calls the relevant review criteria; `validation-policy.md` owns evidence. Effects and stop agree. |
+| Focused/content-only review → findings | Entry excludes authoring workflow and writes; skill/plugin review modules return findings; validation policy distinguishes source inspection from structure and behavior. No conflicting repair instruction found. |
+| Bundled sibling handoff | Entry, `plugin-design.md`, `plugin-standard.md` and validation policy agree on named `SKILL.md` handoff versus direct shared reference, plugin-root containment and non-guaranteed client activation. |
+| Optional `PLUGIN.md` / coordinator | Plugin design and plugin review treat each as conditional and keep canonical behavior in the actual skill/coordinator owner. No inferred portable discovery. |
+| Existing no-skill plugin | Entry and plugin review skip child criteria; plugin standard permits component variants. Creation default remains skill-oriented. |
+| Existing MCP assessment | Entry selects MCP guidance when MCP exists; the module's first sentence can instead be read as only authoring a needed MCP component (R-007). |
+| Presentation for an authored skill | Entry, authoring workflow, portability policy, plugin design and SPEC require the APA-generated OpenAI presentation after portable content; the presentation module's opening narrows its use to an OpenAI-client request (R-008). |
+
+### R-007 — MCP module's opening narrows the entry route
+
+| Field | Evidence |
+| --- | --- |
+| Location and confidence | `agent-package-author/SKILL.md` row for MCP (line 26) versus `references/mcp-packaging.md` line 3 at `527e77a`; high source confidence. |
+| Observation and consequence | The entry loads MCP packaging when MCP is requested **or exists** in a package under review. “Only when the user needs MCP” in the selected module can be interpreted as requiring a request to add MCP, excluding a review of an existing MCP configuration. Its subsequent rules are relevant to that review. |
+| Bounded correction and meaning | Qualify the module opening to include authoring requested/justified MCP and reviewing present MCP, with no implication that a review-only request writes configuration. Keep the rest of the transport contract and evidence limits. |
+| Objective recheck and status | From entry plus module, trace both an existing mixed/MCP-only plugin review and a creation request without MCP; load only the former's actual component path. Open route/wording recommendation. |
+
+### R-008 — Presentation module's trigger conflicts with APA's generated-output contract
+
+| Field | Evidence |
+| --- | --- |
+| Location and confidence | `agent-package-author/SKILL.md` line 31, `references/authoring-workflow.md` step 6, `references/portability-policy.md` line 15, `references/openai-presentation.md` line 3, and `docs/dev/SPEC.md` §5; high source confidence. |
+| Observation and consequence | APA's accepted workflow creates OpenAI metadata and SVG for each authored skill after portable content. The presentation module says to use it when creating/revising a skill “for an OpenAI client,” which implies it can be skipped for an otherwise portable skill even though the other owners require generation. The same paragraph correctly says the files are optional *portable-standard* metadata, but that distinction does not resolve APA's own deliverable rule. |
+| Bounded correction and meaning | Align the module's activation with APA creation/revision of each skill and the entry's assessment of existing presentation. State separately that these outputs are OpenAI client presentation and not portable format requirements; preserve deliberate replacement/verification gates. A change to APA's mandatory generation policy would instead require an explicit governing decision, not a prose-only fix. |
+| Objective recheck and status | From a generic portable standalone request and a plugin with two children, the entry and selected module agree when/how many presentations are generated; a review-only request assesses existing presentation without generating. Open high-priority route consistency finding. |
+
+No separate finding is assigned to plugin-wide composition, sibling links or review-only effects at the inspected source level. U-004 will assess whether README/examples repeat or obscure these interface conditions. The present checks do not establish host loading, transport connectivity or OpenAI rendering.

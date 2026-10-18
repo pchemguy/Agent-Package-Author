@@ -6,7 +6,7 @@
 - Working branch: `revision/005_cb698e2-composition`; assessment: U-000 / C-000 in [REVIEW-PLAN.md](REVIEW-PLAN.md).
 - Reviewer and date: Codex, 2026-10-18. The user's four bullet notes supply the requested concept, not a published format rule or a source-file attachment.
 - Scope: reference size/scope balance as expressed in [skill design](../../../../agent-package-author/references/skill-design.md), [plugin design](../../../../agent-package-author/references/plugin-design.md), [skill review](../../../../agent-package-author/references/skill-review.md) and [plugin review](../../../../agent-package-author/references/plugin-review.md). The [entry](../../../../agent-package-author/SKILL.md), [authoring workflow](../../../../agent-package-author/references/authoring-workflow.md) and [SPEC](../../SPEC.md) were inspected only for routing and contract context.
-- Evidence: located source reading and conceptual contrast cases. No revised runtime, target-client trial, structural validator or full twelve-reference audit is claimed. State: focused assessment complete; general U-001–U-005 and any revision remain pending.
+- Evidence: located source reading and conceptual contrast cases. No revised runtime, target-client trial, structural validator or full twelve-reference audit is claimed. State: U-000 and U-001 assessed; V-001 completed on the campaign branch. U-002–U-005 remain pending; new recommendations are not accepted repairs.
 
 ## Concept and current articulation
 
@@ -70,3 +70,30 @@ These cases are analytic contrasts, not constructed packages or observed agent e
 ## Revision handoff and stop
 
 The paired findings have a common policy shape and two current owners: design guidance and the skill-review checklist. The user accepted V-001 on 2026-10-18; [REVISION-PLAN.md](REVISION-PLAN.md) owns its scope and [REVISION-REPORT.md](REVISION-REPORT.md) records actual changes and checks. The baseline observations above remain unchanged. The broader composition review remains queued at U-001; no merge into `main` is selected while the wider campaign remains incomplete.
+
+## U-001 — Entry and activation composition
+
+- Exact assessed source: `agent-package-author/SKILL.md` at `527e77a754ed0dc53ffea99519e26ff490f533ef` (unchanged from the campaign baseline). Criteria C-001 and C-002; source inspection only.
+- Reverse outline: frontmatter selects the capability; opening paragraph selects operation and effects; routing introduction/table identifies twelve owners, conditions and boundaries; next paragraph gives skill/plugin and optional-component qualifications; final paragraph summarizes authorized authoring, validation and reporting.
+- Direct-link inventory check: twelve `references/*.md` links in the routing table match all twelve shipped references and resolve locally. This checks discoverability, not client selection.
+
+| Scenario | Source route and stop | Assessment |
+| --- | --- | --- |
+| Focused entry/reference question | Select review-only, the relevant skill-review criterion and evidence owner; return scoped findings without authoring. | C-001/C-002 satisfied. |
+| Comprehensive standalone skill | Inventory selected skill and references through skill review; format guidance only for a format claim. | C-001/C-002 satisfied. |
+| Comprehensive mixed plugin | Plugin review plus skill review for actual children; MCP guidance when the package contains it. | C-001/C-002 satisfied. |
+| Authorized authoring/revision | Authoring workflow and applicable package owners; collision check, content check, presentation, structural and behavioral verification. | Route present; final paragraph density noted in R-003. |
+| Structural-only inspection | Matching CLI and validation evidence; skip the authoring workflow. | C-001/C-002 satisfied. |
+| Existing no-skill plugin | Plugin owners and actual components; no invented child skill review or presentation. | C-001/C-002 satisfied. |
+
+### R-003 — Final entry paragraph obscures authoring stages
+
+| Field | Evidence |
+| --- | --- |
+| Baseline location and confidence | `agent-package-author/SKILL.md` line 31, a 112-word paragraph; high confidence in the text, medium confidence in reader impact without a consumer trial. |
+| Observation and consequence | The paragraph moves from collision/authorization to package shape, generated presentation, templates, validation, runtime evidence and reporting. Each qualification is relevant to an authoring request, but their sequence is difficult to scan at the moment of selection, especially the distinction between checks and claims. This is an editorial recommendation, not a demonstrated missed action. |
+| Bounded correction and meaning implication | Group the same actions into compact ordered stages or two to three purpose-specific paragraphs in the entry; retain pre-write collision checking, post-content presentation, optional MCP template, distinct structural/behavioral evidence and completion limits. Do not move necessary pre-action gates into a reference without an entry reminder or create a new module for these sentences. |
+| Objective recheck | From entry alone, locate the pre-write gate, conditional generation, applicable validator, behavioral evidence and reporting stop in order; cross-check authoring workflow and no-review-only side effect. |
+| Disposition | Open recommendation; no runtime edit authorized by this review. |
+
+No finding was assigned to the twelve-row map merely for its length: each shipped module has a direct trigger, owner and boundary, and an entry-only task can select without opening all twelve. The other two long entry paragraphs group one controlling concern each (operation effects; package qualification). U-002–U-005 remain unassessed at this checkpoint.

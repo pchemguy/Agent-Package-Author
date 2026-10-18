@@ -6,7 +6,7 @@
 - Working branch: `revision/005_cb698e2-composition`; assessment: U-000 / C-000 in [REVIEW-PLAN.md](REVIEW-PLAN.md).
 - Reviewer and date: Codex, 2026-10-18. The user's four bullet notes supply the requested concept, not a published format rule or a source-file attachment.
 - Scope: reference size/scope balance as expressed in [skill design](../../../../agent-package-author/references/skill-design.md), [plugin design](../../../../agent-package-author/references/plugin-design.md), [skill review](../../../../agent-package-author/references/skill-review.md) and [plugin review](../../../../agent-package-author/references/plugin-review.md). The [entry](../../../../agent-package-author/SKILL.md), [authoring workflow](../../../../agent-package-author/references/authoring-workflow.md) and [SPEC](../../SPEC.md) were inspected only for routing and contract context.
-- Evidence: located source reading and conceptual contrast cases. No revised runtime, target-client trial, structural validator or full twelve-reference audit is claimed. State: U-000 and U-001 assessed; V-001 completed on the campaign branch. U-002–U-005 remain pending; new recommendations are not accepted repairs.
+- Evidence: located source reading and conceptual contrast cases. No revised runtime, target-client trial, structural validator or full twelve-reference audit is claimed. State: U-000–U-002 assessed; V-001 completed on the campaign branch. U-003–U-005 remain pending; new recommendations are not accepted repairs.
 
 ## Concept and current articulation
 
@@ -97,3 +97,51 @@ The paired findings have a common policy shape and two current owners: design gu
 | Disposition | Open recommendation; no runtime edit authorized by this review. |
 
 No finding was assigned to the twelve-row map merely for its length: each shipped module has a direct trigger, owner and boundary, and an entry-only task can select without opening all twelve. The other two long entry paragraphs group one controlling concern each (operation effects; package qualification). U-002–U-005 remain unassessed at this checkpoint.
+
+## U-002 — Individual reference composition
+
+- Exact runtime candidate: `527e77a754ed0dc53ffea99519e26ff490f533ef`; intervening commits changed only the campaign report. All twelve `references/*.md` were read at source level for C-003/C-004. Length measurements are orientation, not acceptance ceilings.
+
+| Reference | Role and internal trajectory | Assessment |
+| --- | --- | --- |
+| `authoring-workflow.md` | Seven-step intake, selection, collision, classification, acceptance, creation/verification, result procedure. | Complete overall; step 6 combines multiple distinct stages in one list item (R-004). |
+| `portability-policy.md` | Component classification table, host limit, OpenAI presentation exception. | Coherent broad/shallow policy; short exception is sufficient and linked to its owner. |
+| `validation-policy.md` | Evidence taxonomy, review coverage, structural/tool checks, plugin links, presentation, client failure boundaries, report. | One shared evidence owner is justified; paragraph 12 overloads review scope, output, effects and trial setup (R-006). |
+| `skill-standard.md` | Normative metadata, optional fields, resource/path boundary. | Compact format guide with source and policy distinctions; no split indicated. |
+| `skill-design.md` | Capability, conditional routing, reference boundary, acceptance cases. | V-001 clarifies the local design decision; cohesive and appropriately developed. |
+| `skill-review.md` | Shared criteria, entry, reference routing/content, review procedure and contrasts. | Long but cohesive review procedure; V-001's paired reference criterion sits in the correct section. |
+| `hello-world-example.md` | Two paragraphs name a rich Project Welcome Pack and warn against copying its file count. | Useful caution, but sparse as an independently loaded design exemplar (R-005). |
+| `plugin-standard.md` | Manifest and discovery, containment, failure boundaries, extensions. | Dense format summary but conceptually grouped; no natural independent subworkflow identified. |
+| `plugin-design.md` | Capability split, shared links, optional coordination, component/extension/presentation limits. | Coherent plugin-level guidance; reference-level split remains with skill design. |
+| `plugin-review.md` | Composition, conditional shared entry, conditional coordinator, procedure and contrasts. | Optional sections have selection conditions inside the file. A split might save loading in a focused request, but source inspection alone does not show a better boundary once added routing and shared handoffs are counted; no split recommendation. |
+| `mcp-packaging.md` | Optional trigger/schema, local transport, remote transport/security and evidence limit. | Compact conditional guide with a clear role; no material composition finding. |
+| `openai-presentation.md` | Context derivation, output contract, generator commands/example, verification. | Procedural module with appropriate example and client limit; no material composition finding. |
+
+### R-004 — Authoring step 6 contains several operational stages
+
+| Field | Evidence |
+| --- | --- |
+| Location and confidence | `agent-package-author/references/authoring-workflow.md` line 8 at `527e77a`; high confidence in structure, medium in impact. |
+| Observation and consequence | One numbered step covers implementation, two content reviews, presentation generation, structural and workflow verification, repair, and revision preservation. Its roughly 100 words force the reader to retain a sequence of different gates under one label; a hurried author may lose the distinction between accepted portable content and later OpenAI presentation. |
+| Correction and meaning | Separate the stage into compact substeps or a short nested sequence in the same workflow. Preserve the existing order, authority, optionality and evidence ownership; do not split into a tiny new reference. |
+| Objective recheck and status | Trace accepted content → presentation → checks/repair from the loaded authoring workflow and verify no new effect for review-only requests. Open editorial recommendation. |
+
+### R-005 — Conditional exemplar has too little design reasoning for its role
+
+| Field | Evidence |
+| --- | --- |
+| Location and confidence | `agent-package-author/references/hello-world-example.md` lines 3–5, compared with entry row and `docs/dev/SPEC.md` §3; high confidence in the textual gap, medium in user impact. |
+| Observation and consequence | The module names components and cautions against a mandatory tree, but gives only a brief reason for profile selection and no concrete mapping from requirement to reference/script/asset/validator. If the source attachment is absent or unavailable after loading, the agent cannot use this file alone to reason through the claimed rich design exemplar. This is insufficiency for its advertised role, not a criticism based on 112 words. |
+| Correction and meaning | Add a compact decision/example mapping with a conditional profile, common contract, renderer and independent validator, plus why each belongs at that boundary. Make the illustrative status and nonmandatory scope explicit. Do not turn the exemplar into a required scaffold or silently rely on README/source-only files at runtime. |
+| Objective recheck and status | With only the entry and this selected module, justify each illustrative file type and identify when a simpler skill omits it. Open content/composition recommendation. |
+
+### R-006 — Validation review paragraph combines multiple decisions
+
+| Field | Evidence |
+| --- | --- |
+| Location and confidence | `agent-package-author/references/validation-policy.md` line 12 at `527e77a`; high confidence in the controlling-concern shift, medium in impact. |
+| Observation and consequence | One paragraph moves from comprehensive inventory to focused scope, owner selection, finding content, review-only authority, then consumer-trial setup. The module itself has an appropriate shared evidence boundary, but readers cannot readily locate the scope decision versus output and trial conditions. |
+| Correction and meaning | Reorganize this paragraph into short purpose-specific units or labeled subparts inside the same module, keeping evidence taxonomy and reporting rules adjacent to their uses. Do not create separate files just because the paragraph is long. |
+| Objective recheck and status | A focused review, comprehensive review and selected consumer trial can each locate its scope/evidence/report rule without reading a competing procedure. Open editorial recommendation. |
+
+The eight other modules have no material local composition finding at this depth. This unit did not independently verify normative format rules or run client workflows. Cross-owner agreement and README claims remain for U-003/U-004; these local outcomes do not preaccept revisions.

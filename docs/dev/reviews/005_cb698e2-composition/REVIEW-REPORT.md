@@ -6,7 +6,7 @@
 - Working branch: `revision/005_cb698e2-composition`; assessment: U-000 / C-000 in [REVIEW-PLAN.md](REVIEW-PLAN.md).
 - Reviewer and date: Codex, 2026-10-18. The user's four bullet notes supply the requested concept, not a published format rule or a source-file attachment.
 - Scope: reference size/scope balance as expressed in [skill design](../../../../agent-package-author/references/skill-design.md), [plugin design](../../../../agent-package-author/references/plugin-design.md), [skill review](../../../../agent-package-author/references/skill-review.md) and [plugin review](../../../../agent-package-author/references/plugin-review.md). The [entry](../../../../agent-package-author/SKILL.md), [authoring workflow](../../../../agent-package-author/references/authoring-workflow.md) and [SPEC](../../SPEC.md) were inspected only for routing and contract context.
-- Evidence: located source reading and conceptual contrast cases. No revised runtime, target-client trial, structural validator or full twelve-reference audit is claimed. State: U-000–U-003 assessed; V-001 completed on the campaign branch. U-004–U-005 remain pending; new recommendations are not accepted repairs.
+- Evidence: located source reading and conceptual contrast cases. U-001–U-004 inspect the post-V-001 runtime candidate at `527e77a754ed0dc53ffea99519e26ff490f533ef`; later commits change only review records. No target-client trial or full normative recheck is claimed. State: U-000–U-004 assessed; V-001 completed on the campaign branch. U-005 remains pending; new recommendations are not accepted repairs.
 
 ## Concept and current articulation
 
@@ -179,3 +179,38 @@ The eight other modules have no material local composition finding at this depth
 | Objective recheck and status | From a generic portable standalone request and a plugin with two children, the entry and selected module agree when/how many presentations are generated; a review-only request assesses existing presentation without generating. Open high-priority route consistency finding. |
 
 No separate finding is assigned to plugin-wide composition, sibling links or review-only effects at the inspected source level. U-004 will assess whether README/examples repeat or obscure these interface conditions. The present checks do not establish host loading, transport connectivity or OpenAI rendering.
+
+## U-004 — User and developer documentation
+
+- Exact assessed candidate: runtime `527e77a754ed0dc53ffea99519e26ff490f533ef`; `README.md`, `AGENTS.md`, `docs/dev/SPEC.md` and `docs/dev/PLAN.md` at this checkpoint. Criteria C-007/C-008; source reading and local link existence only.
+- README reverse outline: identity and route → installation/CLI use → standalone request with seed, draft, normative source and conditional exemplar → plugin request with seed, drafts, sources and optional MCP → focused/comprehensive review example → twelve-reference map → verification limits. The examples are labeled illustrative and the shipped CLI examples are separated from the absent hypothetical output. The 12 rows match the entry's 12 owners and identify a trigger and observable use.
+- AGENTS reverse outline: project identity → starting sequence and owners → repository map → change/verification guidance. SPEC defines the operation and package contracts; PLAN maps owners, checks and historical implementation tasks. Their presentation rule is mandatory for an APA-authored skill while classifying the files as client-specific, not portable-standard requirements.
+- Local Markdown links outside fenced code: README 51, AGENTS 9, SPEC 0, PLAN 1; all resolved as files. This does not check external URLs, anchors, runtime loading or the correctness of linked content. No developer-entry or governing-document correction is recommended from this unit's composition reading.
+
+| Reader path | Source result |
+| --- | --- |
+| Standalone brief/draft/reference → design → output checks | Stages 1–6 trace authority, branch decision, optional exemplar, conditional resources, presentation and negative check; absent hypothetical attachment/output is disclosed. |
+| Plugin drafts/reference → two skills → optional MCP | Stages 1–6 distinguish two triggers, shared sibling links, standard layers and conditional server; source examples and commands are located. |
+| Focused/comprehensive content review | The separate review walkthrough preserves read-only effects, depth, no-skill case and later authorized revision. |
+| All twelve selected references | The map is complete but its heading hierarchy places a shared authoring map inside the review-only section (R-009). |
+| Presentation policy across documentation | The opening and SPEC require generation per authored skill; the plugin example's closing qualification makes keeping those outputs sound optional (R-010, related to R-008). |
+
+### R-009 — Shared reference map is nested under content review
+
+| Field | Evidence |
+| --- | --- |
+| Location and confidence | `README.md` lines 114–139, especially `### Exact reference loading map` at line 122; high confidence in document hierarchy, medium in reader impact. |
+| Observation and consequence | The map describes both authoring requests and all twelve modules, but its level-three heading makes it a child of `## Content-review walkthrough`. A reader following the two authoring requests may mistake the map for review-only detail or miss it as the requested direct module-to-subworkflow summary. The map itself is substantive and need not be split. |
+| Correction and meaning | Promote the map to its own level-two section after the walkthroughs, with its opening explicitly covering both creation and review triggers. Retain the individual rows and source-vs-execution distinction; do not duplicate the map in each example. |
+| Objective recheck and status | Heading outline shows authoring, review, shared reference map and boundaries as peers; each of twelve rows still traces to entry and an example or review branch. Open low-priority composition recommendation. |
+
+### R-010 — Plugin example makes required presentation output sound optional
+
+| Field | Evidence |
+| --- | --- |
+| Location and confidence | `README.md` line 110 (“retain the results if they are part of the intended deliverable”) against lines 3 and 67, `docs/dev/SPEC.md` line 79, and entry/authoring route; high source confidence. |
+| Observation and consequence | For an APA-created plugin's skills, the governing rule calls for each child's generated presentation. The example correctly says the *shipped demonstration package* omits those generated files and that generation can occur on demand; its last clause can instead be read as allowing an APA author to discard the outputs from a requested deliverable. This repeats the activation ambiguity of R-008 at the README boundary. |
+| Correction and meaning | State plainly that the repository's shipped examples omit pre-generated presentation and that an APA-authored deliverable includes and checks a separate pair per child. Preserve the distinction from portable-standard requirements and the instruction against unintentional replacement. If the project wants optional APA generation, amend SPEC and all routes as an explicit policy decision instead. |
+| Objective recheck and status | Follow standalone and plugin authoring prompts through the README and governing contract; both produce/retain per-skill presentation, while a review-only request writes none and shipped examples remain accurate. Open medium-priority documentation/contract consistency finding; coordinate with R-008. |
+
+The README's long numbered steps serve a worked example with stage boundaries and concrete effects; length alone did not justify a split. This unit did not run the hypothetical authoring prompts or inspect external specifications. U-005 will consolidate findings, rechecks and readiness.

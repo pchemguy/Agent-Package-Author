@@ -119,9 +119,9 @@ The following is a **source-review example**, not a recorded consumer invocation
 2. **Comprehensive request:** “Review the whole `notes-tools` plugin for clear capability boundaries.” Load [`plugin-review.md`](agent-package-author/references/plugin-review.md), inventory `plugin.json`, both included skills, scripts and any relevant resources; apply [`skill-review.md`](agent-package-author/references/skill-review.md) to each actual child entry at the requested depth. Inspect independent versus composite requests and handoffs. With no included `PLUGIN.md` or coordinator, their conditional criteria are inapplicable. State the assessed depth, exclusions, unassessed behavior and findings even if a representative script run succeeds.
 3. **Evidence and authorized follow-up:** [`validation-policy.md`](agent-package-author/references/validation-policy.md) keeps content findings distinct from `python agent-package-author/scripts/validate_plugin.py examples/multi-skill/notes-tools`, script outcomes and a target-client trial. A later explicit “revise these instructions” request selects [`authoring-workflow.md`](agent-package-author/references/authoring-workflow.md), applies proportionate review to permitted repairs, then verifies and reports actual changes. Reviewing an existing plugin with no skills would use the actual manifest and components without inventing child-skill checks; this does not promise MCP-only creation.
 
-### Exact reference loading map
+## Reference loading map
 
-All twelve modules are named directly by the creator's `SKILL.md`. “Read” means the agent loads that reference to make a decision; it does **not** mean a Python validator executes the reference. A referenced module is loaded only for the branch shown. The second column identifies the direct trigger and the third shows a concrete effect in the walkthrough.
+All twelve modules are named directly by the creator's `SKILL.md`. This map covers both authoring requests and the content-review path above. “Read” means the agent loads that reference to make a decision; it does **not** mean a Python validator executes the reference. A referenced module is loaded only for the branch shown. The second column identifies the direct trigger and the third shows a concrete effect in the walkthrough.
 
 | Creator reference | Direct trigger / subworkflow | Observable use above |
 |---|---|---|
@@ -134,9 +134,9 @@ All twelve modules are named directly by the creator's `SKILL.md`. “Read” me
 | [`plugin-standard.md`](agent-package-author/references/plugin-standard.md) | Plugin request, before creating the manifest or skill tree | Fixes `plugin.json`, immediate-child skill discovery, and optional root `mcp.json`. |
 | [`plugin-design.md`](agent-package-author/references/plugin-design.md) | Plugin exploration and capability decomposition | Separates outlining from link checking and avoids overlapping activation. |
 | [`plugin-review.md`](agent-package-author/references/plugin-review.md) | Proportionate composition check during plugin authoring, or an explicit plugin content review | Assesses responsibility split, component handoffs, and optional shared entries/coordinator when present; skill criteria apply only to included skills. |
-| [`mcp-packaging.md`](agent-package-author/references/mcp-packaging.md) | Only the optional heading-index MCP branch | Chooses the `stdio` variant, schema, placeholder placement, path containment, and credential boundary. |
-| [`validation-policy.md`](agent-package-author/references/validation-policy.md) | Both requests, after design and again at acceptance | Combines structural CLIs with output checks, negative cases, and qualified reporting. |
-| [`openai-presentation.md`](agent-package-author/references/openai-presentation.md) | Both requests, after portable `SKILL.md` files exist | Derives reviewed OpenAI metadata and SVG for the standalone skill and each plugin child; invokes `create_openai_presentation.py` and checks outputs. |
+| [`mcp-packaging.md`](agent-package-author/references/mcp-packaging.md) | Optional heading-index MCP branch; also an existing MCP component in a scoped review | Chooses or assesses the `stdio` variant, schema, placeholder placement, path containment, and credential boundary. |
+| [`validation-policy.md`](agent-package-author/references/validation-policy.md) | Both authoring requests at acceptance; content review for evidence and reporting | Combines structural CLIs with output checks, negative cases, and qualified findings. |
+| [`openai-presentation.md`](agent-package-author/references/openai-presentation.md) | Both authoring requests after portable `SKILL.md` files exist; scoped review of existing presentation | Derives reviewed OpenAI metadata and SVG for the standalone skill and each plugin child; assesses existing files without generation in review-only mode. |
 
 ## Boundaries
 

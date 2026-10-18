@@ -1,6 +1,6 @@
 # Optional MCP packaging
 
-Load this reference only when the user needs MCP. `mcp.json` is optional and contains exactly `$schema` and `mcpServers`; its schema version must match `plugin.json`. Each server uses one closed variant: `stdio`, `streamable-http`, or legacy `sse`. Read the normative Agent Plugins transport rules before building a server entry.
+Load this reference when authoring requested or justified MCP, or when assessing an existing `mcp.json` within the review scope. A review-only request does not authorize configuration changes. `mcp.json` is optional and contains exactly `$schema` and `mcpServers`; its schema version must match `plugin.json`. Each server uses one closed variant: `stdio`, `streamable-http`, or legacy `sse`. Read the normative Agent Plugins transport rules before building a server entry.
 
 For `stdio`, `command` is a bare executable token or contained package-relative `./` path; a bundled executable needs the latter. Keep `args` separate, and use allowed `cwd` forms (`./`, `${PLUGIN_ROOT}`, `${PLUGIN_DATA}` with optional children). Only `args`, `env` values and `cwd` expand the two placeholders. Never set reserved `PLUGIN_ROOT` or `PLUGIN_DATA` in `env`.
 

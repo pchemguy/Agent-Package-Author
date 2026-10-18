@@ -36,7 +36,8 @@ Compare the actual reference inventory with the entry. Check both coverage and w
 
 Assess each selected reference according to its role. A procedural reference needs operational boundaries and a return path; a terminology guide needs clear definitions, and an example needs its illustrative status and intended use. Do not impose a procedure or skill-wide activation duties on every reference.
 
-- **Local purpose and cohesion:** Does the module cover a coherent subject? Is a split justified by independent use/loading conditions rather than length alone?
+- **Local purpose and completeness:** Is the module coherent and sufficiently developed for its role? A broad, shallow guide and a narrow, detailed procedure can both be complete.
+- **Reference boundary:** Does a thin or vague fragment have a meaningful independent use and caller-visible loading condition, or should it join its caller or neighboring owner? Does a broad module bury a distinct, substantial subworkflow with its own trigger? Recommend a split only when that separate responsibility warrants it, never to meet a length target.
 - **Scope and ownership:** Does it agree with its caller and neighboring owners? Does a local clause improperly introduce a skill-wide obligation or duplicate a separate procedure?
 - **Required context:** Can it be used with the stated prior instructions and inputs? Are consequential prerequisites available before use without requiring every module to be self-contained?
 - **Loading and onward route:** Are dependencies and subsequent handoffs discoverable before dependent actions, without unrelated loading or deep chains?
@@ -49,7 +50,7 @@ Inspect a caller and adjacent owner when a reference changes routing, shared sta
 
 1. Pin the request, source, selected artifact(s), required prior context, permitted effects and evidence limits. For a comprehensive review, inventory the entry, references and support material needed for their claims; record each item's assessed depth, exclusion or unassessed state. A focused review retains its narrower target.
 2. Reverse-outline sections and significant paragraphs/steps. Evaluate structure and controlling concerns before local wording changes.
-3. Trace entry-to-reference decisions, repeated clauses and consequential handoffs on both sides. If a shortening or move is proposed, verify the destination preserves conditions, qualifiers and reading context.
+3. Trace entry-to-reference decisions, repeated clauses and consequential handoffs on both sides. For a proposed shortening, merge or split, verify caller selection, prerequisites, conditions, qualifiers, reading context and the return path survive the change.
 4. Select representative positive, variant, negative and recovery contrasts appropriate to the actual workflow. A case supplements content coverage; it does not replace inspection of the requested material.
 5. Check metadata, direct links and package containment with the owning structural tooling; inspect supporting scripts/assets only when a claim depends on them. If a consumer trial is selected, record source/model, initial context, loaded instructions, actual decisions/actions/output and stop separately from source inspection.
 6. Report located findings, consequence, confidence, bounded correction owner and objective recheck. Retain no-finding coverage, unknowns, unrun checks and the requested stop. An accepted repair follows the separate authorized authoring/revision path.

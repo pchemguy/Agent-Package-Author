@@ -6,7 +6,7 @@
 - Reviewer/date: Codex, 2026-11-04. The campaign branch begins with the plan-only opening commit `fb5c7986dc694cb6e54fa96b34f1fd232c897394`; report commits do not change the pinned reviewed source.
 - Scope and criteria: [REVIEW-PLAN.md](REVIEW-PLAN.md), U-001–U-006. Closed campaign records are excluded from current-source validity checks.
 - Evidence boundary: source inventory and primary specification comparison in U-001; entry/reference content inspection in U-002; source inspection, 50 automated tests, CLI checks and disposable-package probes in U-003; shipped example and temporary presentation execution in U-004; documentation/link trace in U-005; final coverage and a 16/32-pixel icon rendering in U-006. No target-client activation or Windows CMD trial has been observed.
-- State: U-001–U-006 assessed and consolidated. Six findings remain Open; no revision is accepted or implemented. This is a review-only campaign pending a separate revision decision.
+- State: U-001–U-006 assessed and consolidated. On 2026-11-04 the user directed closure without further work. All six findings are deferred for this campaign; no revision was accepted or implemented.
 
 ## Coverage
 
@@ -23,12 +23,12 @@
 
 | Finding | Type | Priority | Status | Related findings |
 | --- | --- | --- | --- | --- |
-| R-001 | Structural coverage defect | P2 | Open | R-002 (same validator owner) |
-| R-002 | YAML type-validation defect | P1 | Open | R-001 (same validator owner) |
-| R-003 | Example MCP runtime defect | P2 | Open | None |
-| R-004 | Documentation precision | P3 | Open | None |
-| R-005 | Reproducibility/housekeeping | P3 | Open | None |
-| R-006 | Presentation legibility | P3 | Open | None |
+| R-001 | Structural coverage defect | P2 | Deferred | R-002 (same validator owner) |
+| R-002 | YAML type-validation defect | P1 | Deferred | R-001 (same validator owner) |
+| R-003 | Example MCP runtime defect | P2 | Deferred | None |
+| R-004 | Documentation precision | P3 | Deferred | None |
+| R-005 | Reproducibility/housekeeping | P3 | Deferred | None |
+| R-006 | Presentation legibility | P3 | Deferred | None |
 
 ### R-001 — Referenced Markdown links can escape validation coverage
 
@@ -148,8 +148,12 @@ The creator's `agents/openai.yaml` has a task-specific name, summary, `$agent-pa
 | 3 | R-006 | Presentation module/generator; decide small/large asset treatment before editing the output contract. | Representative raster sizes, XML/YAML path checks and existing context/replacement tests. |
 | 4 | R-004, R-005 | README and development command hygiene; align with actual tool and workflow limits. | Walk both documentation paths; run the documented suite in a clean disposable checkout. |
 
-The queue contains one P1 (R-002), two P2 (R-001, R-003) and three P3 (R-004–R-006). All statuses remain **Open**: review evidence neither accepts a correction nor verifies a proposed result. A later revision should decide acceptance, deferral or rejection per ID and preserve these baseline observations. No source repair, governing-document amendment or integration into `main` follows from this report.
+The queue contains one P1 (R-002), two P2 (R-001, R-003) and three P3 (R-004–R-006). These findings were **Deferred** by the user's closure decision, not corrected or verified. A later campaign can select them with fresh scope and evidence. The reviewed source remains unchanged.
 
 ## Verification and stopping boundary
 
-The 50-test suite and shipped structural checks passed at the pinned baseline, with the isolated defects above established by independent probes. No Windows CMD execution, actual target-client discovery/activation, external MCP client handshake, full YAML parser comparison or real attachment-driven agent run was performed. `main` and the delivered package remain unchanged by this campaign. Publish/read back this final report and checkpoint; stop with a proposed revision queue for the user's decision.
+The 50-test suite and shipped structural checks passed at the pinned baseline, with the isolated defects above established by independent probes. No Windows CMD execution, actual target-client discovery/activation, external MCP client handshake, full YAML parser comparison or real attachment-driven agent run was performed. The delivered package remains unchanged by this campaign.
+
+## Closure decision
+
+The user requested closure without further work on 2026-11-04. Retain the report and six deferred findings as historical assessment, publish this finalization on the campaign branch, then integrate the review-only records into its `main` creation parent. No source repair, revision plan, or repeat of the earlier tests is authorized or needed for this documentation-only closure. The merge and target publication are pending until verified separately; this report does not claim them in advance.

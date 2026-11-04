@@ -9,7 +9,7 @@
 - Included: `agent-package-author/` entry, twelve references, scripts, assets and presentation; `README.md`, `AGENTS.md`, root policies, current `docs/dev/SPEC.md` and `PLAN.md`; maintained examples, tests, fixtures, package links and declared checks. Inspect repository and distribution boundaries where they affect delivery.
 - Excluded: changes to the reviewed source, automatic repairs, installation or target-client behavior without an actual trial, and routine validation or editing of closed campaign records. Historical records may be consulted only for a specific provenance question.
 - Evidence mode: source and consumer-path inspection, independent structural checks, local executable tests and representative workflow trials where feasible. Separate each evidence class and record unavailable external/client checks.
-- Companion report: [REVIEW-REPORT.md](REVIEW-REPORT.md). State: U-001–U-006 assessed and consolidated; revision decisions remain pending.
+- Companion report: [REVIEW-REPORT.md](REVIEW-REPORT.md). State: U-001–U-006 assessed and consolidated; the user selected closure without revision, and the report records deferred findings.
 
 ## Review order and criteria
 

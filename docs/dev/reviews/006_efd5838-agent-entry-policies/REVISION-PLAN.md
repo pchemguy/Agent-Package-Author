@@ -7,13 +7,13 @@
 - Working branch: `revision/006_efd5838-agent-entry-policies`; return target: `main`.
 - Decision source: the user's request to open a new campaign, followed by the two attached Markdown files and exact AGENTS.md insertion.
 - Scope: add the supplied `SKILL_DISCOVERY_PROTOCOL.md` and `WINDOWS_SHELL_POLICY.md` at repository root and insert the specified sections before `## Start here` in root `AGENTS.md`. Preserve the attachments' bytes and unrelated content.
-- State: planned. This directly accepted focused revision has no separate review finding or review report. The companion `REVISION-REPORT.md` is created with action evidence.
+- State: V-001 locally executed and checked; [REVISION-REPORT.md](REVISION-REPORT.md) records observed evidence. This directly accepted focused revision has no separate review finding or review report.
 
 ## Action and checks
 
 | Action | Intended result | Verification |
 | --- | --- | --- |
-| V-001 | Copy both supplied policy files without edits; insert the exact Initialization and Windows shell sections at the requested AGENTS.md location. | Compare copied files byte-for-byte with supplied attachments; inspect section order and exact requested text; verify relative links; run `git diff --check` and the repository test suite required by AGENTS.md. |
+| V-001 | Copy both supplied policy files without edits; insert the exact Initialization and Windows shell sections at the requested AGENTS.md location. | Compare copied files byte-for-byte with supplied attachments; inspect section order and exact requested text; verify relative links; run Git's whitespace check with `core.whitespace=cr-at-eol` to preserve supplied CRLF bytes, and the repository test suite required by AGENTS.md. |
 
 The new discovery instructions are read-only during their discovery phase. The repository currently has no `.agents/skills/` or `.agents/plugins/` entries. The Windows policy applies only to Windows execution hosts; this Linux checkout does not use its CMD rules. Neither root policy is a bundled runtime component of `agent-package-author/`.
 

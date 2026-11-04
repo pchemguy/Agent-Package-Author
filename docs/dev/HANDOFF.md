@@ -2,22 +2,22 @@
 
 ## Checkpoint
 
-Campaign `005_cb698e2-composition` completed U-000–U-005 review and V-001–V-005 revision actions, and its verified branch was selected for explicit integration into `main`. The [review plan](reviews/005_cb698e2-composition/REVIEW-PLAN.md), [review report](reviews/005_cb698e2-composition/REVIEW-REPORT.md), [revision plan](reviews/005_cb698e2-composition/REVISION-PLAN.md), and [revision report](reviews/005_cb698e2-composition/REVISION-REPORT.md) hold the findings, decisions, changes and checks. R-001–R-010 have current revision evidence. The project contract is [SPEC.md](SPEC.md) with delivery context in [PLAN.md](PLAN.md).
+Campaign `006_efd5838-agent-entry-policies` is open on `revision/006_efd5838-agent-entry-policies` for the requested root agent-entry policies. Its [revision plan](reviews/006_efd5838-agent-entry-policies/REVISION-PLAN.md) records the accepted action. Campaign `005_cb698e2-composition` was merged and published on `main` at `efd58388f93f879a452b4e94d1e4acc5abcc0941`; its [revision report](reviews/005_cb698e2-composition/REVISION-REPORT.md) retains the earlier outcome. The project contract is [SPEC.md](SPEC.md) with delivery context in [PLAN.md](PLAN.md).
 
 ## Scope and authority
 
-- Workflow: SDD Manager revision campaign returning to the `main` checkpoint after explicit integration.
-- Decision sources: the user's 2026-10-18 campaign and focused balance requests, V-001 acceptance, wider U-001–U-005 review request, and request to plan and execute the resulting R-003–R-010 revisions.
-- Accepted effects: V-001 revised reference boundary design/review; V-002–V-005 revised presentation routing, entry/workflow order, conditional exemplar, MCP/evidence guidance and README navigation. SPEC §5's mandatory APA presentation output remains the governing interpretation.
-- Current stop: verify the merged state, commit the two-parent integration summary, publish and read back `main`, then stop. No target-client trial was run.
+- Workflow: directly accepted focused revision; opening and V-001 execution on the campaign branch.
+- Decision sources: the user's 2026-11-04 requests to open a new campaign and add two attached root policies with an exact AGENTS.md insertion.
+- Accepted effects: copy the supplied files at root and insert the requested sections before `## Start here`. Preserve unrelated content and the delivered skill. No broader review or repair is authorized.
+- Current stop: publish the opening checkpoint, execute and publish V-001, then leave the campaign branch open. No merge or client trial is selected.
 
 ## Git and return
 
-- Campaign: `005_cb698e2-composition`.
-- Creation parent and eventual return target: `main` at full branch-off commit `cb698e2c0d541a730a3070933778a66f6404a7fc`.
-- Integration target and current branch: `main`; receiving parent before merge: `cb698e2c0d541a730a3070933778a66f6404a7fc`. Published incoming branch: `revision/005_cb698e2-composition` at `cee20eba354d895d98b1b1e6a6739feff7983ad8`. The merge commit requires remote readback.
-- No active parent campaign is suspended; closed earlier campaign records remain frozen.
+- Campaign: `006_efd5838-agent-entry-policies`.
+- Creation parent and eventual return target: `main` at `efd58388f93f879a452b4e94d1e4acc5abcc0941`.
+- Working branch: `revision/006_efd5838-agent-entry-policies` at the opening checkpoint; remote publication must be verified before V-001.
+- No active parent campaign is suspended; earlier closed campaign records remain frozen.
 
 ## Next action
 
-On continuation, inspect the two-parent merge and `origin/main` containment. If publication is pending, finish that operation before new work. Once published, this campaign is closed; a new request selects the next workflow from this `main` checkpoint. No further source revision or task range is implied.
+On continuation, verify the opening branch publication and worktree state, then execute V-001 from its plan. Publish and read back the action commit before any other campaign work. Do not infer campaign closure or integration from the completed action.

@@ -9,7 +9,11 @@
 - Included: the current `agent-package-author/` entry, references, scripts, templates and presentation; `README.md`, `AGENTS.md`, active root policies and `docs/dev/SPEC.md`/`PLAN.md`; maintained examples, tests, fixtures, package links and distribution boundaries. Review the interactions among these surfaces, not merely their individual presence.
 - Excluded: edits to the reviewed source, automatic fixes, installation or client behavior without an actual trial, and routine reassessment or repair of closed campaign records. Consult selected historical evidence only for a concrete provenance question; record any new findings in this campaign.
 - Evidence mode: source and consumer-path assessment, independent structural checks, executable positive and negative trials, and externally sourced format comparison when standards claims are assessed. Keep those evidence classes distinct and report unavailable host or client checks.
-- Authorized opening output: this plan and the entry handoff. The review report begins with the first assessed unit. Opening the campaign does not authorize source repairs or completion integration.
+- Authorized opening output: this plan and the entry handoff. The review report would have begun with the first assessed unit. Opening the campaign did not authorize source repairs.
+
+## Cancellation and closure
+
+On 2026-11-04 the user cancelled the review and directed campaign closure. U-001–U-006 were not started, no source candidate was assessed, no findings were made, and no `REVIEW-REPORT.md` was created. The units below are retained as the cancelled plan, not evidence of coverage or a pending review obligation. The only delivered effect is the campaign record and closure handoff; the reviewed source, examples, tests and governing documents remain unchanged. The campaign closes upon publication and readback of the explicit integration into `main`.
 
 ## Units and criteria
 
@@ -28,4 +32,4 @@ Create `REVIEW-REPORT.md` when U-001 begins. For each unit record the reviewed s
 
 After each unit, update and commit the report; publish and read back that commit before starting the next unit. Inspect each owned diff for incidental edits to closed campaigns. A planned check is never described as a passing check.
 
-After U-006, return the report and prioritized revision queue and stop. Any revision plan, source repair or campaign integration requires subsequent authorization. Report actual host/client limitations and do not infer installation, activation or compatibility from structural checks.
+The planned U-006 return and revision queue were cancelled. No review conclusion or package acceptance is implied by the opening tests or campaign closure.

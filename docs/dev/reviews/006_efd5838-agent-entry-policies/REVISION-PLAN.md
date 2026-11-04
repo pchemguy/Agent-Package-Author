@@ -20,3 +20,7 @@ The new discovery instructions are read-only during their discovery phase. The r
 ## Persistence and stop
 
 Commit and publish this opening plan and handoff before V-001. Commit the two root files, AGENTS.md insertion, and observed revision evidence together; push and read back that action commit. Keep the campaign branch open for any further user-directed revision; do not merge into `main` merely from this opening request. No validator behavior, format contract, or client runtime change is planned.
+
+## Later closure authorization
+
+The user's subsequent 2026-11-04 request to close the campaign supersedes the opening stop. After final checks and branch evidence publication, explicitly merge the complete verified campaign into the recorded `main` parent, verify the merged state, publish/read back `main`, and stop. Preserve the original action scope and closed earlier records.

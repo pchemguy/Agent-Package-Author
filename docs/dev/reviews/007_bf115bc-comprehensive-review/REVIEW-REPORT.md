@@ -5,8 +5,8 @@
 - Campaign: `007_bf115bc-comprehensive-review`; starting and reviewed source baseline: `bf115bce52adf2487462db33440ce7702120080a` on `main`.
 - Reviewer/date: Codex, 2026-11-04. The campaign branch begins with the plan-only opening commit `fb5c7986dc694cb6e54fa96b34f1fd232c897394`; report commits do not change the pinned reviewed source.
 - Scope and criteria: [REVIEW-PLAN.md](REVIEW-PLAN.md), U-001–U-006. Closed campaign records are excluded from current-source validity checks.
-- Evidence boundary: source inventory and primary specification comparison in U-001; entry/reference content inspection in U-002; source inspection, 50 automated tests, CLI checks and disposable-package probes in U-003. No target-client activation or Windows CMD trial has been observed.
-- State: U-001–U-003 assessed; U-004–U-006 pending. No revision is accepted or implemented.
+- Evidence boundary: source inventory and primary specification comparison in U-001; entry/reference content inspection in U-002; source inspection, 50 automated tests, CLI checks and disposable-package probes in U-003; shipped example and temporary presentation execution in U-004. No target-client activation or Windows CMD trial has been observed.
+- State: U-001–U-004 assessed; U-005–U-006 pending. No revision is accepted or implemented.
 
 ## Coverage
 
@@ -15,7 +15,7 @@
 | U-001 / C-001 | Satisfied within inspected inventory and standards scope | The baseline has 80 tracked files and no tracked symlinks. The delivered skill contains `SKILL.md`, twelve references, four scripts, four assets and `agents/openai.yaml`; development records, examples and tests are outside that directory. Relative links in delivered/reference and example Markdown resolve within their inspected package roots except the intentionally broken `examples/standalone/sample.md` link used as negative sample data. Source searches found no former-checkout absolute dependency in the delivered skill, examples or tests. Compared format claims in `skill-standard.md`, `plugin-standard.md`, `SPEC.md` and templates with the published Agent Skills and Agent Plugins 1.0.0 specifications. This is source evidence, not an isolated-installation trial. | None |
 | U-002 / C-002–C-003 | Satisfied in source inspection | Read the creator entry and all twelve references, comparing entry-only routing, scope, content boundary and consequential caller/owner handoffs. See the assessed-depth inventory below. No independent consumer-model routing trial was run. | None |
 | U-003 / C-004 | Findings | Read all four Python helpers and seven test files; 50 tests passed. Creator self-validation/inventory and both shipped plugin validators passed; all four CLIs returned zero for `--help`. Disposable probes exposed false success for non-string YAML scalars and links inside references. | R-001, R-002 |
-| U-004 / C-005 | Pending | Examples and producer outputs not yet exercised. | — |
+| U-004 / C-005 | Finding with positive coverage | All three package examples validated; standalone count and both note workflows produced documented outputs. MCP server answered initialize, tools/list, valid heading call and missing-file tool error. Temporary plugin generation produced distinct child presentation and refused replacement. A malformed tool argument produced no response; a non-object request crashed the server. | R-003 |
 | U-005 / C-006–C-007 | Pending | User/developer documentation not yet assessed. | — |
 | U-006 / C-008 | Pending | Consolidation follows the preceding units. | — |
 
@@ -25,6 +25,7 @@
 | --- | --- | --- | --- | --- |
 | R-001 | Structural coverage defect | P2 | Open | R-002 (same validator owner) |
 | R-002 | YAML type-validation defect | P1 | Open | R-001 (same validator owner) |
+| R-003 | Example MCP runtime defect | P2 | Open | None |
 
 ### R-001 — Referenced Markdown links can escape validation coverage
 
@@ -43,6 +44,15 @@
 | Observation and consequence | A directory `123` with `name: 123` and `description: 42` passed with exit 0; `description: 42` also passed in an ordinary named skill. YAML interprets these unquoted scalars as numbers, while Agent Skills requires string `name` and `description`. The parser rejects lowercase `true` but misses numeric and other implicitly typed plain forms, so strict success can misclassify invalid metadata. |
 | Owner and bounded correction | Frontmatter subset parser and tests. Recognize implicit non-string scalar forms under the selected YAML semantics or return `frontmatter-unverified` rather than coercing them to text; keep quoted numeric strings valid. Include the optional `metadata` string mapping in the same check. |
 | Objective recheck and limit | Numeric `name`, `description`, and metadata values fail or are explicitly unverified; quoted string equivalents pass, and existing valid examples remain green. A full YAML parser is not required by the current bounded-parser contract. |
+
+### R-003 — Example MCP server drops malformed calls and can terminate
+
+| Field | Evidence |
+| --- | --- |
+| Baseline location and confidence | `examples/with-mcp/notes-tools/bin/notes_server.py`, `handle()` and `main()`; high confidence from disposable subprocess probes. |
+| Observation and consequence | `tools/call` with `arguments.path: 42` emitted a stderr diagnostic but no JSON-RPC response for its request ID, exiting 0. A non-object JSON request `[]` raised an uncaught `AttributeError`, exited 1 and prevented a following valid `tools/list` request from being served. A client can wait for an unanswered call or lose the local server. The bundled tests cover initialize/list but not these failures. |
+| Owner and bounded correction | Example server and its runtime tests. Validate request and tool-argument shapes and return a correlated JSON-RPC error or `isError` tool result for recoverable failures; keep the process available for later valid requests. Avoid treating invalid user data as a silent notification. |
+| Objective recheck and limit | Feed a malformed request or path type followed by a valid request; each request with an ID receives a response, the valid request still succeeds, and positive heading/missing-file calls remain intact. This is a local fixture behavior finding, not a target-client handshake conclusion. |
 
 ## U-001 evidence and limits
 
@@ -77,8 +87,16 @@ The two review modules and validation policy share short handoff reminders but d
 - Inspected `validate_skill.py`, `validate_plugin.py`, `inspect_package.py`, `create_openai_presentation.py`, all seven `tests/*.py` files and `tests/fixtures/format-cases.json`. The tests cover manifest and MCP variants, sibling warning/missing/escape cases in entries, presentation context/replacement preflight, self-validation, three examples and a small MCP JSON-RPC fixture. Assertions of word presence in `test_authoring.py` supply only source-presence evidence, not model routing behavior.
 - `PYTHONDONTWRITEBYTECODE=1 python -m unittest discover -s tests -q`: 50 tests, OK. `validate_skill.py agent-package-author` returned 0; `inspect_package.py agent-package-author` returned 0 with twelve references, four scripts, four assets, zero errors/warnings and explicit runtime-unverified label. Both shipped `validate_plugin.py` examples returned 0. All four helpers returned 0 with usage on `--help`.
 - Disposable plugin with `SKILL.md` → `references/guide.md` → missing and escaping links: both validators and inspector returned 0, as R-001 records. Disposable numeric frontmatter: `name: 123` plus `description: 42`, and ordinary-name `description: 42`, returned 0; `description: true` was reported unverified. No repository source was edited by these probes.
-- Positive checks do not establish target-client routing, arbitrary YAML support, MCP connectivity or safety of included scripts. U-004 will exercise the shipped examples and a temporary presentation output independently.
+- Positive checks do not establish target-client routing, arbitrary YAML support, MCP connectivity or safety of included scripts. U-004 records the separate shipped-example and temporary presentation trials.
+
+## U-004 example and presentation evidence
+
+- Read the skill entries across all three example packages, their scripts, the plugin manifests/MCP configuration, the local MCP server and package templates. All three validator CLIs returned 0; `inspect_package.py examples/with-mcp/notes-tools` listed two skills and `note-heading-index (stdio)` with zero errors/warnings and `RUNTIME: not verified by inventory`.
+- `count_words.py 'one two three'` printed `3`; `outline.py examples/standalone/sample.md` printed `- First`; `check_links.py` on that sample printed `missing: absent.md`. These are CLI outputs, not client selection trials. The intentionally missing sample link is expected negative data.
+- The MCP fixture returned responses for `initialize`, `tools/list`, a heading call producing `First` and `Second`, and a missing-path call with `isError: true`. The invalid-path and non-object probes in R-003 exposed distinct unhandled cases. The official MCP SDK guidance treats invalid tool arguments as a response carrying `isError`, reinforcing the local response/recovery expectation; this review did not run an SDK-backed client.
+- Copied the multi-skill example to a temporary directory and ran `create_openai_presentation.py` with default context. It returned 0 and wrote exactly two pairs of child files; both YAML prompts contained their respective `$skill-name`, and both icons parsed as 128×128 SVG. A second run without `--force` returned 1 with `already exists`. No plugin-root presentation or tracked output was changed. Distinct visual legibility and OpenAI client rendering were not tested.
+- The minimal manifest and MCP templates use matching 1.0.0 schema identifiers and do not force optional components. The examples intentionally omit generated presentation, while the authoring workflow calls for it in delivered authored skills; U-005 will check the documentation of that distinction.
 
 ## Next checkpoint
 
-Publish and read back this U-003 report commit before U-004. Next exercise the three shipped examples, optional MCP fixture and presentation generation in a disposable copy.
+Publish and read back this U-004 report commit before U-005. Next trace the complete README workflow, root policies and maintained links against the observed source and CLI behavior.

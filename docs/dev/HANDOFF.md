@@ -2,22 +2,22 @@
 
 ## Checkpoint
 
-Campaign `007_bf115bc-comprehensive-review` completed its comprehensive assessment and was selected for review-only integration into `main`. Its [review plan](reviews/007_bf115bc-comprehensive-review/REVIEW-PLAN.md) and [review report](reviews/007_bf115bc-comprehensive-review/REVIEW-REPORT.md) retain six deferred findings and the evidence for U-001–U-006. The current project contract is [SPEC.md](SPEC.md), with implementation context in [PLAN.md](PLAN.md).
+Campaign `008_e8d7a79-comprehensive-review` is open at its plan-only entry. Its [review plan](reviews/008_e8d7a79-comprehensive-review/REVIEW-PLAN.md) defines U-001–U-006; no unit has yet been assessed and no review report or findings exist. The current governing contract is [SPEC.md](SPEC.md), with implementation context in [PLAN.md](PLAN.md).
 
 ## Scope and authority
 
-- Workflow: completed review-only campaign returning to the `main` checkpoint.
-- Decision sources: the user's 2026-11-04 requests to open and run the review, then close it without further work.
-- Authorized effects: integrate the published review records and six deferred finding dispositions. The delivered package is unchanged; no source repair or governing-document amendment is authorized.
-- Current stop: verify this prospective merge, commit its integration summary, publish and read back `main`, then stop.
+- Workflow: comprehensive review of the current Agent Package Author repository, with a review-only stop.
+- Decision source: the user's 2026-11-04 request to open a comprehensive review campaign.
+- Authorized opening effects: establish the campaign branch, plan and handoff, then publish and read back the opening commit. This request alone does not start U-001, revise source, or integrate the campaign.
+- Current stop: published plan-only opening; await a request to run the review. The review's eventual report commit is a separate checkpoint before any revision decision.
 
 ## Git and return
 
-- Campaign: `007_bf115bc-comprehensive-review`.
-- Creation parent and integration target: `main` at `bf115bce52adf2487462db33440ce7702120080a`.
-- Published incoming branch: `revision/007_bf115bc-comprehensive-review` at `9ac3674e99c2878490d8ff499eed9d46bd94b2df`; branch-off commit: `bf115bce52adf2487462db33440ce7702120080a`. Opening commit: `fb5c7986dc694cb6e54fa96b34f1fd232c897394`.
-- No parent campaign is suspended. Prior closed campaign records remain frozen. The merge commit requires remote readback.
+- Campaign and directory: `008_e8d7a79-comprehensive-review`, `docs/dev/reviews/008_e8d7a79-comprehensive-review/`.
+- Creation parent and eventual return target: `main` at `e8d7a7941cbd3f16a411928ad236253a7e0665ce`.
+- Working branch: `revision/008_e8d7a79-comprehensive-review`; branch-off commit and exact source baseline: `e8d7a7941cbd3f16a411928ad236253a7e0665ce`.
+- No parent campaign is suspended. Closed campaign packages `001`–`007` remain frozen. Confirm opening commit publication by exact remote-ref readback before review work.
 
 ## Next action
 
-Verify the two-parent merge, exact incoming-tip containment and unchanged delivered source. If publication is pending, finish it before new work. Once published, the campaign is closed; a later correction needs a new eligible campaign, leaving this report frozen.
+On an authorized continuation, verify the branch and remote checkpoint, begin U-001, create the review report, and persist/publish each unit before its successor. Preserve the review-only boundary unless the user accepts a subsequent revision scope.

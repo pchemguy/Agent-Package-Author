@@ -2,22 +2,22 @@
 
 ## Checkpoint
 
-Campaign `006_efd5838-agent-entry-policies` completed its focused root-policy revision and was selected for explicit integration into `main`. Its [revision plan](reviews/006_efd5838-agent-entry-policies/REVISION-PLAN.md) and [revision report](reviews/006_efd5838-agent-entry-policies/REVISION-REPORT.md) record the action and checks. The project contract is [SPEC.md](SPEC.md) with delivery context in [PLAN.md](PLAN.md).
+Campaign `007_bf115bc-comprehensive-review` completed its comprehensive assessment and was selected for review-only integration into `main`. Its [review plan](reviews/007_bf115bc-comprehensive-review/REVIEW-PLAN.md) and [review report](reviews/007_bf115bc-comprehensive-review/REVIEW-REPORT.md) retain six deferred findings and the evidence for U-001–U-006. The current project contract is [SPEC.md](SPEC.md), with implementation context in [PLAN.md](PLAN.md).
 
 ## Scope and authority
 
-- Workflow: completed focused revision returning to the `main` checkpoint.
-- Decision sources: the user's 2026-11-04 requests to open a new campaign, add two attached root policies with an exact AGENTS.md insertion, and later close the campaign.
-- Accepted effects: copy the supplied files at root and insert the requested sections before `## Start here`. Preserve unrelated content and the delivered skill. No broader review or repair is authorized.
-- Current stop: verify the merged state, commit the two-parent integration summary, publish and read back `main`, then stop. No Windows-host trial was run.
+- Workflow: completed review-only campaign returning to the `main` checkpoint.
+- Decision sources: the user's 2026-11-04 requests to open and run the review, then close it without further work.
+- Authorized effects: integrate the published review records and six deferred finding dispositions. The delivered package is unchanged; no source repair or governing-document amendment is authorized.
+- Current stop: verify this prospective merge, commit its integration summary, publish and read back `main`, then stop.
 
 ## Git and return
 
-- Campaign: `006_efd5838-agent-entry-policies`.
-- Creation parent and eventual return target: `main` at `efd58388f93f879a452b4e94d1e4acc5abcc0941`.
-- Integration target and current branch: `main`, receiving parent `efd58388f93f879a452b4e94d1e4acc5abcc0941`. Published incoming branch: `revision/006_efd5838-agent-entry-policies` at `bc1eb259f42f3893ef0bdefe014776fd0c69726e`. The merge commit requires remote readback.
-- No active parent campaign is suspended; earlier closed campaign records remain frozen.
+- Campaign: `007_bf115bc-comprehensive-review`.
+- Creation parent and integration target: `main` at `bf115bce52adf2487462db33440ce7702120080a`.
+- Published incoming branch: `revision/007_bf115bc-comprehensive-review` at `9ac3674e99c2878490d8ff499eed9d46bd94b2df`; branch-off commit: `bf115bce52adf2487462db33440ce7702120080a`. Opening commit: `fb5c7986dc694cb6e54fa96b34f1fd232c897394`.
+- No parent campaign is suspended. Prior closed campaign records remain frozen. The merge commit requires remote readback.
 
 ## Next action
 
-On continuation, inspect the two-parent merge and exact `origin/main` containment. If publication is pending, finish it before new work. Once published, the campaign is closed; a new request selects any next workflow from this `main` checkpoint.
+Verify the two-parent merge, exact incoming-tip containment and unchanged delivered source. If publication is pending, finish it before new work. Once published, the campaign is closed; a later correction needs a new eligible campaign, leaving this report frozen.

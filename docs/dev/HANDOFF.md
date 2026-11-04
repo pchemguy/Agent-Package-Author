@@ -2,22 +2,22 @@
 
 ## Checkpoint
 
-Campaign `006_efd5838-agent-entry-policies` completed its focused root-policy revision and was selected for explicit integration into `main`. Its [revision plan](reviews/006_efd5838-agent-entry-policies/REVISION-PLAN.md) and [revision report](reviews/006_efd5838-agent-entry-policies/REVISION-REPORT.md) record the action and checks. The project contract is [SPEC.md](SPEC.md) with delivery context in [PLAN.md](PLAN.md).
+Campaign `007_bf115bc-comprehensive-review` is open at its review-plan checkpoint. Its [review plan](reviews/007_bf115bc-comprehensive-review/REVIEW-PLAN.md) defines U-001–U-006 and the report checkpoints. The current project contract is [SPEC.md](SPEC.md), with implementation context in [PLAN.md](PLAN.md). The preceding campaign is integrated into `main`; its closed records are not current review inputs.
 
 ## Scope and authority
 
-- Workflow: completed focused revision returning to the `main` checkpoint.
-- Decision sources: the user's 2026-11-04 requests to open a new campaign, add two attached root policies with an exact AGENTS.md insertion, and later close the campaign.
-- Accepted effects: copy the supplied files at root and insert the requested sections before `## Start here`. Preserve unrelated content and the delivered skill. No broader review or repair is authorized.
-- Current stop: verify the merged state, commit the two-parent integration summary, publish and read back `main`, then stop. No Windows-host trial was run.
+- Workflow: comprehensive review, currently at opening/plan stage; the review report has not yet been created.
+- Decision source: the user's 2026-11-04 request to open a comprehensive review campaign.
+- Authorized work: create and publish this campaign branch, plan and checkpoint; assess the current source and record findings in the active review report. Do not repair source or amend governing documents from review findings alone.
+- Current stop: this opening checkpoint. A subsequent review execution follows U-001–U-006, committing, publishing and reading back each unit before the next. Consolidation returns the report and proposed revisions for a separate decision.
 
 ## Git and return
 
-- Campaign: `006_efd5838-agent-entry-policies`.
-- Creation parent and eventual return target: `main` at `efd58388f93f879a452b4e94d1e4acc5abcc0941`.
-- Integration target and current branch: `main`, receiving parent `efd58388f93f879a452b4e94d1e4acc5abcc0941`. Published incoming branch: `revision/006_efd5838-agent-entry-policies` at `bc1eb259f42f3893ef0bdefe014776fd0c69726e`. The merge commit requires remote readback.
-- No active parent campaign is suspended; earlier closed campaign records remain frozen.
+- Campaign: `007_bf115bc-comprehensive-review`.
+- Creation parent and return/integration target: `main` at `bf115bce52adf2487462db33440ce7702120080a`.
+- Working branch: `revision/007_bf115bc-comprehensive-review`; branch-off commit: `bf115bce52adf2487462db33440ce7702120080a`.
+- No parent campaign is suspended. Prior closed campaign records remain frozen.
 
 ## Next action
 
-On continuation, inspect the two-parent merge and exact `origin/main` containment. If publication is pending, finish it before new work. Once published, the campaign is closed; a new request selects any next workflow from this `main` checkpoint.
+Confirm the opening commit and remote branch publication. When review execution is requested, start U-001 at the pinned source, create `REVIEW-REPORT.md`, and preserve unit-by-unit evidence and publication gates. Reconcile any changed `main` baseline explicitly before expanding the review candidate.

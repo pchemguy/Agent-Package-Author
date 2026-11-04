@@ -9,7 +9,7 @@
 - Included: `agent-package-author/` entry, twelve references, scripts, assets and presentation; `README.md`, `AGENTS.md`, root policies, current `docs/dev/SPEC.md` and `PLAN.md`; maintained examples, tests, fixtures, package links and declared checks. Inspect repository and distribution boundaries where they affect delivery.
 - Excluded: changes to the reviewed source, automatic repairs, installation or target-client behavior without an actual trial, and routine validation or editing of closed campaign records. Historical records may be consulted only for a specific provenance question.
 - Evidence mode: source and consumer-path inspection, independent structural checks, local executable tests and representative workflow trials where feasible. Separate each evidence class and record unavailable external/client checks.
-- Companion report: `REVIEW-REPORT.md` is planned, not yet created. State: review planned; no assessment unit completed.
+- Companion report: [REVIEW-REPORT.md](REVIEW-REPORT.md). State: U-001–U-006 assessed and consolidated; revision decisions remain pending.
 
 ## Review order and criteria
 
@@ -30,4 +30,4 @@ After each unit, update and commit the report, then publish and read back that c
 
 ## Consolidation and stopping
 
-Return the completed report and prioritized revision queue after U-006. Stop before source repair, project-document amendments or campaign integration unless the user authorizes those effects. Opening this campaign establishes its branch, plan and handoff only; it does not claim that the review scenarios have run.
+Return the completed report and prioritized revision queue after U-006. Stop before source repair, project-document amendments or campaign integration unless the user authorizes those effects. The report records which scenarios ran and their limits; this plan alone is not evidence of execution.

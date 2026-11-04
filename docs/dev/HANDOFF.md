@@ -2,22 +2,22 @@
 
 ## Checkpoint
 
-Campaign `007_bf115bc-comprehensive-review` is open at its review-plan checkpoint. Its [review plan](reviews/007_bf115bc-comprehensive-review/REVIEW-PLAN.md) defines U-001–U-006 and the report checkpoints. The current project contract is [SPEC.md](SPEC.md), with implementation context in [PLAN.md](PLAN.md). The preceding campaign is integrated into `main`; its closed records are not current review inputs.
+Campaign `007_bf115bc-comprehensive-review` has assessed U-001–U-006 and reached its consolidated review checkpoint. Its [review plan](reviews/007_bf115bc-comprehensive-review/REVIEW-PLAN.md) and [review report](reviews/007_bf115bc-comprehensive-review/REVIEW-REPORT.md) record six Open findings, coverage, actual checks and a proposed revision queue. The current project contract is [SPEC.md](SPEC.md), with implementation context in [PLAN.md](PLAN.md).
 
 ## Scope and authority
 
-- Workflow: comprehensive review, currently at opening/plan stage; the review report has not yet been created.
-- Decision source: the user's 2026-11-04 request to open a comprehensive review campaign.
-- Authorized work: create and publish this campaign branch, plan and checkpoint; assess the current source and record findings in the active review report. Do not repair source or amend governing documents from review findings alone.
-- Current stop: this opening checkpoint. A subsequent review execution follows U-001–U-006, committing, publishing and reading back each unit before the next. Consolidation returns the report and proposed revisions for a separate decision.
+- Workflow: comprehensive review, assessment complete; no revision has been accepted or implemented.
+- Decision sources: the user's 2026-11-04 requests to open the campaign and run the review.
+- Authorized effects: publish the review report and this checkpoint. The delivered package and `main` are unchanged. Review findings alone do not authorize source repair or governing-document amendments.
+- Current stop: verify and publish the U-006 report/checkpoint commit, then return the six findings and proposed queue for a separate revision decision. No campaign merge is authorized by review completion.
 
 ## Git and return
 
 - Campaign: `007_bf115bc-comprehensive-review`.
 - Creation parent and return/integration target: `main` at `bf115bce52adf2487462db33440ce7702120080a`.
 - Working branch: `revision/007_bf115bc-comprehensive-review`; branch-off commit: `bf115bce52adf2487462db33440ce7702120080a`.
-- No parent campaign is suspended. Prior closed campaign records remain frozen.
+- Published review checkpoints U-001–U-005 precede this final report/checkpoint commit. No parent campaign is suspended; prior closed campaign records remain frozen.
 
 ## Next action
 
-Confirm the opening commit and remote branch publication. When review execution is requested, start U-001 at the pinned source, create `REVIEW-REPORT.md`, and preserve unit-by-unit evidence and publication gates. Reconcile any changed `main` baseline explicitly before expanding the review candidate.
+Confirm publication and readback of the U-006 commit. On a later accepted revision request, decide each report finding's disposition and create an ordered `REVISION-PLAN.md` on this branch before permitted source edits. Preserve the pinned review baseline and do not infer target-client behavior from local checks.

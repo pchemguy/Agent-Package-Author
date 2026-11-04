@@ -5,8 +5,8 @@
 - Campaign: `007_bf115bc-comprehensive-review`; starting and reviewed source baseline: `bf115bce52adf2487462db33440ce7702120080a` on `main`.
 - Reviewer/date: Codex, 2026-11-04. The campaign branch begins with the plan-only opening commit `fb5c7986dc694cb6e54fa96b34f1fd232c897394`; report commits do not change the pinned reviewed source.
 - Scope and criteria: [REVIEW-PLAN.md](REVIEW-PLAN.md), U-001–U-006. Closed campaign records are excluded from current-source validity checks.
-- Evidence boundary: source inventory and primary specification comparison in U-001; entry/reference content inspection in U-002; source inspection, 50 automated tests, CLI checks and disposable-package probes in U-003; shipped example and temporary presentation execution in U-004; documentation/link trace in U-005. No target-client activation or Windows CMD trial has been observed.
-- State: U-001–U-005 assessed; U-006 pending. No revision is accepted or implemented.
+- Evidence boundary: source inventory and primary specification comparison in U-001; entry/reference content inspection in U-002; source inspection, 50 automated tests, CLI checks and disposable-package probes in U-003; shipped example and temporary presentation execution in U-004; documentation/link trace in U-005; final coverage and a 16/32-pixel icon rendering in U-006. No target-client activation or Windows CMD trial has been observed.
+- State: U-001–U-006 assessed and consolidated. Six findings remain Open; no revision is accepted or implemented. This is a review-only campaign pending a separate revision decision.
 
 ## Coverage
 
@@ -15,9 +15,9 @@
 | U-001 / C-001 | Satisfied within inspected inventory and standards scope | The baseline has 80 tracked files and no tracked symlinks. The delivered skill contains `SKILL.md`, twelve references, four scripts, four assets and `agents/openai.yaml`; development records, examples and tests are outside that directory. Relative links in delivered/reference and example Markdown resolve within their inspected package roots except the intentionally broken `examples/standalone/sample.md` link used as negative sample data. Source searches found no former-checkout absolute dependency in the delivered skill, examples or tests. Compared format claims in `skill-standard.md`, `plugin-standard.md`, `SPEC.md` and templates with the published Agent Skills and Agent Plugins 1.0.0 specifications. This is source evidence, not an isolated-installation trial. | None |
 | U-002 / C-002–C-003 | Satisfied in source inspection | Read the creator entry and all twelve references, comparing entry-only routing, scope, content boundary and consequential caller/owner handoffs. See the assessed-depth inventory below. No independent consumer-model routing trial was run. | None |
 | U-003 / C-004 | Findings | Read all four Python helpers and seven test files; 50 tests passed. Creator self-validation/inventory and both shipped plugin validators passed; all four CLIs returned zero for `--help`. Disposable probes exposed false success for non-string YAML scalars and links inside references. | R-001, R-002 |
-| U-004 / C-005 | Finding with positive coverage | All three package examples validated; standalone count and both note workflows produced documented outputs. MCP server answered initialize, tools/list, valid heading call and missing-file tool error. Temporary plugin generation produced distinct child presentation and refused replacement. A malformed tool argument produced no response; a non-object request crashed the server. | R-003 |
+| U-004 / C-005 | Findings with positive coverage | All three package examples validated; standalone count and both note workflows produced documented outputs. MCP server answered initialize, tools/list, valid heading call and missing-file tool error. Temporary plugin generation produced distinct child presentation and refused replacement. A malformed tool argument produced no response; a non-object request crashed the server. U-006's supplementary rendering exposed an unreadable small-size text mark. | R-003, R-006 |
 | U-005 / C-006–C-007 | Findings with positive coverage | Traced README's two illustrative authoring paths and review path against all twelve reference owners and U-003/U-004 outputs; read AGENTS, both root policies and current SPEC/PLAN. Active links resolve; two unresolved raw-regex hits are explicitly hypothetical links inside a fenced example. The network claim and test-command cleanliness need qualification. | R-004, R-005 |
-| U-006 / C-008 | Pending | Consolidation follows the preceding units. | — |
+| U-006 / C-008 | Complete | Reconciled assessed paths and six findings by owner, priority, proposed check and dependency. The creator's own presentation pair was inspected; a generated icon was rendered at two small sizes. See queue and limits below. | R-006 (supplementary presentation assessment) |
 
 ## Findings index
 
@@ -28,6 +28,7 @@
 | R-003 | Example MCP runtime defect | P2 | Open | None |
 | R-004 | Documentation precision | P3 | Open | None |
 | R-005 | Reproducibility/housekeeping | P3 | Open | None |
+| R-006 | Presentation legibility | P3 | Open | None |
 
 ### R-001 — Referenced Markdown links can escape validation coverage
 
@@ -73,6 +74,15 @@
 | Observation and consequence | `python -m unittest discover -s tests -q` passed in a temporary copy but created `tests/__pycache__/` and `agent-package-author/scripts/__pycache__/`; the documented `-v` variant has the same import behavior. `.gitignore` does not exclude them. A developer following README's command gets an untracked checkout; the repository's AGENTS.md instead uses `PYTHONDONTWRITEBYTECODE=1`. |
 | Owner and bounded correction | README command or source `.gitignore`, consistent with the developer entry. Prefer one documented practice for a clean checkout without changing the test semantics. |
 | Objective recheck and limit | Run the documented command in a fresh disposable copy, verify all tests pass and no untracked bytecode artifacts appear. This is a source-development convenience issue, not a delivered skill format defect. |
+
+### R-006 — Generated small icon mark is unreadable at 16 pixels
+
+| Field | Evidence |
+| --- | --- |
+| Baseline location and confidence | `agent-package-author/scripts/create_openai_presentation.py`, SVG builder around lines 79–88, and `references/openai-presentation.md` small-size review criterion; medium confidence from source geometry and a local raster render. |
+| Observation and consequence | The generator puts a 1–3-letter label at SVG font size 15 in a 128-unit canvas and points both `icon_small` and `icon_large` to it. A generated `word-count` icon rendered with Inkscape at 32 and 16 pixels; `WC` was indistinct at 16, though the package motif remained visible. A user relying on the label to distinguish two skills cannot read it at that size. The creator's own label-free icon parsed as SVG and retained a recognizable package motif at 16 pixels. |
+| Owner and bounded correction | OpenAI presentation design, generator and visual checks. Prefer a small-size treatment that does not depend on microtext, while retaining distinctive skill identity at larger display sizes. Decide whether one responsive SVG or separate small/large assets best fits the client presentation contract before changing filenames. |
+| Objective recheck and limit | Render representative one-, two- and three-letter generated icons at likely small and large sizes, inspect legibility and motif distinction, verify YAML paths/XML and contextual metadata. Actual OpenAI client icon sizes and rendering remain unverified. |
 
 ## U-001 evidence and limits
 
@@ -125,6 +135,21 @@ The two review modules and validation policy share short handoff reminders but d
 - AGENTS.md orders repository discovery, current handoff and project contract; the attached root policies remain separate from plugin/runtime instructions. `SKILL_DISCOVERY_PROTOCOL.md` is read-only/chat-only and `.agents/` currently has no entries. `WINDOWS_SHELL_POLICY.md` explicitly applies only to Windows execution hosts; its CMD adapter was source-inspected, not executed here. `ROADMAP.md` marks the original tasks complete while `PLAN.md` retains their planning checkboxes; AGENTS distinguishes their purposes.
 - R-004 and R-005 are documentation/development findings. No unshipped attachment, client invocation or Windows behavior was represented as observed.
 
-## Next checkpoint
+## U-006 consolidation and proposed queue
 
-Publish and read back this U-005 report commit before U-006. Then consolidate findings, priorities, dependencies, assessed coverage and unrun client checks; stop before revision.
+The reviewed baseline's delivered entry, all twelve references, four scripts, four assets and creator presentation pair were assessed at the depth shown above. The three example packages, seven test modules and fixture, README, AGENTS, root policies and current SPEC/PLAN were traced to the claims they support. `AI_DISCLOSURE.md` and `ROADMAP.md` were checked for developer navigation context. Closed campaign histories and `EXPLORER_DRIVE.md` were not current-validity targets. There is no separate installed consumer package or target-agent transcript in this campaign.
+
+The creator's `agents/openai.yaml` has a task-specific name, summary, `$agent-package-author` default prompt and two local icon paths; its `assets/icon.svg` parsed as 128×128 SVG with a label-free package motif. The generated `word-count` output was rendered with `inkscape` at 32 and 16 pixels in a temporary directory, producing R-006. Rendered PNGs were temporary review evidence, not committed package files. No actual OpenAI client display was observed.
+
+| Proposed order | Findings | Bounded owner and dependency | Acceptance evidence to seek after authorization |
+| --- | --- | --- | --- |
+| 1 | R-002, R-001 | Shared skill validator and plugin integration; numeric type and nested-link checks can be designed together without treating prose review as a format rule. | New positive/negative fixtures, strict CLI outcomes and existing sibling-warning regression suite. |
+| 2 | R-003 | MCP example server and runtime tests; independent of validator changes. | Invalid then valid requests retain correlated replies and process continuity; normal heading behavior passes. |
+| 3 | R-006 | Presentation module/generator; decide small/large asset treatment before editing the output contract. | Representative raster sizes, XML/YAML path checks and existing context/replacement tests. |
+| 4 | R-004, R-005 | README and development command hygiene; align with actual tool and workflow limits. | Walk both documentation paths; run the documented suite in a clean disposable checkout. |
+
+The queue contains one P1 (R-002), two P2 (R-001, R-003) and three P3 (R-004–R-006). All statuses remain **Open**: review evidence neither accepts a correction nor verifies a proposed result. A later revision should decide acceptance, deferral or rejection per ID and preserve these baseline observations. No source repair, governing-document amendment or integration into `main` follows from this report.
+
+## Verification and stopping boundary
+
+The 50-test suite and shipped structural checks passed at the pinned baseline, with the isolated defects above established by independent probes. No Windows CMD execution, actual target-client discovery/activation, external MCP client handshake, full YAML parser comparison or real attachment-driven agent run was performed. `main` and the delivered package remain unchanged by this campaign. Publish/read back this final report and checkpoint; stop with a proposed revision queue for the user's decision.

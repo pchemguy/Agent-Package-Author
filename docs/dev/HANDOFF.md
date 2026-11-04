@@ -2,22 +2,22 @@
 
 ## Checkpoint
 
-Campaign `007_bf115bc-comprehensive-review` completed its comprehensive assessment and was selected for review-only integration into `main`. Its [review plan](reviews/007_bf115bc-comprehensive-review/REVIEW-PLAN.md) and [review report](reviews/007_bf115bc-comprehensive-review/REVIEW-REPORT.md) retain six deferred findings and the evidence for U-001–U-006. The current project contract is [SPEC.md](SPEC.md), with implementation context in [PLAN.md](PLAN.md).
+Campaign `008_e8d7a79-comprehensive-review` was cancelled before U-001 and returned to the `main` checkpoint. Its [review plan](reviews/008_e8d7a79-comprehensive-review/REVIEW-PLAN.md) records the cancelled U-001–U-006 scope. No review report, findings or source changes exist. The current governing contract is [SPEC.md](SPEC.md), with implementation context in [PLAN.md](PLAN.md).
 
 ## Scope and authority
 
-- Workflow: completed review-only campaign returning to the `main` checkpoint.
-- Decision sources: the user's 2026-11-04 requests to open and run the review, then close it without further work.
-- Authorized effects: integrate the published review records and six deferred finding dispositions. The delivered package is unchanged; no source repair or governing-document amendment is authorized.
-- Current stop: verify this prospective merge, commit its integration summary, publish and read back `main`, then stop.
+- Workflow: completed cancellation and review-only integration into `main`.
+- Decision sources: the user's 2026-11-04 requests to open the campaign and then close it because the review is cancelled.
+- Authorized effects: record the cancellation, publish the final campaign branch, and integrate the records into `main`. No review units or repairs are authorized.
+- Current stop: publish and read back the verified two-parent `main` merge, then stop. No review continuation remains.
 
 ## Git and return
 
-- Campaign: `007_bf115bc-comprehensive-review`.
-- Creation parent and integration target: `main` at `bf115bce52adf2487462db33440ce7702120080a`.
-- Published incoming branch: `revision/007_bf115bc-comprehensive-review` at `9ac3674e99c2878490d8ff499eed9d46bd94b2df`; branch-off commit: `bf115bce52adf2487462db33440ce7702120080a`. Opening commit: `fb5c7986dc694cb6e54fa96b34f1fd232c897394`.
-- No parent campaign is suspended. Prior closed campaign records remain frozen. The merge commit requires remote readback.
+- Campaign and directory: `008_e8d7a79-comprehensive-review`, `docs/dev/reviews/008_e8d7a79-comprehensive-review/`.
+- Creation parent and eventual return target: `main` at `e8d7a7941cbd3f16a411928ad236253a7e0665ce`.
+- Published incoming branch: `revision/008_e8d7a79-comprehensive-review` at `38323167a7d36f6a1ecb3a86e58ce7cddcc23c31`; branch-off commit and exact source baseline: `e8d7a7941cbd3f16a411928ad236253a7e0665ce`; published opening commit: `051fd285d5dc8b9d5275197dfa2cced7b63e5c8d`.
+- No parent campaign is suspended. Closed campaign packages `001`–`007` remain frozen. The `main` merge requires remote readback.
 
 ## Next action
 
-Verify the two-parent merge, exact incoming-tip containment and unchanged delivered source. If publication is pending, finish it before new work. Once published, the campaign is closed; a later correction needs a new eligible campaign, leaving this report frozen.
+Confirm the merged `main` commit is published and contains the exact incoming branch tip. At that point campaign 008 is closed. A later review requires a new selected scope; the cancelled plan is historical.

@@ -6,18 +6,18 @@ Campaign `009_e591021-critical-review` completed U-001–U-005 against the pinne
 
 ## Scope and authority
 
-- Workflow: critical review only, now at the report checkpoint.
-- Decision source: the user's 2026-11-05 request to open and run the review.
-- Authorized effects: publish and read back the finalized report and handoff on the campaign branch. The request does not authorize a revision plan, source fixes or integration into `main`.
-- Current stop: return the report and prioritized findings; await a separate revision or closure decision.
+- Workflow: accepted critical-review revision, at its plan checkpoint.
+- Decision sources: the user's 2026-11-05 review request and subsequent instruction to plan, execute and close the campaign.
+- Authorized effects: execute A-001–A-006 on the campaign branch, publish/read back each action, then explicitly integrate the verified result into `main`.
+- Current stop: complete A-001–A-006, publish the branch, merge/verify/publish `main`, then return.
 
 ## Git and return
 
 - Campaign: `009_e591021-critical-review`; directory `docs/dev/reviews/009_e591021-critical-review/`.
 - Creation parent and potential return target: `main` at `e591021a4ca3ed4dc48b40fc984604bde3f7227d`.
 - Working branch: `revision/009_e591021-critical-review`; branch-off and pinned reviewed source: `e591021a4ca3ed4dc48b40fc984604bde3f7227d`; published opening: `57abe148f3429829de3e8fd5f04588f6aeda623b`.
-- U-001–U-004 report commits were published and read back before subsequent units. Final U-005 publication/readback remains to be confirmed. Closed packages `001`–`008` are frozen.
+- U-001–U-004 report commits were published and read back before subsequent units. Final U-005 review commit was published and read back at `532f2034e604b339f4e6e6b08b45dabb0003bf03`. Closed packages `001`–`008` are frozen.
 
 ## Next action
 
-Confirm final report publication, return its findings and stop. If the user later accepts specific fixes, plan them within this active campaign; if the user elects review-only closure, verify and explicitly integrate the report into its recorded parent. Do not treat the proposed revision order as authorization.
+Publish/read back the revision plan, then begin A-001. Keep actions and evidence together; close only after the verified `main` merge.

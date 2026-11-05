@@ -9,3 +9,7 @@ Changed `agent-package-author/scripts/validate_skill.py` and `tests/test_skill_v
 ## A-002 — Reachable resources and examples (R-003, R-004)
 
 Changed `validate_skill.py`, `tests/test_skill_validation.py` and `tests/test_plugin_validation.py`. The scanner follows reachable Markdown links relative to each containing file, visits cycles once, enforces the skill or plugin boundary on each target, and reports the containing path. Fenced and inline-code Markdown examples are excluded; explicit resource-path literals in the entry remain checked. Nested references may use inline paths as examples of generated output, so only linked paths in nested files are dependencies. `PYTHONDONTWRITEBYTECODE=1 python -m unittest tests.test_skill_validation tests.test_plugin_validation -q`: 25 tests passed. The creator's own `validate_skill.py agent-package-author` succeeds with no findings. This is a bounded Markdown link scanner, not a full CommonMark parser.
+
+## A-003 — MCP request recovery (R-005)
+
+Changed `examples/with-mcp/notes-tools/bin/notes_server.py` and `tests/test_authoring.py`. The line server now answers non-object and unparsable requests with JSON-RPC errors, validates identified calls and tool arguments, and continues serving after malformed input. For a valid path, the tool still returns headings; a missing file remains a tool-level error. `PYTHONDONTWRITEBYTECODE=1 python -m unittest tests.test_authoring -q` passes, including a five-request malformed/valid sequence with correlated IDs.

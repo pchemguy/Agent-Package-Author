@@ -2,14 +2,14 @@
 
 ## Checkpoint
 
-Campaign `012_0f43537-package-review` is open with a focused accepted revision to the skill-reference review criteria and placement of non-operative examples. Its [revision plan](reviews/012_0f43537-package-review/REVISION-PLAN.md) and [revision report](reviews/012_0f43537-package-review/REVISION-REPORT.md) record the actions and checks. Campaign 011 was closed on `main`; the governing contract remains [SPEC.md](SPEC.md), with context in [PLAN.md](PLAN.md).
+Campaign `012_0f43537-package-review` has completed its planned revisions and has an explicit user closure request. Its [revision plan](reviews/012_0f43537-package-review/REVISION-PLAN.md) and [revision report](reviews/012_0f43537-package-review/REVISION-REPORT.md) record the actions and checks. Campaign 011 was closed on `main`; the governing contract remains [SPEC.md](SPEC.md), with context in [PLAN.md](PLAN.md).
 
 ## Scope and authority
 
 - Workflow: focused review-criteria revision on the open package-review campaign branch.
 - Decision sources: the user's 2026-11-05 campaign opening, per-reference workflow-component review requirement and follow-up placement rule.
 - Completed effects: opening, plan and A-001–A-004 implemented and verified; their checkpoints are published/read back after this record's publication.
-- Current stop: all planned actions complete; await further scope or explicit closure on this branch.
+- Current stop: publish/read back the closure gate, then merge the verified tip into `main`.
 
 ## Git and return
 
@@ -21,7 +21,8 @@ Campaign `012_0f43537-package-review` is open with a focused accepted revision t
 - Published A-001 action tip: `5190d83339db7957f9e91de138716562d4de8832`.
 - Published A-002 verification tip: `3c5151437001c8dda644030b5db0f67505367894`.
 - Published A-003 relocation tip: `d6f151237dc45f43d9f14d9991e1e7a18e189bcb`.
+- Published A-004 verification tip: `5849b1c3c14286f870e6b36b66f904ebfe077399`.
 
 ## Next action
 
-No planned action remains after this checkpoint's publication/readback. Keep campaign 012 open on its branch for further scope or explicit closure.
+Publish/read back the closure gate. Integrate the campaign into `main` with a two-parent merge that records the closed state.

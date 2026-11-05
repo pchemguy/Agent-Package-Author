@@ -32,6 +32,10 @@ When `references/*.md` exists, APA's **authoring policy** calls for an identifie
 
 Compare the actual reference inventory with the entry. Check both coverage and whether the entry supplies enough information to select each reference without opening it first. A bare filename list, vague topic labels or “inspect references to find out” instructions do not supply that decision. For a consumer routing trial, expose only `SKILL.md` and ordinary request facts before observing selection; do not leak the reviewer's expected answer or reference contents. Link validity, entry-only routing and successful execution are separate properties.
 
+### Optional composite workflows
+
+Apply this check when a skill claims a path combining multiple references, whether or not it has a **Composite workflows** section. From `SKILL.md` alone, can the agent identify the trigger, relevant reference owners, consequential order or handoffs, expected output and stop? If the optional section is present, does it clarify that path with direct links while leaving detailed procedures with their owners and ordinary per-reference routing intact? Do not require a section because a skill has several references, or report its absence when the entry already makes the composite clear. This is a content assessment, not structural conformance.
+
 ## Reference modules
 
 Assess each selected reference according to its role. A procedural reference needs operational boundaries and a return path; a terminology guide needs clear definitions, and an example needs its illustrative status and intended use. Do not impose a procedure or skill-wide activation duties on every reference.

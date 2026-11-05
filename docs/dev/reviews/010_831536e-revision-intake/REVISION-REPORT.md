@@ -33,3 +33,9 @@ Removed the blank line before the three indented stages of step 6 in `references
 ## A-004 — URI terminology
 
 Formatted `userinfo` as an inline technical token in `references/mcp-packaging.md`, preserving the URL requirement and the rest of the paragraph. A direct text assertion confirmed the term, the scoped diff showed only its formatting, `validate_skill.py agent-package-author` exited 0, `PYTHONDONTWRITEBYTECODE=1 python -m unittest discover -s tests -q` passed 55 tests, and `git diff --check` passed. Its commit and remote readback establish publication.
+
+## Amended closure gate
+
+A-003 and A-004 were individually published/read back, ending at action tip `962f8c13136c6795d1bf1049b4ed0085dda27d2e`. The complete amended diff from refreshed `main` changes only the two requested reference files plus current campaign plan/report and HANDOFF; no other closed package changed. `PYTHONDONTWRITEBYTECODE=1 python -m unittest discover -s tests -q` passed 55 tests, `validate_skill.py agent-package-author` exited 0, the inspector reported twelve references, four scripts, four assets and zero errors/warnings, and `git diff --check main...HEAD` passed. These are source and local structural checks, not client behavior trials.
+
+The verified amended tip is ready for a second explicit two-parent merge into return target `main` at `f9af864bfc2287b0ed4624e584d5640d45a790e3`. Verify the prospective merged tree, reconcile HANDOFF to closed state in the merge, publish/read back `main`, and return on the target branch. The first closure and its evidence remain intact above.

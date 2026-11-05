@@ -4,7 +4,7 @@
 
 - Campaign: `009_e591021-critical-review`; [plan](REVIEW-PLAN.md). Pinned reviewed source: `e591021a4ca3ed4dc48b40fc984604bde3f7227d` on `main`. Review branch commits change only this report and active navigation, not the pinned source.
 - Reviewer: Codex, 2026-11-05. This report records source inspection, structural checks and local execution separately. No target-client activation or Windows CMD execution is claimed.
-- State: U-001–U-003 assessed; U-004–U-005 pending. Four findings allocated. A prior campaign's observations are not treated as evidence for this baseline.
+- State: U-001–U-004 assessed; U-005 pending. Eight findings allocated. A prior campaign's observations are not treated as evidence for this baseline.
 
 ## U-001 — Inventory and format baseline
 
@@ -56,3 +56,39 @@ Disposable skill probes showed: a valid linked reference passed; plain `descript
 - **Bounded correction and recheck:** Parse operative links outside code spans/fences and distinguish actual resource literals from examples. Test fenced and inline-code examples against a real broken link in prose; keep the latter as an error.
 
 The helper source read found no claim of executing included code during inspection, and the tested inspector remained read-only. Generated presentation and example MCP behavior are assessed in U-004. Target-native Windows and client execution remain untested.
+
+## U-004 — Examples, presentation and reader path
+
+Local execution of the shipped examples produced `3` for the standalone word count, `- First` for note outlining, and `missing: absent.md` for link checking. Both plugin variants passed strict structural validation in U-003. The MCP server returned a heading result and a correlated `isError` result for a missing note, but failed the malformed request sequence described below. A disposable plugin copy generated distinct YAML/SVG files for both children, with each `$name` prompt and parseable 128×128 SVG; a second run refused replacement and `--force` regenerated them. No presentation was written at plugin root. A 16-pixel raster render was attempted but the host's ImageMagick SVG delegate (`rsvg-convert`) was unavailable, so icon legibility is a geometry-based concern, not an observed visual pass or failure.
+
+Read the README walkthrough and command/boundary sections, `AGENTS.md`, both root policies, current SPEC/PLAN and the shipped example entries against the assessed paths. The walkthrough clearly marks its attached seed/draft prompts as illustrative rather than executed; its per-reference map identifies all twelve modules. A fenced-code-aware scan of these active Markdown surfaces found 66 operative local links and no missing target. On this Linux host, the Windows CMD policy was inspected but not executed. The current development documents and delivered skill contain no dependency on a former checkout. The following concerns affect the user path.
+
+### R-005 — Example MCP server drops malformed calls and can terminate
+
+- **Priority/type/confidence:** P2, runtime recovery defect in a shipped example; high, observed in subprocess trials.
+- **Located evidence:** `examples/with-mcp/notes-tools/bin/notes_server.py` `handle()` passes `arguments.path` to `Path` and catches `TypeError` only in `main()`. A `tools/call` with `path: 42` yielded no response for ID 7 and only stderr, while the following valid ID 8 succeeded. A separate sequence containing JSON `[]` raised an uncaught `AttributeError` at `request.get`, exited 1 and prevented the following valid request from being served. The tests cover initialize and tool listing but not these shapes.
+- **Consequence:** A client can wait indefinitely for a call result or lose the server on malformed input, undermining the example's demonstration of an MCP tool boundary.
+- **Bounded correction and recheck:** Validate request/params/argument shapes and return correlated JSON-RPC errors or tool `isError` responses for recoverable requests. Send each malformed input followed by a valid request; require an ID-correlated response and continued service while preserving the positive heading and missing-file behavior.
+
+### R-006 — README's offline statement extends beyond the helpers
+
+- **Priority/type/confidence:** P3, documentation precision; high from the wording and described workflow.
+- **Located evidence:** `README.md` “Boundaries” says “The creator's runtime uses only Python's standard library and no network.” Its authoring walkthrough directs the agent to consult published external format specifications. The bundled Python helpers themselves are offline.
+- **Consequence:** A reader may infer that the complete agent-led authoring workflow needs no network, which the walkthrough does not guarantee.
+- **Bounded correction and recheck:** Scope the offline/standard-library promise to the bundled helpers, and state that external source consultation and generated package facilities depend on the task and host. Read both walkthrough branches against the revised statement.
+
+### R-007 — The documented test command dirties a fresh checkout
+
+- **Priority/type/confidence:** P3, developer reproducibility; high, from a disposable copy.
+- **Located evidence:** `README.md` “Use” shows `python -m unittest discover -s tests -v`, while `AGENTS.md` uses `PYTHONDONTWRITEBYTECODE=1`. In a disposable copy, the README form passed but created `tests/__pycache__/` and `agent-package-author/scripts/__pycache__/`; root `.gitignore` does not exclude them.
+- **Consequence:** A developer following the README gets untracked bytecode artifacts and an unexpectedly dirty checkout.
+- **Bounded correction and recheck:** Align the README invocation with the clean developer command or ignore generated caches; rerun it in a fresh disposable copy and check for no untracked bytecode.
+
+### R-008 — Generated icon text is too small for the stated small-size review
+
+- **Priority/type/confidence:** P3, presentation legibility concern; medium, inferred from source geometry; visual rendering unverified on this host.
+- **Located evidence:** `scripts/create_openai_presentation.py` lines 79–87 draws a 1–3-letter label at `font-size="15"` in a 128-unit viewBox. At 16×16 display, that is roughly 1.9 pixels of nominal font size. `references/openai-presentation.md` asks for recognizability at small sizes, and tests assert only label presence/XML validity. The creator's own `assets/icon.svg` uses a label-free package motif.
+- **Consequence:** The text mark cannot function as a legible identifier at typical small-icon scale; it consumes visual space without reliable information. This is not a claim of observed client rendering.
+- **Bounded correction and recheck:** Redesign the generated motif/mark for small displays and inspect actual 16/32-pixel renders, including 1- and 3-letter contexts. Keep XML and prompt/context tests, but do not treat them as a legibility test.
+
+No source modification or target-client installation was performed. The examples' successful local scripts and structural validation do not prove their use by a particular agent or MCP client.

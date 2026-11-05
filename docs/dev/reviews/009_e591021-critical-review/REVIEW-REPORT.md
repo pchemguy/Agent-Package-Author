@@ -4,7 +4,7 @@
 
 - Campaign: `009_e591021-critical-review`; [plan](REVIEW-PLAN.md). Pinned reviewed source: `e591021a4ca3ed4dc48b40fc984604bde3f7227d` on `main`. Review branch commits change only this report and active navigation, not the pinned source.
 - Reviewer: Codex, 2026-11-05. This report records source inspection, structural checks and local execution separately. No target-client activation or Windows CMD execution is claimed.
-- State: U-001–U-002 assessed; U-003–U-005 pending. One finding allocated. A prior campaign's observations are not treated as evidence for this baseline.
+- State: U-001–U-003 assessed; U-004–U-005 pending. Four findings allocated. A prior campaign's observations are not treated as evidence for this baseline.
 
 ## U-001 — Inventory and format baseline
 
@@ -27,3 +27,32 @@ The entry directly names and links all twelve files and gives a load condition a
 - **Bounded correction and recheck:** `authoring-workflow.md` should make source-role/authority and conflict resolution part of intake before accepting the package contract; link to a substantive owner only if that responsibility grows. Recheck with a conflicting seed, reference and draft, observing whether the agent identifies the difference before writing, while preserving a simple brief-only path.
 
 Other U-002 routes were coherent on source inspection. Consumer selection of references, handoff activation, and whether a less capable model applies the distinctions remain untested.
+
+## U-003 — Helpers, fixtures and failure behavior
+
+Read all four Python helpers (609 lines), all seven test modules (620 lines), three templates and `tests/fixtures/format-cases.json`. The 50-test `unittest` suite passed; all four helpers' `--help` commands returned 0. Both shipped plugins passed `validate_plugin.py`, and the MCP plugin inspector reported two skills, one stdio server and zero structural errors. The creator self-check passed in U-001. These checks establish only the exercised paths.
+
+Disposable skill probes showed: a valid linked reference passed; plain `description: 42` and an indented `metadata` value `version: 1.0` also passed; a reference containing a broken local link passed; and a fenced Markdown example containing `[missing](absent.md)` failed with `resource-missing`. The last three outcomes disagree with the helper's claimed string and operative-resource checks. All probes ran outside the repository and left no source changes. Source inspection confirms the corresponding `_scalar()` and entry-only regex logic. The test suite lacks these negative cases. Existing manifest/MCP tests do challenge type, namespace, transport, containment and partial component failure, but their pass does not cover every variant or client behavior.
+
+### R-002 — Plain numeric YAML scalars receive false string validation
+
+- **Priority/type/confidence:** P1, structural false success; high, from source and disposable CLI execution.
+- **Located evidence:** `scripts/validate_skill.py` `_scalar()` returns a plain value as text after only a small reserved-word check (lines 28–50). A skill with `description: 42` exited 0; an indented `metadata` value `version: 1.0` also exited 0. YAML interprets these unquoted forms as numbers, whereas Agent Skills requires `description` and metadata values to be strings.
+- **Consequence:** Invalid frontmatter can be certified by `validate_skill`, then by plugin validation/inspection using it. Quoted numeric strings should remain valid.
+- **Bounded correction and recheck:** Frontmatter parser and tests should reject or explicitly mark implicitly typed YAML scalars unverified, including `name`, `description` and metadata. Test unquoted numeric, quoted numeric, and a valid ordinary skill; retain the documented bounded-parser behavior.
+
+### R-003 — Links inside loaded references are not checked
+
+- **Priority/type/confidence:** P2, resource-validation coverage; high, from source and disposable CLI execution.
+- **Located evidence:** `scripts/validate_skill.py` extracts links and resource literals only from the `SKILL.md` `content` string (lines 133–151). A valid entry linking `references/guide.md` passed with exit 0 even when that reference linked nonexistent `absent.md`. The plugin validator and inspector call the same skill validator.
+- **Consequence:** Strict success can hide an unavailable or escaping resource needed by a selected workflow. A manual inventory scan is not a replacement for the advertised helper result.
+- **Bounded correction and recheck:** Traverse operative links in reachable local Markdown references with cycle handling and per-file resolution, while preserving the skill/plugin containment boundary and warning-only valid sibling links. A nested missing or escaping link must fail; a contained link and fenced illustrative text must pass.
+
+### R-004 — Fenced example links are treated as operative resources
+
+- **Priority/type/confidence:** P2, structural false failure; high, from source and disposable CLI execution.
+- **Located evidence:** The same regex in `validate_skill.py` scans the whole entry without excluding fenced code. A skill whose body only showed a fenced `markdown` example containing `[missing](absent.md)` exited 1 with `resource-missing`, though the example does not instruct the agent to load that path.
+- **Consequence:** A valid instructional skill can fail strict creator validation merely for teaching a negative path example. This also affects plugin child validation.
+- **Bounded correction and recheck:** Parse operative links outside code spans/fences and distinguish actual resource literals from examples. Test fenced and inline-code examples against a real broken link in prose; keep the latter as an error.
+
+The helper source read found no claim of executing included code during inspection, and the tested inspector remained read-only. Generated presentation and example MCP behavior are assessed in U-004. Target-native Windows and client execution remain untested.

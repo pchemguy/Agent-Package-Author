@@ -17,3 +17,7 @@ Changed `examples/with-mcp/notes-tools/bin/notes_server.py` and `tests/test_auth
 ## A-004 — Intake authority and documentation (R-001, R-006, R-007)
 
 Changed `agent-package-author/references/authoring-workflow.md`, `README.md` and `.gitignore`. The operative intake now records seed, reference and draft roles, provenance, conflicts, authority and observable acceptance decisions, including the brief-only path. The README's offline statement is scoped to bundled Python helpers, while authoring can consult external references. Python bytecode caches are ignored so the documented cross-platform test command leaves a fresh Git checkout clean. Rechecked the instruction paths and disposable test run in the final regression section.
+
+## A-005 — Small-size icon (R-008)
+
+Changed `create_openai_presentation.py`, `openai-presentation.md` and presentation tests. Generated SVGs enlarge the chosen motif and omit the tiny pill and visible text. The accepted `icon_label` remains useful as an accessible abbreviation in the SVG's `aria-label`; it is not a visual mark. `PYTHONDONTWRITEBYTECODE=1 python -m unittest tests.test_openai_presentation -q`: 7 tests passed, including XML and context checks. Inkscape rendered all four motifs at 16 pixels and the default package motif at 32 pixels; visual inspection found recognizable silhouettes without lettering. This checks local rendering, not client display.

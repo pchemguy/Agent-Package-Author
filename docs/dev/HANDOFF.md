@@ -2,14 +2,14 @@
 
 ## Checkpoint
 
-Campaign `011_0adf8c0-shared-entries-composite-workflows` remains open with all planned revisions completed. Its [revision plan](reviews/011_0adf8c0-shared-entries-composite-workflows/REVISION-PLAN.md) and [revision report](reviews/011_0adf8c0-shared-entries-composite-workflows/REVISION-REPORT.md) retain the accepted changes and checks. Campaign 010 is closed; the governing contract remains [SPEC.md](SPEC.md), with context in [PLAN.md](PLAN.md).
+Campaign `011_0adf8c0-shared-entries-composite-workflows` has all planned revisions completed and an explicit user closure request. Its [revision plan](reviews/011_0adf8c0-shared-entries-composite-workflows/REVISION-PLAN.md) and [revision report](reviews/011_0adf8c0-shared-entries-composite-workflows/REVISION-REPORT.md) retain the accepted changes and checks. Campaign 010 is closed; the governing contract remains [SPEC.md](SPEC.md), with context in [PLAN.md](PLAN.md).
 
 ## Scope and authority
 
 - Workflow: focused skill and plugin design revisions completed on the open campaign branch.
 - Decision sources: the user's 2026-11-05 campaign opening, optional skill-level composite section request and correction to the design/review boundary in plugin guidance.
 - Completed effects: A-001–A-006 implemented, verified, published and read back. No planned revision action remains.
-- Current stop: retain the open campaign branch pending further scope or explicit closure.
+- Current stop: publish/read back the closure gate, then merge the verified campaign tip into `main` and publish/read back the merge.
 
 ## Git and return
 
@@ -21,7 +21,8 @@ Campaign `011_0adf8c0-shared-entries-composite-workflows` remains open with all 
 - Published A-005/A-006 plan tip: `2a193cb9941c87194edfa380b14bf5f534dcd6a4`.
 - Published A-005 action tip: `d5f577d4698052f02e29a9c24ebdbcdc0124dd9e`.
 - Published A-006 verification tip: `ca6e87c2ccf11e2bd8cb835523bc5870c9520173`.
+- Published campaign completion tip: `60ddf5cdf9c27696c0e406f09342252564889552`.
 
 ## Next action
 
-Wait for further revision scope or an explicit closure request. Keep campaign 011 open; no default-branch merge has been requested.
+Publish/read back the closure gate. Integrate the campaign into `main` with a two-parent merge and record the closed state in that merge commit.

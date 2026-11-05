@@ -17,3 +17,11 @@ The bounded frontmatter parser returned the expected four string values, and JSO
 The user subsequently requested campaign closure. Both accepted actions are published and read back on `revision/010_831536e-revision-intake`; the final action tip before this record is `a70e366766fa7211da05c0241f101aab9f222a64`. A fresh combined recheck matched the exact description and four string-valued metadata fields, decoded the alias pair in order, passed 55 tests, validated and inspected the skill with zero errors/warnings, and passed `git diff --check`. The complete branch diff changes only the skill frontmatter and active campaign/HANDOFF records; no closed campaign package changed. No client alias activation or skill installation was tested.
 
 This verified branch is ready for an explicit two-parent merge into creation parent `main` at `831536ef6f0e93b733db6a686ffcf011bdef8577`. Verify the prospective merged tree, reconcile HANDOFF to closed state in the merge commit, publish/read back `main`, and retain the campaign records without further edits.
+
+## Integration and closure
+
+The published campaign tip `df0cccefc3433599ce9a360d35e8b420baae0e2e` was explicitly merged into its creation parent `main` at `831536ef6f0e93b733db6a686ffcf011bdef8577` with `git merge --no-ff --no-commit`; there were no conflicts. The prospective merged tree passed 55 tests, skill validation and staged whitespace checks. This closure record and the updated HANDOFF are included in the two-parent merge commit. Its remote publication/readback completes the campaign; the branch and historical records are retained.
+
+## Reopening checkpoint
+
+The user requested two additional reference edits and closure again. The prior closure remains established by published merge `f9af864bfc2287b0ed4624e584d5640d45a790e3`. The campaign branch has been brought forward to that checkpoint by an incoming two-parent merge, retaining the original opening `809c7d43bc9bc7d8e89adb5874431964adf2d343` and baseline `831536ef6f0e93b733db6a686ffcf011bdef8577`. A-003 and A-004 are accepted amendment actions; their checks and new closure are recorded below as they occur. This does not revise the earlier A-001/A-002 evidence.

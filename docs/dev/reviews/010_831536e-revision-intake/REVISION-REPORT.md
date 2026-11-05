@@ -25,3 +25,7 @@ The published campaign tip `df0cccefc3433599ce9a360d35e8b420baae0e2e` was explic
 ## Reopening checkpoint
 
 The user requested two additional reference edits and closure again. The prior closure remains established by published merge `f9af864bfc2287b0ed4624e584d5640d45a790e3`. The campaign branch has been brought forward to that checkpoint by an incoming two-parent merge, retaining the original opening `809c7d43bc9bc7d8e89adb5874431964adf2d343` and baseline `831536ef6f0e93b733db6a686ffcf011bdef8577`. A-003 and A-004 are accepted amendment actions; their checks and new closure are recorded below as they occur. This does not revise the earlier A-001/A-002 evidence.
+
+## A-003 — Authoring workflow list spacing
+
+Removed the blank line before the three indented stages of step 6 in `references/authoring-workflow.md`. The blank line following its heading remains, and the nested list is still part of step 6. A direct text assertion confirmed that structure and the scoped diff contains just the requested line deletion. `validate_skill.py agent-package-author` exited 0; `PYTHONDONTWRITEBYTECODE=1 python -m unittest discover -s tests -q` passed 55 tests; `git diff --check` passed. Its commit and remote readback establish publication.

@@ -2,14 +2,14 @@
 
 ## Checkpoint
 
-Campaign `010_831536e-revision-intake` is open at its [intake record](reviews/010_831536e-revision-intake/REVISION-PLAN.md). The user requested a new revision campaign without naming an objective. The preceding campaign `009_e591021-critical-review` is closed and remains frozen. The governing project contract is [SPEC.md](SPEC.md), with implementation context in [PLAN.md](PLAN.md).
+Campaign `010_831536e-revision-intake` is open with an accepted focused [revision plan](reviews/010_831536e-revision-intake/REVISION-PLAN.md). Its first action changes the delivered skill's frontmatter description to the user's exact wording. The preceding campaign `009_e591021-critical-review` is closed and remains frozen. The governing project contract is [SPEC.md](SPEC.md), with implementation context in [PLAN.md](PLAN.md).
 
 ## Scope and authority
 
-- Workflow: new revision campaign opened; objective and action scope pending.
-- Decision source: the user's 2026-11-05 instruction to open a new revision campaign.
-- Authorized effects so far: branch and intake record only. No review, source changes, repair or integration is implied.
-- Current stop: await the revision objective before selecting actions.
+- Workflow: direct focused revision in the open campaign.
+- Decision sources: the user's 2026-11-05 campaign opening and exact replacement description.
+- Authorized effect: A-001 changes the `SKILL.md` description only, with scoped validation and evidence.
+- Current stop: publish the plan, execute/publish A-001, and await further numbered scope or closure instruction.
 
 ## Git and return
 
@@ -19,4 +19,4 @@ Campaign `010_831536e-revision-intake` is open at its [intake record](reviews/01
 
 ## Next action
 
-Obtain the revision objective; establish its scope and accepted sources before planning or modifying the product. Retain and publish the campaign branch at each owned checkpoint.
+Publish the accepted plan. Then replace and validate the description, record A-001 in the active revision report, and publish/read back that commit. Keep the campaign open for further scope.

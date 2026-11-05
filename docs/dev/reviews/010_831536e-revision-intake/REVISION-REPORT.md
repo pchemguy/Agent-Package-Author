@@ -29,3 +29,7 @@ The user requested two additional reference edits and closure again. The prior c
 ## A-003 — Authoring workflow list spacing
 
 Removed the blank line before the three indented stages of step 6 in `references/authoring-workflow.md`. The blank line following its heading remains, and the nested list is still part of step 6. A direct text assertion confirmed that structure and the scoped diff contains just the requested line deletion. `validate_skill.py agent-package-author` exited 0; `PYTHONDONTWRITEBYTECODE=1 python -m unittest discover -s tests -q` passed 55 tests; `git diff --check` passed. Its commit and remote readback establish publication.
+
+## A-004 — URI terminology
+
+Formatted `userinfo` as an inline technical token in `references/mcp-packaging.md`, preserving the URL requirement and the rest of the paragraph. A direct text assertion confirmed the term, the scoped diff showed only its formatting, `validate_skill.py agent-package-author` exited 0, `PYTHONDONTWRITEBYTECODE=1 python -m unittest discover -s tests -q` passed 55 tests, and `git diff --check` passed. Its commit and remote readback establish publication.

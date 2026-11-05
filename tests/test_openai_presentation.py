@@ -42,7 +42,9 @@ class PresentationTests(unittest.TestCase):
         self.assertTrue(25 <= len(json.loads(next(line.split(': ', 1)[1] for line in metadata.splitlines() if 'short_description:' in line))) <= 64)
         root = ElementTree.parse(skill / 'assets/icon.svg').getroot()
         self.assertEqual(root.attrib['viewBox'], '0 0 128 128')
-        self.assertIn('WC', (skill / 'assets/icon.svg').read_text())
+        self.assertIn('WC', root.attrib['aria-label'])
+        self.assertNotIn('<text', (skill / 'assets/icon.svg').read_text())
+        self.assertIn('scale(1.25)', (skill / 'assets/icon.svg').read_text())
 
     def test_plugin_generates_distinct_contextual_files_per_child(self):
         plugin = self.path / 'notes-tools'
@@ -59,8 +61,9 @@ class PresentationTests(unittest.TestCase):
         for name, label in [('outline-notes', 'NO'), ('check-note-links', 'LC')]:
             child = plugin / 'skills' / name
             self.assertIn(f'${name}', (child / 'agents/openai.yaml').read_text())
-            self.assertIn(label, (child / 'assets/icon.svg').read_text())
-            ElementTree.parse(child / 'assets/icon.svg')
+            icon = ElementTree.parse(child / 'assets/icon.svg').getroot()
+            self.assertIn(label, icon.attrib['aria-label'])
+            self.assertNotIn('<text', (child / 'assets/icon.svg').read_text())
         self.assertFalse((plugin / 'agents/openai.yaml').exists())
 
     def test_existing_output_refused_without_force_then_stable_on_regeneration(self):

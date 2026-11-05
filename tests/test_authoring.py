@@ -4,6 +4,7 @@ from pathlib import Path
 import re
 import subprocess
 import sys
+import tempfile
 import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -115,6 +116,28 @@ class AuthoringTests(unittest.TestCase):
         responses=[json.loads(line) for line in result.stdout.splitlines()]
         self.assertEqual(responses[0]['result']['serverInfo']['name'],'note-heading-index')
         self.assertEqual(responses[1]['result']['tools'][0]['name'],'headings')
+
+    def test_example_mcp_server_recovers_after_malformed_calls(self):
+        import json
+        server = ROOT/'examples/with-mcp/notes-tools/bin/notes_server.py'
+        with tempfile.TemporaryDirectory() as temp:
+            note = Path(temp)/'note.md'
+            note.write_text('# First\nContent\n## Second\n')
+            requests = ['[]', '{broken', json.dumps({'jsonrpc':'2.0','id':1,'method':'tools/call',
+                'params':{'name':'headings','arguments':{'path':42}}}),
+                json.dumps({'jsonrpc':'2.0','id':2,'method':'tools/call',
+                'params':{'name':'headings','arguments':{'path':str(note)}}}),
+                json.dumps({'jsonrpc':'2.0','id':3,'method':'tools/call',
+                'params':{'name':'headings','arguments':{'path':str(note)+'-missing'}}})]
+            result = subprocess.run([sys.executable,str(server)],input='\n'.join(requests)+'\n',
+                                    capture_output=True,text=True)
+        self.assertEqual(result.returncode,0,result.stderr)
+        replies = [json.loads(line) for line in result.stdout.splitlines()]
+        self.assertEqual(len(replies),5)
+        self.assertEqual([r['id'] for r in replies], [None,None,1,2,3])
+        self.assertEqual([r['error']['code'] for r in replies[:3]],[-32600,-32700,-32602])
+        self.assertEqual(replies[3]['result']['content'][0]['text'],'First\nSecond')
+        self.assertTrue(replies[4]['result']['isError'])
 
 
 if __name__ == '__main__':

@@ -1,3 +1,5 @@
 .obsidian
 .trash
 *.tkn
+__pycache__/
+*.py[cod]

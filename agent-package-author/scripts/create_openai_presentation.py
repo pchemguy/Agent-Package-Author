@@ -76,14 +76,13 @@ def render(skill, context, plugin_root=None):
         'check': '<circle cx="64" cy="53" r="29"/><path d="m49 53 10 10 21-23"/>',
         'spark': '<path d="m64 20 8 25 25 8-25 8-8 25-8-25-25-8 25-8Z"/>',
     }
+    accessible_name = f'{display} ({label}) icon'
     svg = ('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" '
-           f'aria-label="{html.escape(display, quote=True)} icon">\n'
+           f'aria-label="{html.escape(accessible_name, quote=True)}">\n'
            f'  <rect x="4" y="4" width="120" height="120" rx="28" fill="{color.upper()}"/>\n'
-           '  <g fill="none" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" '
+           '  <g transform="translate(-16 -4) scale(1.25)" fill="none" stroke="#FFFFFF" '
+           'stroke-width="5" stroke-linecap="round" '
            f'stroke-linejoin="round">{glyphs[motif]}</g>\n'
-           '  <rect x="31" y="87" width="66" height="26" rx="13" fill="#FFFFFF" opacity="0.95"/>\n'
-           f'  <text x="64" y="105" text-anchor="middle" font-family="sans-serif" font-size="15" '
-           f'font-weight="700" fill="{color.upper()}">{label}</text>\n'
            '</svg>\n')
     return metadata, svg
 

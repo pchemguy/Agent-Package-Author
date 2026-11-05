@@ -74,6 +74,45 @@ class SkillValidationTests(unittest.TestCase):
         self.write('name: example-skill\ndescription: "Valid: quoted" # comment')
         self.assertEqual(load().validate_skill(self.root), [])
 
+    def test_implicit_nonstring_scalars_are_not_passed_as_strings(self):
+        for value in ('42', '+42', '0x2a', '0o52', '3.14', '1e3', '.inf',
+                      '.NaN', 'TRUE', 'False', 'Null', '~'):
+            with self.subTest(value=value):
+                for field in ('name', 'description', 'metadata'):
+                    prefix = 'name: example-skill\ndescription: Valid'
+                    if field == 'name':
+                        source = f'name: {value}\ndescription: Valid'
+                    elif field == 'description':
+                        source = f'name: example-skill\ndescription: {value}'
+                    else:
+                        source = prefix + f'\nmetadata:\n  sample: {value}'
+                    self.write(source)
+                    self.assertTrue(any(i.rule == 'frontmatter-unverified'
+                                        for i in load().validate_skill(self.root)), (field, value))
+        self.write('name: example-skill\ndescription: "42"\nmetadata:\n  sample: "TRUE"')
+        self.assertEqual(load().validate_skill(self.root), [])
+
+    def test_reachable_markdown_nested_links_and_cycle(self):
+        self.write()
+        refs = self.root / 'references'
+        refs.mkdir()
+        (self.root / 'SKILL.md').write_text((self.root / 'SKILL.md').read_text() + '\n[guide](references/guide.md)\n')
+        (refs / 'guide.md').write_text('[detail](detail.md)\n')
+        (refs / 'detail.md').write_text('[back](guide.md)\n[missing](absent.md)\n')
+        issues = load().validate_skill(self.root)
+        self.assertEqual([(i.rule, Path(i.path).name) for i in issues], [('resource-missing', 'detail.md')])
+        (refs / 'detail.md').write_text('[back](guide.md)\n[escape](../../../outside.md)\n')
+        self.assertTrue(any(i.rule == 'resource-escape' and i.path.endswith('detail.md')
+                            for i in load().validate_skill(self.root)))
+
+    def test_example_links_in_code_are_ignored(self):
+        self.write()
+        entry = self.root / 'SKILL.md'
+        entry.write_text(entry.read_text() + '\n```markdown\n[bad](absent.md)\n```\n'
+                         '~~~\n[also bad](../outside.md)\n~~~\n'
+                         'Use `[example](absent.md)` in examples.\n')
+        self.assertEqual(load().validate_skill(self.root), [])
+
 
 if __name__ == '__main__':
     unittest.main()

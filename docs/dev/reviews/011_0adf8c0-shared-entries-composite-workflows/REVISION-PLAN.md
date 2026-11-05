@@ -7,7 +7,7 @@
 - Creation parent and return target: `main` at that baseline.
 - Working branch: `revision/011_0adf8c0-shared-entries-composite-workflows`.
 - User instructions: open a revision campaign for shared entries and composite workflows definition, then concisely define an optional `SKILL.md` section for composite workflows involving multiple references on 2026-11-05.
-- State: active with published skill-level and plugin-level revisions. The next accepted correction requires explicit nonstandard `PLUGIN.md`/coordinator definitions in plugin design, a README explanation and review-only criteria. No preceding review finding is invented.
+- State: active; A-001–A-006 are implemented, verified, published and read back. No planned revision action remains. No preceding review finding is invented.
 
 ## Scope to resolve
 
@@ -32,4 +32,4 @@ The user's conditional factoring rule applies if both paths actually consume one
 
 ## Persistence and return
 
-The A-001–A-004 checkpoints are published. Publish and read back this A-005/A-006 plan extension before source edits. Commit the source and action evidence together, publish/read back, then perform A-006. The campaign remains open unless the user directs closure; a later eligible closure explicitly merges the verified tip into `main`.
+The A-001–A-006 checkpoints, including source and verification evidence, are published and read back. The campaign remains open unless the user directs closure; a later eligible closure explicitly merges the verified tip into `main`.

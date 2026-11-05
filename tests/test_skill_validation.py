@@ -74,6 +74,24 @@ class SkillValidationTests(unittest.TestCase):
         self.write('name: example-skill\ndescription: "Valid: quoted" # comment')
         self.assertEqual(load().validate_skill(self.root), [])
 
+    def test_implicit_nonstring_scalars_are_not_passed_as_strings(self):
+        for value in ('42', '+42', '0x2a', '0o52', '3.14', '1e3', '.inf',
+                      '.NaN', 'TRUE', 'False', 'Null', '~'):
+            with self.subTest(value=value):
+                for field in ('name', 'description', 'metadata'):
+                    prefix = 'name: example-skill\ndescription: Valid'
+                    if field == 'name':
+                        source = f'name: {value}\ndescription: Valid'
+                    elif field == 'description':
+                        source = f'name: example-skill\ndescription: {value}'
+                    else:
+                        source = prefix + f'\nmetadata:\n  sample: {value}'
+                    self.write(source)
+                    self.assertTrue(any(i.rule == 'frontmatter-unverified'
+                                        for i in load().validate_skill(self.root)), (field, value))
+        self.write('name: example-skill\ndescription: "42"\nmetadata:\n  sample: "TRUE"')
+        self.assertEqual(load().validate_skill(self.root), [])
+
 
 if __name__ == '__main__':
     unittest.main()

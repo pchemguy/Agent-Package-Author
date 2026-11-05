@@ -13,6 +13,11 @@ import sys
 
 NAME = re.compile(r'[a-z0-9]+(?:-[a-z0-9]+)*\Z')
 OPTIONAL = {'license', 'compatibility', 'metadata', 'allowed-tools'}
+NUMBER = re.compile(r'[-+]?(?:0o[0-7]+|0x[0-9a-fA-F]+|[0-9]+|'
+                    r'(?:\.[0-9]+|[0-9]+(?:\.[0-9]*)?)(?:[eE][-+]?[0-9]+)?|'
+                    r'\.(?:inf|Inf|INF|nan|NaN|NAN))\Z')
+IMPLICIT = {'null', 'Null', 'NULL', '~', 'true', 'True', 'TRUE',
+            'false', 'False', 'FALSE'}
 
 
 @dataclass(frozen=True)
@@ -44,7 +49,7 @@ def _scalar(value: str) -> str:
     value = re.split(r'\s+#', value, maxsplit=1)[0].rstrip()
     if ': ' in value or re.search(r'[\x00-\x1f]', value):
         raise ValueError('unsupported YAML plain scalar syntax')
-    if not value or value[0] in '[{>|&*!' or value in {'null', '~', 'true', 'false'}:
+    if not value or value[0] in '[{>|&*!' or value in IMPLICIT or NUMBER.fullmatch(value):
         raise ValueError('unsupported YAML scalar syntax')
     return value
 

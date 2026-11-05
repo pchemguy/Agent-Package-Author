@@ -2,14 +2,14 @@
 
 ## Checkpoint
 
-Campaign `011_0adf8c0-shared-entries-composite-workflows` is open at its [revision intake](reviews/011_0adf8c0-shared-entries-composite-workflows/REVISION-PLAN.md). The requested topic is the definition of shared entries and composite workflows. Campaign 010 is closed, and the governing project contract remains [SPEC.md](SPEC.md), with context in [PLAN.md](PLAN.md).
+Campaign `011_0adf8c0-shared-entries-composite-workflows` is open with an accepted focused [revision plan](reviews/011_0adf8c0-shared-entries-composite-workflows/REVISION-PLAN.md). The requested change is an optional `SKILL.md` composite-workflow section involving several references, integrated with the existing routing and review criteria. Campaign 010 is closed; the governing contract remains [SPEC.md](SPEC.md), with context in [PLAN.md](PLAN.md).
 
 ## Scope and authority
 
-- Workflow: new revision campaign opened; definitional scope and acceptance examples pending.
-- Decision source: the user's 2026-11-05 instruction to open a campaign for shared entries and composite workflows definition.
-- Authorized effects so far: branch and scoped intake record only. No source revision or review result is implied.
-- Current stop: publish/read back the opening checkpoint, then establish the intended definitions and examples before source changes.
+- Workflow: direct accepted revision in the open campaign.
+- Decision sources: the user's 2026-11-05 campaign opening and optional skill-level composite section request.
+- Authorized effects: update skill design and corresponding review guidance, then verify/report; no source implementation or format rule change.
+- Current stop: publish/read back the plan, execute and verify A-001/A-002, then return at the open campaign boundary.
 
 ## Git and return
 
@@ -19,4 +19,4 @@ Campaign `011_0adf8c0-shared-entries-composite-workflows` is open at its [revisi
 
 ## Next action
 
-Publish/read back campaign 011's opening checkpoint. Then determine the desired definitions and their acceptance examples; assess the relevant owner and handoff surfaces before planning source edits.
+Publish/read back the accepted plan. Then update the coupled design/review guidance with action evidence, verify the campaign scope, and keep the branch open for further instructions.

@@ -26,6 +26,8 @@ No governing SPEC/PLAN amendment is needed for this bounded authoring/review ref
 
 The user's follow-up identified that `plugin-design.md` sends an author to the review checklist for detailed composition and coordinator criteria. That reverses design/review ownership. A-003 adds concise design decisions in the authoring owner while `plugin-review.md` retains its existing assessment questions; no duplicate checklist is needed.
 
+The user's conditional factoring rule applies if both paths actually consume one checklist. The entry routes design before authoring and review during assessment; after A-003 the design owner states decisions without consuming the review checklist. Inspect this boundary before deciding whether a shared reference is warranted; do not create a trivial third file solely because both modules discuss the same concepts.
+
 ## Persistence and return
 
 The A-001/A-002 checkpoints are published. Publish and read back this plan extension before A-003. Commit the source and action evidence together, publish/read back, then perform A-004. The campaign remains open after these actions unless the user directs closure; a later eligible closure explicitly merges the verified tip into `main`.

@@ -7,7 +7,7 @@ Review instruction quality in `SKILL.md` and `references/*.md`. Apply [skill for
 ## Shared criteria
 
 - **Purpose and scope:** Does the artifact serve one coherent capability or local responsibility, with assumptions and exclusions that agree with it?
-- **Document structure:** Does the sequence fit a procedure, explanation, contract or example? Do headings support navigation without fragmenting short material?
+- **Document structure:** Does the sequence fit the component's procedure, explanation or contract, with examples serving that role? Do headings support navigation without fragmenting short material?
 - **Paragraphs and steps:** Does each unit have one controlling concern? Are prerequisites and exceptions near the action they govern, without overload or topic drift?
 - **Language and precision:** Are conditions, actors, terms, technical distinctions, uncertainty and outputs stated clearly? Does repetition have a reason?
 - **Ownership and discovery:** Is shared guidance owned in one place? Can an agent find the needed module before acting without loading unrelated branches or traversing hidden chains?
@@ -38,26 +38,31 @@ Apply this check when a skill claims a path combining multiple references, wheth
 
 ## Reference modules
 
-Assess each selected reference according to its role. A procedural reference needs operational boundaries and a return path; a terminology guide needs clear definitions, and an example needs its illustrative status and intended use. Do not impose a procedure or skill-wide activation duties on every reference.
+For **each in-scope reference**, decide whether it defines a particular component of the skill's workflow. Identify the entry condition that selects it, the decision, action, constraint, check or handoff it owns, and the difference its use makes to that path. Shared guidance can be a component when it governs an identifiable step or decision; a reference need not be a standalone procedure. Topical relevance, polished exposition or an illustrative collection alone does not establish a workflow role. If no concrete contribution can be traced, report a file-specific content finding. This is a content judgment, not a format violation.
+
+Standalone examples and background belong in the source repository's root `README.md` or root `examples/`, according to their use. A skill package's own `examples/` needs a strong, specific reason for inclusion in the delivered package, such as an actual runtime step that reads it, plus an explicit loading path. A brief example inside an operational reference may explain that reference's rule; it does not itself justify a separate reference. Evaluate misplaced material separately from the quality of its prose and recommend relocation, consolidation or removal with the owning caller adjusted.
+
+Then assess each reference according to its actual role. A procedural reference needs operational boundaries and a return path; definitions and supporting material need a clear application to the selected component. Do not impose a full procedure or skill-wide activation duties on every reference.
 
 - **Local purpose and completeness:** Is the module coherent and sufficiently developed for its role? A broad, shallow guide and a narrow, detailed procedure can both be complete.
 - **Reference boundary:** Does a thin or vague fragment have a meaningful independent use and caller-visible loading condition, or should it join its caller or neighboring owner? Does a broad module bury a distinct, substantial subworkflow with its own trigger? Recommend a split only when that separate responsibility warrants it, never to meet a length target.
 - **Scope and ownership:** Does it agree with its caller and neighboring owners? Does a local clause improperly introduce a skill-wide obligation or duplicate a separate procedure?
 - **Required context:** Can it be used with the stated prior instructions and inputs? Are consequential prerequisites available before use without requiring every module to be self-contained?
 - **Loading and onward route:** Are dependencies and subsequent handoffs discoverable before dependent actions, without unrelated loading or deep chains?
-- **Result and return:** For a procedure, are output, stop and next owner clear? For guidance/contract/example material, is it sufficient for its intended decision and distinguishable from operative instructions?
+- **Result and return:** For a procedure, are output, stop and next owner clear? For supporting guidance or contract material, is its application to the owned workflow component clear and distinguishable from operative instructions?
 - **Shared content:** Does a reminder protect a boundary, or does it repeat material whose versions can diverge?
 
 Inspect a caller and adjacent owner when a reference changes routing, shared state or handoff. That local interface check does not expand a focused review into an audit of every reference.
 
 ## Review procedure
 
-1. Pin the request, source, selected artifact(s), required prior context, permitted effects and evidence limits. For a comprehensive review, inventory the entry, references and support material needed for their claims; record each item's assessed depth, exclusion or unassessed state. A focused review retains its narrower target.
-2. Reverse-outline sections and significant paragraphs/steps. Evaluate structure and controlling concerns before local wording changes.
-3. Trace entry-to-reference decisions, repeated clauses and consequential handoffs on both sides. For a proposed shortening, merge or split, verify caller selection, prerequisites, conditions, qualifiers, reading context and the return path survive the change.
-4. Select representative positive, variant, negative and recovery contrasts appropriate to the actual workflow. A case supplements content coverage; it does not replace inspection of the requested material.
-5. Check metadata, direct links and package containment with the owning structural tooling; inspect supporting scripts/assets only when a claim depends on them. If a consumer trial is selected, record source/model, initial context, loaded instructions, actual decisions/actions/output and stop separately from source inspection.
-6. Report located findings, consequence, confidence, bounded correction owner and objective recheck. Retain no-finding coverage, unknowns, unrun checks and the requested stop. An accepted repair follows the separate authorized authoring/revision path.
+1. Pin the request, source, selected artifact(s), required prior context, permitted effects and evidence limits. For a comprehensive skill review, inventory every reference; a focused review retains its selected references and records the others as unassessed.
+2. For every in-scope reference, trace its entry condition to a particular workflow component and record its concrete contribution or the absence of one. Keep this per-file verdict distinct from link validity and writing quality.
+3. Reverse-outline sections and significant paragraphs/steps. Evaluate structure and controlling concerns before local wording changes.
+4. Trace entry-to-reference decisions, repeated clauses and consequential handoffs on both sides. For a proposed shortening, merge or split, verify caller selection, prerequisites, conditions, qualifiers, reading context and the return path survive the change.
+5. Select representative positive, variant, negative and recovery contrasts appropriate to the actual workflow. A case supplements content coverage; it does not replace inspection of the requested material.
+6. Check metadata, direct links and package containment with the owning structural tooling; inspect supporting scripts/assets only when a claim depends on them. If a consumer trial is selected, record source/model, initial context, loaded instructions, actual decisions/actions/output and stop separately from source inspection.
+7. Report each in-scope reference's component verdict, located findings with consequence, confidence, bounded correction owner and objective recheck. Retain no-finding coverage, unknowns, unrun checks and the requested stop. An accepted repair follows the separate authorized authoring/revision path.
 
 ## Useful contrasts
 

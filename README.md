@@ -8,6 +8,8 @@ The [walkthrough](#complete-authoring-walkthrough) shows both modes with attache
 
 Place the complete `agent-package-author/` directory in a skill discovery location supported by your agent. Ask it to create a package from a brief and attached files, review an existing package, or run structural inspection. A focused review stays with the requested content; a comprehensive review inventories the requested package and reports reviewed and unassessed parts. The entry point is [`SKILL.md`](agent-package-author/SKILL.md); it selects the relevant references for the requested operation and package. Installation paths, invocation syntax, Python support, and MCP transport support depend on the host.
 
+Put standalone examples and background in the repository README or root `examples/`. Include examples inside a delivered skill only when a specific workflow step needs them and the skill provides an explicit path to load them. Such files are ordinary package resources, not discovered workflow entries.
+
 Run the offline helpers with Python 3.11 or newer:
 
 ```console
@@ -142,7 +144,7 @@ All twelve modules are named directly by the creator's `SKILL.md`. This map cove
 | [`portability-policy.md`](agent-package-author/references/portability-policy.md) | Both requests, before choosing files | Classifies core, optional, development, and client-specific material; excludes implicit host hooks. |
 | [`skill-standard.md`](agent-package-author/references/skill-standard.md) | Standalone request; again for each plugin skill | Checks `SKILL.md` metadata, name, and resource paths; plugin child links use the plugin root boundary. |
 | [`skill-design.md`](agent-package-author/references/skill-design.md) | Standalone request; again for each plugin skill | Places branch rules in references, repeatable work in scripts, static material in assets; distinguishes independent skill triggers. |
-| [`skill-review.md`](agent-package-author/references/skill-review.md) | Proportionate content check during both authoring requests, or an explicit standalone/child-skill review | Assesses entry-only reference routing and the applicable reference content; review-only findings do not trigger repairs. |
+| [`skill-review.md`](agent-package-author/references/skill-review.md) | Proportionate content check during both authoring requests, or an explicit standalone/child-skill review | Assesses entry-only routing and each in-scope reference's distinct workflow contribution; review-only findings do not trigger repairs. |
 | [`hello-world-example.md`](agent-package-author/references/hello-world-example.md) | Only the rich Project Welcome Pack branch with the supplied exemplar | Informs conditional profile loading and independent validation without imposing its file count on `word-count` or `notes-tools`. |
 | [`plugin-standard.md`](agent-package-author/references/plugin-standard.md) | Plugin request, before creating the manifest or skill tree | Fixes `plugin.json`, immediate-child skill discovery, and optional root `mcp.json`. |
 | [`plugin-design.md`](agent-package-author/references/plugin-design.md) | Plugin exploration and capability decomposition | Separates outlining from link checking and avoids overlapping activation. |

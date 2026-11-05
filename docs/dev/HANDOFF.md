@@ -2,14 +2,14 @@
 
 ## Checkpoint
 
-Campaign `012_0f43537-package-review` is open with a focused accepted revision to the skill-reference review criteria. Its [revision plan](reviews/012_0f43537-package-review/REVISION-PLAN.md) records the action and checks. Campaign 011 was closed on `main`; the governing contract remains [SPEC.md](SPEC.md), with context in [PLAN.md](PLAN.md).
+Campaign `012_0f43537-package-review` is open with a focused accepted revision to the skill-reference review criteria and placement of non-operative examples. Its [revision plan](reviews/012_0f43537-package-review/REVISION-PLAN.md) and [revision report](reviews/012_0f43537-package-review/REVISION-REPORT.md) record the actions and checks. Campaign 011 was closed on `main`; the governing contract remains [SPEC.md](SPEC.md), with context in [PLAN.md](PLAN.md).
 
 ## Scope and authority
 
 - Workflow: focused review-criteria revision on the open package-review campaign branch.
-- Decision sources: the user's 2026-11-05 campaign opening and subsequent per-reference workflow-component review requirement.
-- Completed effects: campaign opening published/read back; A-001/A-002 plan extension pending publication.
-- Current stop: publish/read back the plan extension, then implement and verify the bounded review criterion.
+- Decision sources: the user's 2026-11-05 campaign opening, per-reference workflow-component review requirement and follow-up placement rule.
+- Completed effects: opening and initial plan published/read back; refined A-001 source and evidence recorded locally, pending publication.
+- Current stop: publish/read back A-001, perform A-002, then A-003 relocation and A-004 verification.
 
 ## Git and return
 
@@ -17,7 +17,8 @@ Campaign `012_0f43537-package-review` is open with a focused accepted revision t
 - Creation parent and return target: `main` at `0f435371eccf592a7d99af83a1c6f44bae14d1d2`.
 - Working branch: `revision/012_0f43537-package-review`; branch-off commit is the same full baseline. Closed campaigns `001`–`011` remain frozen.
 - Published opening tip: `4bdc4dfba6e6e96b4f5218a6ca42ca8c04b91e8d`.
+- Published initial A-001/A-002 plan tip: `4ee9b0e0d9566fa6239263f6f2f9003fd9a55046`.
 
 ## Next action
 
-Publish/read back the A-001/A-002 plan, then apply the per-reference criterion and coupled verification. Do not infer a comprehensive package-review finding from this focused revision.
+Publish/read back A-001's criterion, placement guidance and plan amendment. Verify A-002, then relocate the non-operative bundled exemplar under A-003. Leave the campaign open after A-004.

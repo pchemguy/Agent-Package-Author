@@ -9,7 +9,7 @@ Campaign `010_831536e-revision-intake` is open with an accepted focused [revisio
 - Workflow: direct focused revision in the open campaign.
 - Decision sources: the user's 2026-11-05 campaign opening, replacement description and proposed metadata.
 - Authorized effects: published A-001 description change; A-002 metadata addition with string-valued aliases to preserve portable frontmatter.
-- Current stop: publish this plan extension, verify and publish A-002, then await further scope or closure instruction.
+- Current stop: publish/read back verified A-002, then await further scope or closure instruction.
 
 ## Git and return
 
@@ -19,4 +19,4 @@ Campaign `010_831536e-revision-intake` is open with an accepted focused [revisio
 
 ## Next action
 
-Publish the A-002 plan extension, then add and validate the metadata, record its evidence in the active revision report, and publish/read back that action. Keep the campaign open for further scope.
+Publish/read back A-002 with its evidence. Then await further numbered scope or a closure instruction; the campaign remains open on its branch.

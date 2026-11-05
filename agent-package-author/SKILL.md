@@ -26,7 +26,7 @@ Open only the references selected by the operation, package contents, and reques
 | [Skill review](references/skill-review.md) | Comprehensive skill content review, or a relevant focused question; proportionately during authorized work | Entry and reference composition, routing and content coverage; no format-error classification or automatic edits. |
 | [Hello World example](references/hello-world-example.md) | A deliberately broad exemplar would inform design | Optional example, never a required scaffold. |
 | [Plugin standard](references/plugin-standard.md) | Authoring, reviewing format, or validating a plugin | Manifest and fixed discovery locations; not content quality. |
-| [Plugin design](references/plugin-design.md) | Designing/revising a plugin or assessing composition | Capability split and ownership; detailed package review is separate. |
+| [Plugin design](references/plugin-design.md) | Designing/revising a plugin or assessing composition | Capability split, shared entries and coordination ownership; detailed package review is separate. |
 | [Plugin review](references/plugin-review.md) | Comprehensive plugin content review, or a relevant focused question; proportionately during authorized work | Composition and optional coordination; include skill review only for actual bundled skills. |
 | [MCP packaging](references/mcp-packaging.md) | MCP is requested or exists in the package | MCP config and transport guidance; irrelevant for a skill-only package. |
 | [OpenAI presentation](references/openai-presentation.md) | Generating/revising OpenAI presentation after skill content is accepted, or assessing existing presentation | Derive `agents/openai.yaml` and `assets/icon.svg`; client presentation is distinct from portable skill format. |

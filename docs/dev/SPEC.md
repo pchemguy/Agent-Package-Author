@@ -34,8 +34,7 @@ agent-package-author/
 │   ├── mcp-packaging.md
 │   ├── portability-policy.md
 │   ├── validation-policy.md
-│   ├── openai-presentation.md
-│   └── hello-world-example.md
+│   └── openai-presentation.md
 ├── scripts/
 │   ├── inspect_package.py
 │   ├── validate_skill.py
@@ -50,7 +49,7 @@ agent-package-author/
     └── mcp-template.json
 ```
 
-`SKILL.md` SHALL contain only valid `name` and `description` frontmatter and concise operation/package routing, relative resource links, applicable creation steps, and completion conditions. It SHALL name and link every bundled reference with sufficient purpose, boundary, and use conditions for selection before reading it. Review-only requests SHALL NOT be routed through writing, collision, installation, or generation steps. `references/` contains conditional authoring and review knowledge; `scripts/` contains deterministic offline helpers; `assets/` contains starting material for generated files. The Hello World example SHALL explain design choices without turning them into universal requirements. Development `SPEC.md`, `PLAN.md`, `README.md`, examples, and tests MAY accompany the source repository but SHALL NOT be necessary to execute the runtime skill.
+`SKILL.md` SHALL contain only valid `name` and `description` frontmatter and concise operation/package routing, relative resource links, applicable creation steps, and completion conditions. It SHALL name and link every bundled reference with sufficient purpose, boundary, and use conditions for selection before reading it. Review-only requests SHALL NOT be routed through writing, collision, installation, or generation steps. `references/` contains conditional authoring and review knowledge; `scripts/` contains deterministic offline helpers; `assets/` contains starting material for generated files. Source-only examples in root `examples/` MAY explain design choices without becoming runtime references or universal requirements. Development `SPEC.md`, `PLAN.md`, `README.md`, examples, and tests MAY accompany the source repository but SHALL NOT be necessary to execute the runtime skill.
 
 ## 4. Shared authoring workflow
 

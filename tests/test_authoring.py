@@ -19,7 +19,7 @@ class AuthoringTests(unittest.TestCase):
         self.assertIn('plugin', body.lower())
         self.assertIn('references/mcp-packaging.md', body)
         self.assertIn('only for', body.lower())
-        self.assertIn('references/hello-world-example.md', body)
+        self.assertNotIn('references/hello-world-example.md', body)
         self.assertIn('references/openai-presentation.md', body)
 
     def test_entry_links_entire_reference_inventory(self):
@@ -39,10 +39,11 @@ class AuthoringTests(unittest.TestCase):
     def test_skill_resources_are_optional_and_example_is_not_mandatory(self):
         standard = (CREATOR / 'references/skill-standard.md').read_text()
         design = (CREATOR / 'references/skill-design.md').read_text()
-        exemplar = (CREATOR / 'references/hello-world-example.md').read_text()
+        exemplar = (ROOT / 'examples/hello-world-design.md').read_text()
         self.assertIn('optional', standard.lower())
         self.assertIn('activation', design.lower())
         self.assertIn('not a mandatory', exemplar.lower())
+        self.assertFalse((CREATOR / 'references/hello-world-example.md').exists())
         self.assertIn('description:', (CREATOR / 'assets/skill-entry-template.md').read_text())
 
     def test_plugin_templates_have_canonical_schemas(self):

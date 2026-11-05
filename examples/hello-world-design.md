@@ -1,5 +1,7 @@
 # Hello World design exemplar
 
+This is a source-only design example for readers of this repository. It is not part of the installed creator skill or a runtime reference.
+
 The illustrative Project Welcome Pack accepts a project description and `audience=user|contributor`, then writes `WELCOME.md` and `welcome.json` with repeatable bytes. The contributor output ends with a first-change path; the user output ends with a help path. A missing audience or invalid output must be diagnosed. These requirements justify more than a single generic instruction; they do not specify a required tree for other skills.
 
 | Requirement | Illustrative resource decision and reason |

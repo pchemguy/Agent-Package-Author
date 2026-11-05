@@ -8,8 +8,8 @@ Campaign `012_0f43537-package-review` is open with a focused accepted revision t
 
 - Workflow: focused review-criteria revision on the open package-review campaign branch.
 - Decision sources: the user's 2026-11-05 campaign opening, per-reference workflow-component review requirement and follow-up placement rule.
-- Completed effects: opening, initial plan and refined A-001 published/read back; A-002 coupled verification recorded, pending publication.
-- Current stop: publish/read back A-002, then A-003 relocation and A-004 verification.
+- Completed effects: opening, initial plan, A-001 and A-002 published/read back; A-003 relocation and evidence recorded locally, pending publication.
+- Current stop: publish/read back A-003, then A-004 coupled verification.
 
 ## Git and return
 
@@ -19,7 +19,8 @@ Campaign `012_0f43537-package-review` is open with a focused accepted revision t
 - Published opening tip: `4bdc4dfba6e6e96b4f5218a6ca42ca8c04b91e8d`.
 - Published initial A-001/A-002 plan tip: `4ee9b0e0d9566fa6239263f6f2f9003fd9a55046`.
 - Published A-001 action tip: `5190d83339db7957f9e91de138716562d4de8832`.
+- Published A-002 verification tip: `3c5151437001c8dda644030b5db0f67505367894`.
 
 ## Next action
 
-Publish/read back A-002's coupled verification. Then relocate the non-operative bundled exemplar under A-003 and recheck under A-004. Leave the campaign open.
+Publish/read back A-003's relocated source-only example and reconciled callers, then recheck under A-004. Leave the campaign open.

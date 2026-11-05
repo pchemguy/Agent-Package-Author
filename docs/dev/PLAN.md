@@ -37,7 +37,6 @@
 | `scripts/create_openai_presentation.py`                                                                                            | Contextual metadata and SVG generation for skills and plugin children                      |
 | `tests/test_skill_validation.py`, `test_plugin_validation.py`, `test_mcp_validation.py`, `test_inspection.py`, `test_authoring.py`, `test_openai_presentation.py` | Structural, negative, CLI, presentation, and end-to-end behavior |
 | `examples/standalone/`, `examples/multi-skill/`, `examples/with-mcp/`                                                              | Realistic acceptance packages; only `with-mcp` contains `mcp.json`                          |
-| `examples/hello-world-design.md`                                                                                                  | Source-only resource design exemplar, outside the delivered skill                           |
 | `README.md`                                                                                                                        | Source usage, format scope, independent installation, verification instructions             |
 
 ## Review focus
@@ -72,7 +71,7 @@ Reviewable delivery boundaries are: governing contract and route ownership; usab
 
 ## Task 03: Standalone skill authoring resources
 
-**Files:** `references/skill-standard.md`, `skill-design.md`, root `examples/hello-world-design.md`, `assets/skill-entry-template.md`, `tests/test_authoring.py`.
+**Files:** `references/skill-standard.md`, `skill-design.md`, `assets/skill-entry-template.md`, `README.md`, `tests/test_authoring.py`.
 
 - [ ] Add assertions that the skill references distinguish mandatory `SKILL.md` from optional resources, describe activation and relative paths, treat the exemplar as nonmandatory, and reject template-driven file proliferation.
 - [ ] Write the three references and a minimal `name`/`description` frontmatter template. Describe when to add scripts, assets, independent output validation, and positive/branch/negative cases; distinguish format rules from authoring advice.

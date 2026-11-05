@@ -7,7 +7,7 @@
 - Creation parent and return target: `main` at that baseline.
 - Working branch: `revision/011_0adf8c0-shared-entries-composite-workflows`.
 - User instructions: open a revision campaign for shared entries and composite workflows definition, then concisely define an optional `SKILL.md` section for composite workflows involving multiple references on 2026-11-05.
-- State: active with one directly accepted focused revision. No preceding review finding is invented.
+- State: active with the published skill-level revision and a directly accepted plugin-design correction. No preceding review finding is invented.
 
 ## Scope to resolve
 
@@ -19,9 +19,13 @@ The current [skill design](../../../../agent-package-author/references/skill-des
 | --- | --- | --- |
 | A-001 | Add a concise conditional composite-workflow pattern to `skill-design.md` and its corresponding optional content check to `skill-review.md`. State selection, principal reference owners, sequence/handoffs, output/stop, and avoidance of duplicate procedures; preserve the direct per-reference routing policy. | Trace a single-reference skill, independent multi-reference variants, and an actual composite path with and without a section. Confirm that a present section gives entry-level selection while linked references remain canonical; check the existing plugin-level analogy without conflating the two. |
 | A-002 | Verify the coupled content and repository regression, record scope/evidence and prepare the later return boundary. | Skill self-validation, full test suite, active links and scoped diff, with untested agent behavior stated. |
+| A-003 | Correct `plugin-design.md`'s reverse handoff into `plugin-review.md`: give authoring guidance for meaningful cross-skill composites, optional shared `PLUGIN.md` projection and coordinator ownership in the design owner itself. Remove the review-only no-skill instruction already owned by `plugin-review.md`. | Trace direct focused, composite-without-coordinator, optional shared-entry unavailable and coordinator direct-entry paths against the existing review criteria; ensure no portable discovery or mandatory coordinator claim. |
+| A-004 | Recheck the coupled skill/plugin guidance and current campaign scope after A-003. | Self-validation, full suite, active links and diff against baseline; record limits and leave campaign open pending closure instruction. |
 
 No governing SPEC/PLAN amendment is needed for this bounded authoring/review refinement; their existing entry, reference and plugin composition requirements remain compatible. No change to portable format rules or Python structural validation is authorized. Closed campaigns 001–010 remain unchanged.
 
+The user's follow-up identified that `plugin-design.md` sends an author to the review checklist for detailed composition and coordinator criteria. That reverses design/review ownership. A-003 adds concise design decisions in the authoring owner while `plugin-review.md` retains its existing assessment questions; no duplicate checklist is needed.
+
 ## Persistence and return
 
-Publish and read back this accepted plan before A-001. Commit the source and action evidence together, publish/read back, then perform A-002. The campaign remains open after these actions unless the user directs closure; a later eligible closure explicitly merges the verified tip into `main`.
+The A-001/A-002 checkpoints are published. Publish and read back this plan extension before A-003. Commit the source and action evidence together, publish/read back, then perform A-004. The campaign remains open after these actions unless the user directs closure; a later eligible closure explicitly merges the verified tip into `main`.

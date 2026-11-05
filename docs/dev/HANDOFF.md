@@ -2,14 +2,14 @@
 
 ## Checkpoint
 
-Campaign `011_0adf8c0-shared-entries-composite-workflows` remains open after a focused optional skill-level composite-workflow revision. Its [revision plan](reviews/011_0adf8c0-shared-entries-composite-workflows/REVISION-PLAN.md) and [revision report](reviews/011_0adf8c0-shared-entries-composite-workflows/REVISION-REPORT.md) retain the accepted scope and checks. Campaign 010 is closed; the governing contract remains [SPEC.md](SPEC.md), with context in [PLAN.md](PLAN.md).
+Campaign `011_0adf8c0-shared-entries-composite-workflows` remains open. Its [revision plan](reviews/011_0adf8c0-shared-entries-composite-workflows/REVISION-PLAN.md) and [revision report](reviews/011_0adf8c0-shared-entries-composite-workflows/REVISION-REPORT.md) retain the completed skill-level composite guidance and the accepted correction to plugin design ownership. Campaign 010 is closed; the governing contract remains [SPEC.md](SPEC.md), with context in [PLAN.md](PLAN.md).
 
 ## Scope and authority
 
 - Workflow: focused revision completed on the open campaign branch.
-- Decision sources: the user's 2026-11-05 campaign opening and optional skill-level composite section request.
-- Completed effects: skill design and corresponding review guidance updated, verified and A-001 published/read back; A-002 final check recorded.
-- Current stop: publish/read back A-002, then await further shared-entry/composite scope or a closure instruction.
+- Decision sources: the user's 2026-11-05 campaign opening, optional skill-level composite section request and correction to the design/review boundary in plugin guidance.
+- Completed effects: A-001/A-002 skill-level guidance and verification published/read back.
+- Current stop: publish/read back the extended plan, execute/verify A-003/A-004, then await further scope or closure.
 
 ## Git and return
 
@@ -20,4 +20,4 @@ Campaign `011_0adf8c0-shared-entries-composite-workflows` remains open after a f
 
 ## Next action
 
-Publish/read back A-002's verification checkpoint. Keep the branch open; plugin shared-entry and cross-skill composite definitions have not been revised in this focused action.
+Publish/read back the plan extension. Put concise cross-skill design decisions in `plugin-design.md`, keep assessment in `plugin-review.md`, and verify/publish the action and coupled result. Keep the campaign open.

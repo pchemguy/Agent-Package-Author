@@ -4,7 +4,7 @@
 
 - Campaign: `009_e591021-critical-review`; [plan](REVIEW-PLAN.md). Pinned reviewed source: `e591021a4ca3ed4dc48b40fc984604bde3f7227d` on `main`. Review branch commits change only this report and active navigation, not the pinned source.
 - Reviewer: Codex, 2026-11-05. This report records source inspection, structural checks and local execution separately. No target-client activation or Windows CMD execution is claimed.
-- State: U-001–U-004 assessed; U-005 pending. Eight findings allocated. A prior campaign's observations are not treated as evidence for this baseline.
+- State: U-001–U-005 assessed and consolidated. Eight findings remain open for a separate revision decision; no source repair or integration was performed. A prior campaign's observations are not treated as evidence for this baseline.
 
 ## U-001 — Inventory and format baseline
 
@@ -92,3 +92,19 @@ Read the README walkthrough and command/boundary sections, `AGENTS.md`, both roo
 - **Bounded correction and recheck:** Redesign the generated motif/mark for small displays and inspect actual 16/32-pixel renders, including 1- and 3-letter contexts. Keep XML and prompt/context tests, but do not treat them as a legibility test.
 
 No source modification or target-client installation was performed. The examples' successful local scripts and structural validation do not prove their use by a particular agent or MCP client.
+
+## U-005 — Consolidated coverage and disposition
+
+| Surface / criterion | Assessment depth and result | Limits |
+| --- | --- | --- |
+| Delivered entry and twelve references / C-001–C-003 | Full-text source inspection, entry routing and adjacent ownership; R-001. The reference inventory is directly routed and the core format summaries match sampled normative rules. | No independent agent selection/authoring run; source wording cannot prove behavior. |
+| Four helpers, templates, tests and fixture / C-004 | Full helper/test source inspection, 50 passing tests, CLI self/fixture checks and disposable counterexamples; R-002–R-004. Contextual presentation generated for both plugin skills with replacement refusal. | Bounded YAML parser was not compared against every valid YAML construct; Windows native paths and OpenAI client display not run. |
+| Three shipped example package shapes / C-005 | Structural checks and standalone/skill script outputs passed; local MCP positive/error and malformed recovery probes; R-005. | No full target-client handshake or agent activation. |
+| README, root policies, current SPEC/PLAN and active links / C-006–C-007 | Full reader-path inspection; 66 local links resolved; disposable documented test command; R-001, R-006–R-007. | Attached-file prompts are illustrative, not an executed authoring transcript. Windows policy inspected on Linux only. |
+| Presentation / C-005–C-007 | Generated YAML/XML and source geometry examined; R-008. | Raster delegate unavailable, so visual legibility and client rendering remain unverified. |
+
+**Finding index:** eight open findings: P1 `R-002`; P2 `R-001`, `R-003`, `R-004`, `R-005`; P3 `R-006`, `R-007`, `R-008`. `R-003` and `R-004` share the link-scanning owner and need one parser design with tests that avoids replacing a false success with a false failure. `R-002` shares the skill validator but is a separate metadata semantics issue. All findings describe the pinned source; none is accepted as an implementation task by this review request.
+
+**Proposed revision order:** first correct `R-002` and its quoted/unquoted regression cases; then design and test operative link traversal for `R-003`/`R-004`; then fix MCP recovery `R-005` with malformed-then-valid sequences. Align authoring intake with the README's source authority claim (`R-001`), and address the scoped documentation/housekeeping concerns (`R-006`/`R-007`). For `R-008`, obtain actual small-size rendering before selecting a motif redesign. The order is a recommendation, not an accepted revision plan.
+
+**No-finding areas and uncertainty:** current sampled published format claims, package inventory/containment, entry reference inventory, optional no-skill/plugin/MCP routing, template schemas in tests, normal CLI paths, example positive outputs and active local links gave no additional finding at the recorded depth. The absence of a finding does not certify untested variants, security, usability in a specific client or universal portability. No source changes, installations, releases or external client trials were made. The review stops at this published report pending a separate decision on revision and integration.

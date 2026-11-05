@@ -2,14 +2,6 @@
 
 This repository develops `agent-package-author`, a portable skill for authoring and reviewing standalone Agent Skills and Agent Plugins 1.0 packages. Work from the repository root. Use [README.md](README.md) for the user-facing workflow and runnable examples.
 
-## Initialization
-
-Execute the [skill and plugin discovery protocol](SKILL_DISCOVERY_PROTOCOL.md).
-
-## Windows shell
-
-On **Windows execution hosts only**, follow [WINDOWS_SHELL_POLICY.md](WINDOWS_SHELL_POLICY.md): CMD syntax, unavailable PowerShell/pwsh, temporary files for script text and shell operations, and the documented tool probe/recovery. This repository policy is independent of the plugin.
-
 ## Start here
 
 1. Inspect Git status and the requested scope before editing. Preserve unrelated changes.

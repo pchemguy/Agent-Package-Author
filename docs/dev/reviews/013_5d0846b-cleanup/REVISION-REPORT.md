@@ -1,0 +1,25 @@
+# Source cleanup revision report
+
+## A-001 — Remove source examples
+
+Deleted `examples/hello-world-design.md` and `examples/standalone/sample.md`. README no longer links the former and describes its supplied design exemplar as input material. The notes-tools walkthrough creates and removes a disposable note for its script smoke commands; the existing authoring test uses a temporary directory for the same positive and broken-link cases. `docs/dev/PLAN.md` no longer lists the deleted design example. No delivered skill file was changed.
+
+The README commands produced `- First` and `missing: absent.md`, then removed the temporary note. `PYTHONDONTWRITEBYTECODE=1 python -m unittest discover -s tests -q` passed 55 tests. The creator and both plugin examples passed their validators. Active README, package, SPEC, PLAN and tests have no reference to the two deleted paths; staged/unstaged whitespace checks passed. This is a source and local execution check, not client behavior evidence.
+
+## A-002 — Remove root policies and entry sections
+
+Deleted `SKILL_DISCOVERY_PROTOCOL.md` and `WINDOWS_SHELL_POLICY.md`. Removed precisely `## Initialization` and `## Windows shell` and their contents from root `AGENTS.md`; the development entry beginning with `## Start here` remains. Active README, AGENTS, package, SPEC, PLAN, tests and examples have no references to the deleted policies. Closed campaign records retain their historical mentions.
+
+`PYTHONDONTWRITEBYTECODE=1 python -m unittest discover -s tests -q` passed 55 tests. The requested paths and headings are absent, the remaining agent entry is intact, and staged/unstaged whitespace checks passed. The removed policies are no longer active repository instructions.
+
+## A-003 — Combined verification and return boundary
+
+The published/read-back A-002 tip is `b35bb4273ab55025b61d01bbfe080e5b6ce32eb3`. A fresh full suite passed 55 tests. Creator validation and inspection reported eleven references, four scripts, four assets and zero errors/warnings; both shipped plugin variants passed validation. The four requested files and two `AGENTS.md` sections are absent, while `## Start here` remains. A scan of active README, AGENTS, delivered skill/references, SPEC, PLAN, HANDOFF and campaign 013 records resolved 95 local Markdown links. `git diff --check main...HEAD` passed. The branch diff changes only the two requested source examples, two root policies, AGENTS, their direct README/PLAN/test callers and active campaign/HANDOFF records. Closed campaigns 001–012 remain unchanged. No client installation or runtime compatibility trial was run. Campaign 013 stays open on its revision branch pending further scope or explicit closure.
+
+## Closure gate
+
+The user requested closure after the published/read-back A-003 tip `bbd3c94ce10de184b94006690ae5f80d2860f977`. Return target `main` remains at the original parent `5d0846b592b516c7f3d79dd48a7e5ea8c544cc7a`, also the merge base. A fresh full suite passed 55 tests; creator validation and inspection reported eleven references, four scripts, four assets and zero errors/warnings; both plugin variants passed validation; `git diff --check main...HEAD` passed. No planned action remains. Publish/read back this gate, verify the prospective merged tree, then record closure in the two-parent integration commit on `main`.
+
+## Integration and closure
+
+The published/read-back closure-gate tip `e999830d242a8f5d4247677732966830089dd432` was merged into return target `main` at `5d0846b592b516c7f3d79dd48a7e5ea8c544cc7a` using `git merge --no-ff --no-commit`, without conflicts. The prospective merged tree passed 55 tests, creator validation and inspection (eleven references and zero errors/warnings), both plugin validators, and `git diff --cached --check`. This closure record, final plan state and HANDOFF are included in the two-parent integration commit. Its publication and remote readback complete campaign 013; the branch and records remain as history.

@@ -36,13 +36,12 @@ class AuthoringTests(unittest.TestCase):
         self.assertIn('before', body.lower())
         self.assertIn('acceptance', body.lower())
 
-    def test_skill_resources_are_optional_and_example_is_not_mandatory(self):
+    def test_skill_resources_are_optional(self):
         standard = (CREATOR / 'references/skill-standard.md').read_text()
         design = (CREATOR / 'references/skill-design.md').read_text()
-        exemplar = (ROOT / 'examples/hello-world-design.md').read_text()
         self.assertIn('optional', standard.lower())
         self.assertIn('activation', design.lower())
-        self.assertIn('not a mandatory', exemplar.lower())
+        self.assertIn('SKILL.md` alone', design)
         self.assertFalse((CREATOR / 'references/hello-world-example.md').exists())
         self.assertIn('description:', (CREATOR / 'assets/skill-entry-template.md').read_text())
 
@@ -66,13 +65,16 @@ class AuthoringTests(unittest.TestCase):
         counter = examples/'standalone'/'word-count'/'scripts'/'count_words.py'
         run = subprocess.run([sys.executable, str(counter), 'one two three'], capture_output=True, text=True)
         self.assertEqual((run.returncode, run.stdout.strip()), (0, '3'))
-        for root in ('multi-skill', 'with-mcp'):
-            base = examples/root/'notes-tools'/'skills'
-            for skill, expected in [('outline-notes', '- First'), ('check-note-links', 'missing: absent.md')]:
-                tool = next((base/skill/'scripts').glob('*.py'))
-                result = subprocess.run([sys.executable, str(tool), str(examples/'standalone'/'sample.md')], capture_output=True, text=True)
-                self.assertEqual(result.returncode, 0, result.stderr)
-                self.assertIn(expected, result.stdout)
+        with tempfile.TemporaryDirectory() as temp:
+            note = Path(temp)/'note.md'
+            note.write_text('# First\n\nSee [broken](absent.md).\n', encoding='utf-8')
+            for root in ('multi-skill', 'with-mcp'):
+                base = examples/root/'notes-tools'/'skills'
+                for skill, expected in [('outline-notes', '- First'), ('check-note-links', 'missing: absent.md')]:
+                    tool = next((base/skill/'scripts').glob('*.py'))
+                    result = subprocess.run([sys.executable, str(tool), str(note)], capture_output=True, text=True)
+                    self.assertEqual(result.returncode, 0, result.stderr)
+                    self.assertIn(expected, result.stdout)
 
     def test_invalid_package_and_bad_invocation_have_distinct_exit_codes(self):
         import tempfile

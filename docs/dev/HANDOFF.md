@@ -2,14 +2,14 @@
 
 ## Checkpoint
 
-Campaign `010_831536e-revision-intake` is open with an accepted focused [revision plan](reviews/010_831536e-revision-intake/REVISION-PLAN.md) and [revision report](reviews/010_831536e-revision-intake/REVISION-REPORT.md). A-001 updates the delivered skill's frontmatter description to the user's exact wording. The preceding campaign `009_e591021-critical-review` is closed and remains frozen. The governing project contract is [SPEC.md](SPEC.md), with implementation context in [PLAN.md](PLAN.md).
+Campaign `010_831536e-revision-intake` is open with an accepted focused [revision plan](reviews/010_831536e-revision-intake/REVISION-PLAN.md) and [revision report](reviews/010_831536e-revision-intake/REVISION-REPORT.md). A-001 updated the delivered skill's description; A-002 adds its requested metadata with a string-typed alias representation. The preceding campaign `009_e591021-critical-review` is closed and frozen. The governing project contract is [SPEC.md](SPEC.md), with implementation context in [PLAN.md](PLAN.md).
 
 ## Scope and authority
 
 - Workflow: direct focused revision in the open campaign.
-- Decision sources: the user's 2026-11-05 campaign opening and exact replacement description.
-- Authorized effect: A-001 changes the `SKILL.md` description only, with scoped validation and evidence.
-- Current stop: verify and publish A-001, then await further numbered scope or closure instruction.
+- Decision sources: the user's 2026-11-05 campaign opening, replacement description and proposed metadata.
+- Authorized effects: published A-001 description change; A-002 metadata addition with string-valued aliases to preserve portable frontmatter.
+- Current stop: publish this plan extension, verify and publish A-002, then await further scope or closure instruction.
 
 ## Git and return
 
@@ -19,4 +19,4 @@ Campaign `010_831536e-revision-intake` is open with an accepted focused [revisio
 
 ## Next action
 
-Verify and publish A-001. Keep the campaign open for any further numbered scope; do not merge into `main` until a closure instruction or completed authorized boundary.
+Publish the A-002 plan extension, then add and validate the metadata, record its evidence in the active revision report, and publish/read back that action. Keep the campaign open for further scope.

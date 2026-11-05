@@ -21,3 +21,24 @@ Changed `agent-package-author/references/authoring-workflow.md`, `README.md` and
 ## A-005 — Small-size icon (R-008)
 
 Changed `create_openai_presentation.py`, `openai-presentation.md` and presentation tests. Generated SVGs enlarge the chosen motif and omit the tiny pill and visible text. The accepted `icon_label` remains useful as an accessible abbreviation in the SVG's `aria-label`; it is not a visual mark. `PYTHONDONTWRITEBYTECODE=1 python -m unittest tests.test_openai_presentation -q`: 7 tests passed, including XML and context checks. Inkscape rendered all four motifs at 16 pixels and the default package motif at 32 pixels; visual inspection found recognizable silhouettes without lettering. This checks local rendering, not client display.
+
+## A-006 — Coupled regression and disposition
+
+On the revised branch, `PYTHONDONTWRITEBYTECODE=1 python -m unittest discover -s tests -q` passed 55 tests. The creator self validator and inspector reported zero errors/warnings and twelve references, four scripts and four assets. The standalone example and both plugin variants passed strict validation; the MCP variant inspector reported two skills, one stdio server and zero errors/warnings. Example scripts yielded `3`, `- First` and `missing: absent.md`. An active-link pass over README, root agent entry, handoff and the active campaign's Markdown resolved 73 local links with none missing. `git diff --check` passed. A disposable Git clone from the committed A-004 state ran the README's plain `python -m unittest discover -s tests -q` with 55 passing tests and a clean `git status --porcelain` afterward.
+
+| Finding | Disposition and evidence |
+| --- | --- |
+| R-001 | Corrected in A-004: operative intake now classifies and arbitrates sources before acceptance; brief-only and conflict cases traced in the instruction, not observed as an independent agent run. |
+| R-002 | Corrected in A-001: unquoted core non-string scalar matrix fails as unverified; quoted strings pass. |
+| R-003 | Corrected in A-002: nested missing/escaping linked resources fail and cycles terminate. |
+| R-004 | Corrected in A-002: fenced/inline example links pass while operative missing links fail. |
+| R-005 | Corrected in A-003: malformed and valid line sequence returns errors/results with expected IDs and continues. |
+| R-006 | Corrected in A-004: offline claim describes bundled helpers only. |
+| R-007 | Corrected in A-004: committed ignore rules keep the documented test command's checkout clean. |
+| R-008 | Corrected in A-005: generated icons are label-free, and local 16/32-pixel renders were inspected. |
+
+The original review report remains an accurate snapshot of the pinned pre-revision source. Current source rechecks support closure of all eight findings at the recorded depth. The bounded YAML and Markdown parsers are not full language implementations. No target-client activation, OpenAI icon display, MCP client handshake, or Windows-native execution was tested. A source-level intake rule does not prove how an arbitrary agent will handle a conflicting attachment in practice.
+
+## Integration gate
+
+The branch was published and read back after each action. Final branch verification above is the gate for an explicit two-parent merge into the creation parent `main`. The merge and remote readback are recorded by the integration commit and final handoff.

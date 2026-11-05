@@ -13,3 +13,7 @@ Changed `validate_skill.py`, `tests/test_skill_validation.py` and `tests/test_pl
 ## A-003 — MCP request recovery (R-005)
 
 Changed `examples/with-mcp/notes-tools/bin/notes_server.py` and `tests/test_authoring.py`. The line server now answers non-object and unparsable requests with JSON-RPC errors, validates identified calls and tool arguments, and continues serving after malformed input. For a valid path, the tool still returns headings; a missing file remains a tool-level error. `PYTHONDONTWRITEBYTECODE=1 python -m unittest tests.test_authoring -q` passes, including a five-request malformed/valid sequence with correlated IDs.
+
+## A-004 — Intake authority and documentation (R-001, R-006, R-007)
+
+Changed `agent-package-author/references/authoring-workflow.md`, `README.md` and `.gitignore`. The operative intake now records seed, reference and draft roles, provenance, conflicts, authority and observable acceptance decisions, including the brief-only path. The README's offline statement is scoped to bundled Python helpers, while authoring can consult external references. Python bytecode caches are ignored so the documented cross-platform test command leaves a fresh Git checkout clean. Rechecked the instruction paths and disposable test run in the final regression section.

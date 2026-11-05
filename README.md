@@ -140,7 +140,7 @@ All twelve modules are named directly by the creator's `SKILL.md`. This map cove
 
 ## Boundaries
 
-- The creator's runtime uses only Python's standard library and no network. Generated packages may have different declared runtime needs. The examples use Python 3.11+; the MCP example launches a local standard-library server through a bare `python` executable token and `${PLUGIN_ROOT}` path argument.
+- The bundled Python helpers use only Python's standard library and make no network calls. Authoring may consult external specifications and supplied references when access is available. Generated packages may have different declared runtime needs. The examples use Python 3.11+; the MCP example launches a local standard-library server through a bare `python` executable token and `${PLUGIN_ROOT}` path argument.
 - The skill validator parses a documented subset of YAML frontmatter: plain and quoted string scalars and an indented string mapping for `metadata`. Other valid YAML syntax, including block scalars, is reported as **unverified** with a failing status. A green result therefore confirms its supported structural checks, not complete YAML-language conformance for every possible skill.
 - The structural checks do not establish prose quality, reliable activation, security of included code, remote service behavior, host installation, or cross-client runtime compatibility. The example MCP server's initialize and tool-list responses are tested locally; full interoperability with particular clients and network services is outside the checks.
 - Credentials are not part of the portable MCP package. A literal-looking secret in an environment or header value triggers a review warning, which is not a comprehensive secret scanner.

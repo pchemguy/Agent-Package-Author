@@ -34,8 +34,7 @@ agent-package-author/
 │   ├── mcp-packaging.md
 │   ├── portability-policy.md
 │   ├── validation-policy.md
-│   ├── openai-presentation.md
-│   └── hello-world-example.md
+│   └── openai-presentation.md
 ├── scripts/
 │   ├── inspect_package.py
 │   ├── validate_skill.py
@@ -50,7 +49,7 @@ agent-package-author/
     └── mcp-template.json
 ```
 
-`SKILL.md` SHALL contain only valid `name` and `description` frontmatter and concise operation/package routing, relative resource links, applicable creation steps, and completion conditions. It SHALL name and link every bundled reference with sufficient purpose, boundary, and use conditions for selection before reading it. Review-only requests SHALL NOT be routed through writing, collision, installation, or generation steps. `references/` contains conditional authoring and review knowledge; `scripts/` contains deterministic offline helpers; `assets/` contains starting material for generated files. The Hello World example SHALL explain design choices without turning them into universal requirements. Development `SPEC.md`, `PLAN.md`, `README.md`, examples, and tests MAY accompany the source repository but SHALL NOT be necessary to execute the runtime skill.
+`SKILL.md` SHALL contain only valid `name` and `description` frontmatter and concise operation/package routing, relative resource links, applicable creation steps, and completion conditions. It SHALL name and link every bundled reference with sufficient purpose, boundary, and use conditions for selection before reading it. Review-only requests SHALL NOT be routed through writing, collision, installation, or generation steps. `references/` contains conditional authoring and review knowledge; `scripts/` contains deterministic offline helpers; `assets/` contains starting material for generated files. Source-only examples in root `examples/` MAY explain design choices without becoming runtime references or universal requirements. Development `SPEC.md`, `PLAN.md`, `README.md`, examples, and tests MAY accompany the source repository but SHALL NOT be necessary to execute the runtime skill.
 
 ## 4. Shared authoring workflow
 
@@ -73,6 +72,8 @@ The generated skill SHALL be a directory whose `SKILL.md` contains valid YAML fr
 The workflow SHALL put concise orchestration and conditional routing in `SKILL.md`; focused detail MAY reside in `references/`, executable repeatable operations in `scripts/`, and reusable input material in `assets/`. None of those optional directories SHALL be created just to match a template. Every linked resource SHALL exist and use a relative path. The creator requires standalone links to remain in the skill directory; section 6 permits plugin child links to remain within the containing plugin instead. References SHOULD be linked directly from `SKILL.md`, with task-specific loading where useful. Conditional branches SHALL have observable effects when they are part of the requested behavior.
 
 For a skill it creates or substantively revises that contains `references/*.md`, APA SHALL provide an identified entry-routing section that individually names and links each reference and states its purpose, scope boundary, and loading condition. Compact grouping is permitted if every file and condition remains identifiable. A skill without references needs no routing section. When reviewing a third-party skill, missing or weak routing is a content finding, not a formal format violation or a Python-validator error.
+
+Standalone examples and background SHALL be placed in the source repository's root `README.md` or root `examples/` as appropriate. A skill-local `examples/` directory MAY be distributed only when an actual workflow step needs those files, their loading path is explicit and a strong, specific inclusion rationale is recorded. It has no portable discovery role.
 
 Scripts SHALL state their runtime requirements, provide actionable errors and nonzero failure status, and be tested on their supported paths. Prefer deterministic and offline helpers when the task permits; external tools, network access, and dependencies are permitted only if genuinely required and declared. Where generated artifacts admit mechanical checks, validation SHOULD be independent of their producer. Acceptance SHALL cover representative success, branching when applicable, and meaningful failure behavior.
 
@@ -99,6 +100,8 @@ The creator SHALL isolate explicitly requested client-specific behavior in the r
 For a full/comprehensive skill review, APA SHALL load `skill-review.md` and account for the requested `SKILL.md`, `references/*.md`, and supporting material needed to assess instruction claims. For a full/comprehensive plugin review, it SHALL load `plugin-review.md` and assess included skills/references through `skill-review.md` at the requested depth. Record reviewed depth and evidence, exclusions, and unassessed material; representative cases supplement content coverage. An ordinary focused review SHALL retain its narrower requested scope and use only relevant criteria. Explicit use of a review module at narrower scope is permitted.
 
 `skill-review.md` SHALL own entry/reference composition and routing assessment. `plugin-review.md` SHALL own package-level responsibility, shared entry, composite workflow and optional coordinator assessment. Apply `PLUGIN.md` and coordinator criteria only when those artifacts exist. Review an existing no-skill plugin using its actual manifest, MCP and extension interfaces without inventing skill requirements or child presentation. Format rules remain with the standards references; scripts remain structural tools and SHALL NOT classify subjective prose quality as formal conformance.
+
+For every in-scope skill reference, content review SHALL assess whether it defines a particular component of the skill's workflow, with a selectable entry condition and a concrete contribution to a decision, action, constraint, check or handoff. A comprehensive skill review covers every reference; a focused review identifies references outside its scope as unassessed. A reference without an identifiable workflow contribution is a content finding, not a structural conformance error.
 
 A content review SHALL distinguish inspected text, structural checks, observed workflow behavior and client-specific runtime evidence. Review-only output SHALL contain located, actionable findings, coverage, uncertainty and a stopping boundary without writing to the reviewed package. Any authorized subsequent revision SHALL preserve the request's scope and report actual changed and verified results; neither a passing structural validator nor a source-only review establishes client activation or behavioral acceptance.
 

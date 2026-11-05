@@ -1,0 +1,31 @@
+# Package review revision report
+
+## A-001 — Per-reference workflow-component assessment
+
+Added a per-file content verdict to `skill-review.md`: for each reference in a comprehensive skill review, or each selected reference in a focused review, trace its entry condition and distinct contribution to a decision, action, constraint, check or handoff. Record a located finding if the file has no such workflow component. The criterion permits shared guidance that governs an identifiable step without demanding a standalone procedure, and it remains separate from format validation. The review procedure now records the verdict for each assessed file and identifies unassessed references in a focused review.
+
+Aligned `skill-design.md`, `portability-policy.md`, `docs/dev/SPEC.md`, the creator entry and README. Standalone examples/background belong in the source repository README or root `examples/`. A skill-local `examples/` needs a concrete runtime use, explicit loading route and strong inclusion rationale; it has no special discovery status. Brief explanation inside an operational reference can still clarify its rule. The user-supplied negative example is not used as an illustration in the new review aspect.
+
+Source-level contrasts: a selected procedure has its own action/result; cross-cutting guidance can govern a concrete decision; material with only topical or illustrative value receives an absent-component finding and a placement recommendation. `PYTHONDONTWRITEBYTECODE=1 python -m unittest discover -s tests -q` passed 55 tests. The creator validator exited 0; inspector reported twelve references, four scripts, four assets, zero errors and zero warnings. `git diff --check` passed. These checks do not constitute a complete content review or target-agent trial.
+
+## A-002 — Coupled criterion check
+
+The published/read-back A-001 tip is `5190d83339db7957f9e91de138716562d4de8832`. A fresh full suite passed 55 tests; self-validation exited 0; the inspector reported twelve references, four scripts, four assets and zero errors/warnings. Active campaign links resolve and `git diff --check main...HEAD` passed. The diff touches only the creator's relevant review/design/classification guidance, entry, README, governing SPEC and active campaign/HANDOFF records. The new criterion makes a per-file source judgment; the Python validator remains structural. No complete review of all twelve existing references, target-client trial or package relocation is claimed by this checkpoint. A-003 addresses the identified bundled exemplar separately.
+
+## A-003 — Source-only design example placement
+
+Moved the non-operative design exemplar from the delivered skill's `references/` to root `examples/hello-world-design.md`, marked it as source-only and removed its runtime entry route. README now presents it as repository material rather than an installed-skill module; the reference loading map names eleven runtime modules. Reconciled `docs/dev/SPEC.md`, `PLAN.md` and the existing authoring test. No source-only file is required by the installed creator to work from a user's brief or attachment.
+
+The full suite passed 55 tests; `validate_skill.py agent-package-author` exited 0; `inspect_package.py` reported eleven references, four scripts, four assets, zero errors and zero warnings. The README's moved-file links resolve, the delivered entry has no source-only link, and staged/unstaged whitespace checks passed. These checks show packaging and source consistency, not host routing behavior. Historical closed-campaign records retain their original references as history; the new review criterion itself does not use this file as an illustrative case.
+
+## A-004 — Coupled result and return boundary
+
+The published/read-back A-003 tip is `d6f151237dc45f43d9f14d9991e1e7a18e189bcb`. A fresh suite passed 55 tests; self-validation and inspection reported eleven references, four scripts, four assets and zero errors/warnings. The delivered skill copied into an isolated temporary directory validated and inspected without the root source example. A fenced-code-aware scan resolved 93 local links across active README, skill entry/references, governing documents, active campaign records and the source example. `git diff --check main...HEAD` passed. The branch diff is limited to the relevant guidance, example placement, existing authoring test, governing docs and campaign/HANDOFF records; closed campaigns are untouched. No full content review of all remaining references or target-client routing trial was run. The campaign stays open on its revision branch pending further scope or explicit closure.
+
+## Closure gate
+
+The user requested closure after the published/read-back A-004 tip `5849b1c3c14286f870e6b36b66f904ebfe077399`. Return target `main` is still the original parent `0f435371eccf592a7d99af83a1c6f44bae14d1d2`, also the merge base. A fresh 55-test suite passed; skill validation exited 0; inspection reported eleven references, four scripts, four assets and zero errors/warnings; `git diff --check main...HEAD` passed. All planned actions are complete. Publish/read back this gate, verify the prospective merged tree, then include the closed state in an explicit two-parent integration commit on `main`. This gate does not claim a comprehensive review or client behavior trial.
+
+## Integration and closure
+
+The published/read-back closure-gate tip `f4625ab8aa35aa728d309ba7272550c42da9c8e9` was merged into return target `main` at `0f435371eccf592a7d99af83a1c6f44bae14d1d2` using `git merge --no-ff --no-commit`, without conflicts. The prospective merged tree passed 55 tests, skill validation and inspection (eleven references and zero errors/warnings), and `git diff --cached --check`. This closure record, final plan state and HANDOFF are included in the two-parent integration commit. Its publication/readback completes campaign 012. The user then requested a separate cleanup campaign, which starts from the published merged `main` state.

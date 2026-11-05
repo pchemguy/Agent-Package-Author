@@ -8,8 +8,8 @@ Campaign `012_0f43537-package-review` is open with a focused accepted revision t
 
 - Workflow: focused review-criteria revision on the open package-review campaign branch.
 - Decision sources: the user's 2026-11-05 campaign opening, per-reference workflow-component review requirement and follow-up placement rule.
-- Completed effects: opening, initial plan, A-001 and A-002 published/read back; A-003 relocation and evidence recorded locally, pending publication.
-- Current stop: publish/read back A-003, then A-004 coupled verification.
+- Completed effects: opening, plan and A-001–A-004 implemented and verified; their checkpoints are published/read back after this record's publication.
+- Current stop: all planned actions complete; await further scope or explicit closure on this branch.
 
 ## Git and return
 
@@ -20,7 +20,8 @@ Campaign `012_0f43537-package-review` is open with a focused accepted revision t
 - Published initial A-001/A-002 plan tip: `4ee9b0e0d9566fa6239263f6f2f9003fd9a55046`.
 - Published A-001 action tip: `5190d83339db7957f9e91de138716562d4de8832`.
 - Published A-002 verification tip: `3c5151437001c8dda644030b5db0f67505367894`.
+- Published A-003 relocation tip: `d6f151237dc45f43d9f14d9991e1e7a18e189bcb`.
 
 ## Next action
 
-Publish/read back A-003's relocated source-only example and reconciled callers, then recheck under A-004. Leave the campaign open.
+No planned action remains after this checkpoint's publication/readback. Keep campaign 012 open on its branch for further scope or explicit closure.

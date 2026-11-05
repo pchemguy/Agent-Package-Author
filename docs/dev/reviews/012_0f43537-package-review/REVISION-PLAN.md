@@ -7,7 +7,7 @@
 - Creation parent and return target: `main` at that baseline.
 - Working branch: `revision/012_0f43537-package-review`.
 - User instruction: “Open package review revision campaign” on 2026-11-05.
-- State: active with a focused accepted revision to skill-reference review criteria. No comprehensive package review or prior finding is invented.
+- State: active; A-001–A-004 completed and verified. No comprehensive package review or prior finding is invented.
 
 ## Scope and next boundary
 
@@ -24,4 +24,4 @@ The user now requires each reference in a skill review to be evaluated for wheth
 
 ## Persistence and return
 
-The opening checkpoint is published/read back at `4bdc4dfba6e6e96b4f5218a6ca42ca8c04b91e8d`, and the initial A-001/A-002 plan at `4ee9b0e0d9566fa6239263f6f2f9003fd9a55046`. The user's placement instruction arrived during A-001. Commit and publish the refined A-001 with its evidence and this amended plan, then perform A-002. Publish/read back that checkpoint before A-003 relocation. Verify A-004 after relocation. Keep `main` at the starting baseline and leave the campaign open for later scope or explicit closure.
+The opening, plan, A-001, A-002 and A-003 checkpoints were published and read back before A-004 verification. The user's placement instruction arrived during A-001 and was incorporated in the plan before A-003 relocation. Publish/read back A-004's evidence. Keep `main` at the starting baseline and leave the campaign open for later scope or explicit closure.

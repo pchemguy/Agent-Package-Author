@@ -1,6 +1,6 @@
 ---
 name: agent-package-author
-description: Design, create, revise, review, inspect, and validate standalone Agent Skills and Agent Plugins 1.0 packages. Use for portable skill authoring, content assessment, or multi-skill plugin packaging with optional MCP configuration.
+description: Design, create, revise, review, inspect, and validate standalone Agent Skills and Agent Plugins packages. Use for portable skill authoring, content assessment, or multi-skill plugin packaging with optional MCP configuration.
 ---
 
 # Agent Package Author

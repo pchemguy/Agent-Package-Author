@@ -92,6 +92,27 @@ class SkillValidationTests(unittest.TestCase):
         self.write('name: example-skill\ndescription: "42"\nmetadata:\n  sample: "TRUE"')
         self.assertEqual(load().validate_skill(self.root), [])
 
+    def test_reachable_markdown_nested_links_and_cycle(self):
+        self.write()
+        refs = self.root / 'references'
+        refs.mkdir()
+        (self.root / 'SKILL.md').write_text((self.root / 'SKILL.md').read_text() + '\n[guide](references/guide.md)\n')
+        (refs / 'guide.md').write_text('[detail](detail.md)\n')
+        (refs / 'detail.md').write_text('[back](guide.md)\n[missing](absent.md)\n')
+        issues = load().validate_skill(self.root)
+        self.assertEqual([(i.rule, Path(i.path).name) for i in issues], [('resource-missing', 'detail.md')])
+        (refs / 'detail.md').write_text('[back](guide.md)\n[escape](../../../outside.md)\n')
+        self.assertTrue(any(i.rule == 'resource-escape' and i.path.endswith('detail.md')
+                            for i in load().validate_skill(self.root)))
+
+    def test_example_links_in_code_are_ignored(self):
+        self.write()
+        entry = self.root / 'SKILL.md'
+        entry.write_text(entry.read_text() + '\n```markdown\n[bad](absent.md)\n```\n'
+                         '~~~\n[also bad](../outside.md)\n~~~\n'
+                         'Use `[example](absent.md)` in examples.\n')
+        self.assertEqual(load().validate_skill(self.root), [])
+
 
 if __name__ == '__main__':
     unittest.main()

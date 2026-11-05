@@ -59,6 +59,18 @@ class PluginValidationTests(unittest.TestCase):
         self.assertEqual(inspector.returncode, 0, inspector.stdout)
         self.assertIn('warnings: 2', inspector.stdout)
 
+    def test_nested_sibling_reference_is_traversed_with_plugin_boundary(self):
+        entry = self.sibling_skills()
+        entry.write_text(entry.read_text() + '\n[Shared](../beta/references/shared.md)\n')
+        shared = self.root / 'skills/beta/references/shared.md'
+        shared.write_text('[deeper](deeper.md)\n')
+        issues = load().validate_plugin(self.root)
+        self.assertTrue(any(i.rule == 'resource-missing' and i.path == str(shared) for i in issues))
+        (shared.parent / 'deeper.md').write_text('# Detail\n')
+        issues = load().validate_plugin(self.root)
+        self.assertEqual([i for i in issues if i.severity == 'ERROR'], [])
+        self.assertTrue(any(i.rule == 'resource-cross-skill' for i in issues))
+
     def test_missing_sibling_file_is_error(self):
         entry = self.sibling_skills()
         entry.write_text(entry.read_text() + '\n[Missing](../beta/references/absent.md)\n')

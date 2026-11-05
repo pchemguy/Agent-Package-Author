@@ -91,6 +91,35 @@ def _frontmatter(content: str) -> dict[str, object]:
     return data
 
 
+def _resource_targets(content: str, entry: bool) -> set[str]:
+    """Extract local links; entry-only resource literals are explicit dependencies."""
+    targets: set[str] = set()
+    fence_char = ''
+    fence_width = 0
+    for line in content.splitlines():
+        fence = re.match(r' {0,3}(`{3,}|~{3,})', line)
+        if fence:
+            marker = fence[1]
+            if not fence_char:
+                fence_char, fence_width = marker[0], len(marker)
+                continue
+            if marker[0] == fence_char and len(marker) >= fence_width:
+                fence_char = ''
+                continue
+        if fence_char:
+            continue
+        # Resource paths in inline code are explicit dependencies; Markdown links
+        # displayed as inline examples are not operative links.
+        def inline(match: re.Match[str]) -> str:
+            literal = match[2]
+            if entry and re.fullmatch(r'(?:references|scripts|assets)/[^\s`]+', literal):
+                targets.add(literal)
+            return ' '
+        prose = re.sub(r'(`+)(.*?)\1', inline, line)
+        targets.update(re.findall(r'\]\(([^)]+)\)', prose))
+    return targets
+
+
 def validate_skill(path: Path, plugin_root: Path | None = None) -> list[Issue]:
     """Return structural findings for a skill directory.
 
@@ -137,21 +166,32 @@ def validate_skill(path: Path, plugin_root: Path | None = None) -> list[Issue]:
         issues.append(Issue('ERROR', str(entry), 'field', f'unknown frontmatter field {key!r}'))
     if 'allowed-tools' in metadata:
         issues.append(Issue('WARN', str(entry), 'experimental', 'allowed-tools is experimental; client support varies'))
-    # Only explicit local links and resource path literals have file semantics.
-    links = re.findall(r'\]\(([^)]+)\)', content)
-    literals = re.findall(r'`((?:references|scripts|assets)/[^`\s]+)`', content)
-    for raw in sorted(set(links + literals)):
-        target = raw.split('#', 1)[0]
-        if not target or '://' in target or target.startswith('#'):
+    # Follow only reachable Markdown, resolving each link from its containing file.
+    pending = [(entry, content)]
+    visited: set[Path] = set()
+    while pending:
+        source, body = pending.pop(0)
+        if source.resolve() in visited:
             continue
-        resolved = (path / target).resolve()
-        if Path(target).is_absolute() or not resolved.is_relative_to(boundary):
-            issues.append(Issue('ERROR', str(entry), 'resource-escape', f'local resource escapes validation root: {raw}'))
-        elif not resolved.is_file():
-            issues.append(Issue('ERROR', str(entry), 'resource-missing', f'local resource does not exist: {raw}'))
-        elif plugin_root is not None and not resolved.is_relative_to(path.resolve()):
-            issues.append(Issue('WARN', str(entry), 'resource-cross-skill',
-                                f'plugin-contained reference depends on bundled files; client handoff is not guaranteed: {raw}'))
+        visited.add(source.resolve())
+        for raw in sorted(_resource_targets(body, source == entry)):
+            target = raw.split('#', 1)[0]
+            if not target or '://' in target or target.startswith('#'):
+                continue
+            resolved = (source.parent / target).resolve()
+            if Path(target).is_absolute() or not resolved.is_relative_to(boundary):
+                issues.append(Issue('ERROR', str(source), 'resource-escape', f'local resource escapes validation root: {raw}'))
+            elif not resolved.is_file():
+                issues.append(Issue('ERROR', str(source), 'resource-missing', f'local resource does not exist: {raw}'))
+            else:
+                if plugin_root is not None and not resolved.is_relative_to(path.resolve()):
+                    issues.append(Issue('WARN', str(source), 'resource-cross-skill',
+                                        f'plugin-contained reference depends on bundled files; client handoff is not guaranteed: {raw}'))
+                if resolved.suffix.lower() == '.md' and resolved not in visited:
+                    try:
+                        pending.append((resolved, resolved.read_text(encoding='utf-8')))
+                    except (OSError, UnicodeError) as error:
+                        issues.append(Issue('ERROR', str(resolved), 'read', str(error)))
     return issues
 
 

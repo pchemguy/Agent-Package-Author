@@ -21,3 +21,25 @@ This verified branch is ready for an explicit two-parent merge into creation par
 ## Integration and closure
 
 The published campaign tip `df0cccefc3433599ce9a360d35e8b420baae0e2e` was explicitly merged into its creation parent `main` at `831536ef6f0e93b733db6a686ffcf011bdef8577` with `git merge --no-ff --no-commit`; there were no conflicts. The prospective merged tree passed 55 tests, skill validation and staged whitespace checks. This closure record and the updated HANDOFF are included in the two-parent merge commit. Its remote publication/readback completes the campaign; the branch and historical records are retained.
+
+## Reopening checkpoint
+
+The user requested two additional reference edits and closure again. The prior closure remains established by published merge `f9af864bfc2287b0ed4624e584d5640d45a790e3`. The campaign branch has been brought forward to that checkpoint by an incoming two-parent merge, retaining the original opening `809c7d43bc9bc7d8e89adb5874431964adf2d343` and baseline `831536ef6f0e93b733db6a686ffcf011bdef8577`. A-003 and A-004 are accepted amendment actions; their checks and new closure are recorded below as they occur. This does not revise the earlier A-001/A-002 evidence.
+
+## A-003 — Authoring workflow list spacing
+
+Removed the blank line before the three indented stages of step 6 in `references/authoring-workflow.md`. The blank line following its heading remains, and the nested list is still part of step 6. A direct text assertion confirmed that structure and the scoped diff contains just the requested line deletion. `validate_skill.py agent-package-author` exited 0; `PYTHONDONTWRITEBYTECODE=1 python -m unittest discover -s tests -q` passed 55 tests; `git diff --check` passed. Its commit and remote readback establish publication.
+
+## A-004 — URI terminology
+
+Formatted `userinfo` as an inline technical token in `references/mcp-packaging.md`, preserving the URL requirement and the rest of the paragraph. A direct text assertion confirmed the term, the scoped diff showed only its formatting, `validate_skill.py agent-package-author` exited 0, `PYTHONDONTWRITEBYTECODE=1 python -m unittest discover -s tests -q` passed 55 tests, and `git diff --check` passed. Its commit and remote readback establish publication.
+
+## Amended closure gate
+
+A-003 and A-004 were individually published/read back, ending at action tip `962f8c13136c6795d1bf1049b4ed0085dda27d2e`. The complete amended diff from refreshed `main` changes only the two requested reference files plus current campaign plan/report and HANDOFF; no other closed package changed. `PYTHONDONTWRITEBYTECODE=1 python -m unittest discover -s tests -q` passed 55 tests, `validate_skill.py agent-package-author` exited 0, the inspector reported twelve references, four scripts, four assets and zero errors/warnings, and `git diff --check main...HEAD` passed. These are source and local structural checks, not client behavior trials.
+
+The verified amended tip is ready for a second explicit two-parent merge into return target `main` at `f9af864bfc2287b0ed4624e584d5640d45a790e3`. Verify the prospective merged tree, reconcile HANDOFF to closed state in the merge, publish/read back `main`, and return on the target branch. The first closure and its evidence remain intact above.
+
+## Amended integration and closure
+
+The published amended tip `c8557f16c093432b48f3a29c0f9e95bdc8187689` was explicitly merged into return target `main` at `f9af864bfc2287b0ed4624e584d5640d45a790e3` with `git merge --no-ff --no-commit`; there were no conflicts. The prospective merged tree passed 55 tests, skill validation and staged whitespace checks. This new closure record and HANDOFF are included in the second two-parent integration commit. Its publication and remote readback complete the reopened amendment; the worktree returns on `main`, and the retained campaign package is frozen again.

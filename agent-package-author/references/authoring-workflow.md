@@ -6,7 +6,6 @@
 4. Classify proposed files according to `portability-policy.md`. Keep client extensions isolated and documented.
 5. Establish an observable acceptance contract, design the minimum files, and, for substantial projects, write an explicit spec and ordered plan. An example skill is not a mandatory scaffold.
 6. Implement the portable package. For revisions, preserve unrelated files. Then complete these stages in order:
-
     - Review created/revised entries and references proportionately with [skill content review](skill-review.md), and assess a plugin with [plugin composition review](plugin-review.md). These checks inform authorized repairs without requiring a full audit of unrelated material.
     - After each skill's `SKILL.md` exists and its portable content is accepted, read [OpenAI presentation](openai-presentation.md) and generate context-specific `agents/openai.yaml` and `assets/icon.svg` for that skill. Review supplied brand/draft material before passing it as generator context.
     - Apply [validation policy](validation-policy.md): validate structure, run representative successful and failing workflows, inspect results, repair findings within scope, and revalidate.

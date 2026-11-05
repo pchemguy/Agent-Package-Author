@@ -21,3 +21,14 @@ The supplied description and metadata values are the authority for these changes
 ## Persistence and return
 
 Retain the branch and this directory while the campaign is open. A-001 and its evidence are published; publish this plan extension before A-002, then commit and publish the verified action with its revision report. These numbered requests may be followed by further scope; do not close or merge the campaign merely because A-002 finishes. At a later explicit closure boundary, verify the complete campaign tip and explicitly integrate it into `main`.
+
+## Reopened amendment — 2026-11-05
+
+The user explicitly reopened this last closed campaign for two focused reference edits and authorized closure again. The qualifying latest first-parent merge on `main` is `f9af864bfc2287b0ed4624e584d5640d45a790e3`, with parents `831536ef6f0e93b733db6a686ffcf011bdef8577` and `df0cccefc3433599ce9a360d35e8b420baae0e2e`. The original opening commit is `809c7d43bc9bc7d8e89adb5874431964adf2d343`; the original baseline remains unchanged. The current reopening/source and return checkpoint is that `main` merge. The campaign branch incorporates it before further edits.
+
+| Action | Owner and effect | Recheck |
+| --- | --- | --- |
+| A-003 | Remove the blank line between step 6's introductory sentence and its indented stage list in `references/authoring-workflow.md`; retain the blank line after the heading. | Inspect the exact diff and Markdown list structure; validate the delivered skill. |
+| A-004 | Mark `userinfo` as an inline technical token in `references/mcp-packaging.md`. | Inspect the exact sentence and Markdown; validate the delivered skill. |
+
+Each action updates the active revision report and is committed, published and read back before the next. Then run coupled regression checks, publish the amended campaign tip, explicitly merge it into the refreshed `main` return target, verify the merged state, publish/read back, and close again. Earlier actions and closure evidence remain historical, and other closed campaign records stay frozen.

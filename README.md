@@ -21,6 +21,19 @@ python -m unittest discover -s tests -v
 
 The skill and plugin validators exit `0` on strict structural success, `1` on detected package errors, and `2` for invalid invocation or absent paths. The inspector exits `0` for a valid package, `1` for a recognized invalid package, and `2` for an unknown or unreadable path. The presentation generator exits nonzero for invalid input or existing outputs, and accepts `--force` for an intentional replacement. Diagnostics identify paths and rules; `--help` is available for each helper. A strict plugin check fails if any included skill or MCP server is invalid even when a conforming client could load other valid components.
 
+## Shared plugin entries and coordination
+
+Agent Plugins 1.0.0 discovers immediate-child skills under `skills/` and optional MCP servers in `mcp.json`. A root `PLUGIN.md` and a coordinator role are APA design patterns, not additional portable component types. Use them when the package has a real cross-skill navigation or orchestration need:
+
+| Element | Meaning and entry |
+| --- | --- |
+| `PLUGIN.md` | Optional shared orientation at plugin root. Document how the target agent loads it; portable discovery does not load it automatically. It can summarize routes and handoffs, while operational rules remain reachable through supported entries. |
+| Coordinator | An ordinary bundled skill whose `SKILL.md` owns recurring cross-skill selection, readiness, handoffs and return. Its name and activation are client-dependent; it must work on direct entry without `PLUGIN.md`. |
+| Focused skill | A bundled skill with a distinct task and direct `SKILL.md` entry. It retains its own procedure even when a coordinator routes a composite request to it. |
+| Composite workflow | One request that joins independently useful owners. Put its trigger, sequence, handoff inputs/results and stop in a discoverable skill entry; `PLUGIN.md` may summarize that path if the host loads it. |
+
+See [plugin design](agent-package-author/references/plugin-design.md#shared-plugin-entries-and-coordination) for the authoring decisions and [plugin review](agent-package-author/references/plugin-review.md) for conditional assessment. Neither optional entry is required by the `notes-tools` example below, whose two skills have direct entries. A Markdown link and named handoff do not guarantee that a client activates another skill.
+
 ## Complete authoring walkthrough
 
 This walkthrough shows **two requests to the creator skill**: a standalone Project Welcome Pack skill, then a `notes-tools` Agent Plugin. The prompts and attached-file excerpts below are illustrative; those attachments were not provided in this repository and the transcript is not a recorded agent execution. The repository does include runnable `word-count` and `notes-tools` output examples, so the verification commands in the second half can be executed as written.

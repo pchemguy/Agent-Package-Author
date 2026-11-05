@@ -2,23 +2,29 @@
 
 ## Checkpoint
 
-Campaign `010_831536e-revision-intake` is closed again after its reopened amendment was verified and integrated into `main`. Its [revision plan](reviews/010_831536e-revision-intake/REVISION-PLAN.md) and [revision report](reviews/010_831536e-revision-intake/REVISION-REPORT.md) retain the original actions/closure and the two new reference edits. The governing project contract is [SPEC.md](SPEC.md), with context in [PLAN.md](PLAN.md).
+Campaign `011_0adf8c0-shared-entries-composite-workflows` is closed by an explicit two-parent merge into `main`. Its [revision plan](reviews/011_0adf8c0-shared-entries-composite-workflows/REVISION-PLAN.md) and [revision report](reviews/011_0adf8c0-shared-entries-composite-workflows/REVISION-REPORT.md) retain the accepted changes and checks. No campaign is active. The governing contract remains [SPEC.md](SPEC.md), with context in [PLAN.md](PLAN.md).
 
 ## Scope and authority
 
-- Workflow: reopened amendment closed after explicit integration into `main`.
-- Decision sources: the original 2026-11-05 requests and the user's subsequent explicit reopening, two reference edits and reclosure instruction.
-- Completed effects: A-001/A-002 and first closure remain historical; A-003/A-004 were published, verified and merged into `main`.
-- Current stop: none for campaign 010. New work starts from current `main`.
+- Workflow: focused skill and plugin design revisions completed and integrated.
+- Decision sources: the user's 2026-11-05 campaign opening, optional skill-level composite section request and correction to the design/review boundary in plugin guidance.
+- Completed effects: A-001–A-006 implemented, verified, published and read back. No planned revision action remains.
+- Current stop: return on `main` after merge publication and readback.
 
 ## Git and return
 
-- Campaign: `010_831536e-revision-intake`; directory `docs/dev/reviews/010_831536e-revision-intake/`.
-- Creation parent and return target: `main` at `831536ef6f0e93b733db6a686ffcf011bdef8577` before this campaign.
-- Working branch: `revision/010_831536e-revision-intake`; original branch-off commit is the same full baseline and opening commit is `809c7d43bc9bc7d8e89adb5874431964adf2d343`.
-- First published integration: `f9af864bfc2287b0ed4624e584d5640d45a790e3`; amendment source/return checkpoint is this `main` merge. Closed campaigns `001`–`009` remain frozen.
-- Final published amended campaign tip: `c8557f16c093432b48f3a29c0f9e95bdc8187689`, included as the second parent of the new two-parent integration into `main` at `f9af864bfc2287b0ed4624e584d5640d45a790e3`.
+- Campaign: `011_0adf8c0-shared-entries-composite-workflows`; directory `docs/dev/reviews/011_0adf8c0-shared-entries-composite-workflows/`.
+- Creation parent and return target: `main` at `0adf8c072260faf8045366984be791b156f46a2a`.
+- Working branch: `revision/011_0adf8c0-shared-entries-composite-workflows`; branch-off commit is the same full baseline. Closed campaigns `001`–`010` remain frozen.
+- Published focused action tip: `dca2016e624b2a9423abd6b08de5a3e61e44e575`.
+- Published plugin-design action tip: `f5e279340599a71f362f64526cc039ac7ceaa8a6`.
+- Published A-005/A-006 plan tip: `2a193cb9941c87194edfa380b14bf5f534dcd6a4`.
+- Published A-005 action tip: `d5f577d4698052f02e29a9c24ebdbcdc0124dd9e`.
+- Published A-006 verification tip: `ca6e87c2ccf11e2bd8cb835523bc5870c9520173`.
+- Published campaign completion tip: `60ddf5cdf9c27696c0e406f09342252564889552`.
+- Published closure-gate tip and merge second parent: `2e26c755e8e59928b3033bf7ca9043bdfa2ebbea`.
+- Merge first parent: `main` at `0adf8c072260faf8045366984be791b156f46a2a`.
 
 ## Next action
 
-Campaign 010 is closed again. The amended merged tree passed 55 tests and skill validation with zero findings. See the [revision report](reviews/010_831536e-revision-intake/REVISION-REPORT.md) for the two focused edits, prior closure and new integration evidence.
+No campaign action remains. Use `main` as the current return branch; start any new work from its published state.

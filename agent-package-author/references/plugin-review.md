@@ -32,21 +32,21 @@ Concision is judged by sufficient explicit guidance for the intended models, not
 
 ## Optional shared `PLUGIN.md` entry
 
-Apply this section **only when the package includes** a `PLUGIN.md` intended as shared workflow guidance. Agent Plugins 1.0.0 does not discover it as a portable component. Establish how the target agent would load it; do not infer automatic discovery or require one for every integrated plugin. See [plugin design](plugin-design.md) for when authoring such an optional entry is justified.
+Apply only when the package includes a `PLUGIN.md` intended as shared workflow guidance. Use [plugin design](plugin-design.md#shared-plugin-entries-and-coordination) for its definition and optionality; assess the actual target loading path before judging its content.
 
 - Does it identify the capability system, relevant common prerequisites, optional coordinator and clear condition for loading the next owner?
+- Is its loading path documented and supported by the target, without an implied portable discovery guarantee?
 - Can ordinary requests route to a supported capability without opening every skill or requiring the user to know internals?
 - Do composite summaries state purpose, principal owners, outputs, consequential handoffs and stops without repeating every execution procedure?
 - Are shared authority, acceptance, persistence or other domain obligations visible before governed actions, with detailed gates linked to their owners?
 - Do summaries agree with the operational owners? Is **each substantial rule also defined in the canonical coordinator, skill or component owner**, and are those instructions sufficient when `PLUGIN.md` is unavailable?
 - Can an established owner keep a contextual follow-up without reloading the optional shared entry? Does unclear context route to bounded recovery?
 
-`PLUGIN.md` may project the coordinator's canonical orchestration guidance; it must not be its only source. Entry routing, context reuse and missing-context recovery answer different questions. A capability directory is not a replacement for a workflow summary, and neither should become a second procedure catalog.
-
 ## Optional coordinator
 
-Apply this section when the plugin includes a coordinator capability. Inspect its relevant entry/modules and its actual handoffs; do not presume its name, branch model, backend or an approval sequence.
+Apply only when the plugin includes a coordinator skill. Use [plugin design](plugin-design.md#shared-plugin-entries-and-coordination) for the role definition; inspect its actual entry, relevant modules and handoffs without presuming a branch model, backend or approval sequence.
 
+- **Justification and entry:** Is recurring orchestration substantial enough to warrant this skill? Is it discoverable as an ordinary bundled skill, with selection and consequential gates available from its entry without `PLUGIN.md`?
 - **Selection and continuity:** Does it establish or reuse sufficient evidence before choosing a path and announcing a consequential change? Can it retain an applicable workflow without duplicate orientation?
 - **Shared readiness:** Are prerequisites and human decisions established for the next owner, with authority, readiness and completed state distinguished?
 - **Delegation:** Are focused owners, handoff inputs/effects/expected results clear without the coordinator reimplementing their procedures?
@@ -54,7 +54,7 @@ Apply this section when the plugin includes a coordinator capability. Inspect it
 - **Results and blockers:** Does it collect actual evidence, reconcile failures and return at the correct boundary without claiming unavailable capabilities or unobserved effects?
 - **Entry/module structure:** Are coordination decisions and consequential obligations visible in its own entry before dependent work, with conditional detail accessible from that entry? Does moving detail preserve pre-action guidance?
 
-The coordinator may own canonical orchestration instructions. Do **not** impose the shared `PLUGIN.md` projection-only rule on that owner. Check both sides of a consequential handoff: who selects, establishes readiness, executes, verifies and returns control. Its ordinary context reuse and recovery must work without reloading `PLUGIN.md`.
+Check both sides of a consequential handoff for selection, readiness, execution, verification and return. Can the coordinator retain context and recover a missing decision through its own instructions when the optional shared entry is unavailable?
 
 ## Review procedure
 

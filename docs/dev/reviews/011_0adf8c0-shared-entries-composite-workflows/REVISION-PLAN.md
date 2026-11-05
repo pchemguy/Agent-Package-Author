@@ -7,7 +7,7 @@
 - Creation parent and return target: `main` at that baseline.
 - Working branch: `revision/011_0adf8c0-shared-entries-composite-workflows`.
 - User instructions: open a revision campaign for shared entries and composite workflows definition, then concisely define an optional `SKILL.md` section for composite workflows involving multiple references on 2026-11-05.
-- State: active with the published skill-level revision and a directly accepted plugin-design correction. No preceding review finding is invented.
+- State: active with published skill-level and plugin-level revisions. The next accepted correction requires explicit nonstandard `PLUGIN.md`/coordinator definitions in plugin design, a README explanation and review-only criteria. No preceding review finding is invented.
 
 ## Scope to resolve
 
@@ -21,6 +21,8 @@ The current [skill design](../../../../agent-package-author/references/skill-des
 | A-002 | Verify the coupled content and repository regression, record scope/evidence and prepare the later return boundary. | Skill self-validation, full test suite, active links and scoped diff, with untested agent behavior stated. |
 | A-003 | Correct `plugin-design.md`'s reverse handoff into `plugin-review.md`: give authoring guidance for meaningful cross-skill composites, optional shared `PLUGIN.md` projection and coordinator ownership in the design owner itself. Remove the review-only no-skill instruction already owned by `plugin-review.md`. | Trace direct focused, composite-without-coordinator, optional shared-entry unavailable and coordinator direct-entry paths against the existing review criteria; ensure no portable discovery or mandatory coordinator claim. |
 | A-004 | Recheck the coupled skill/plugin guidance and current campaign scope after A-003. | Self-validation, full suite, active links and diff against baseline; record limits and leave campaign open pending closure instruction. |
+| A-005 | Put `## Shared plugin entries and coordination` in `plugin-design.md`. Define optional root `PLUGIN.md` and coordinator as APA design patterns, their supported loading/entry paths, canonical ownership and composite workflow placement. Explain these nonstandard concepts in README. Refine `plugin-review.md` to assess those decisions without supplying general introductions. Update entry routing if needed. | Trace direct focused skill, composite without coordinator, coordinator direct entry, optional shared entry present/unavailable, and both handoff sides. Confirm format claims against Agent Plugins 1.0.0 and avoid a second full procedure catalog. |
+| A-006 | Recheck the coupled guidance and publish the action evidence. | Full suite, self-validator and inspector, Markdown links, scoped diff and campaign state; report unobserved client behavior. Keep campaign open. |
 
 No governing SPEC/PLAN amendment is needed for this bounded authoring/review refinement; their existing entry, reference and plugin composition requirements remain compatible. No change to portable format rules or Python structural validation is authorized. Closed campaigns 001–010 remain unchanged.
 
@@ -30,4 +32,4 @@ The user's conditional factoring rule applies if both paths actually consume one
 
 ## Persistence and return
 
-The A-001/A-002 checkpoints are published. Publish and read back this plan extension before A-003. Commit the source and action evidence together, publish/read back, then perform A-004. The campaign remains open after these actions unless the user directs closure; a later eligible closure explicitly merges the verified tip into `main`.
+The A-001–A-004 checkpoints are published. Publish and read back this A-005/A-006 plan extension before source edits. Commit the source and action evidence together, publish/read back, then perform A-006. The campaign remains open unless the user directs closure; a later eligible closure explicitly merges the verified tip into `main`.
